@@ -59,7 +59,7 @@ public class AskForName extends JFrame {
 				if (!player1Enter.getText().equals("Enter Name") && !player2Enter.getText().equals("Enter Name"))
 				{
 					new ChessGame(randomizeColors.isSelected(), player1Enter.getText(), player2Enter.getText());
-					getContentPane().setVisible(false);
+					closeWindow();
 				} else
 				{
 					errorMsg.setText("You must input both names");
@@ -70,7 +70,8 @@ public class AskForName extends JFrame {
 		getContentPane().add(btnStart);
 		
 		
-		
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setSize(318, 194);
 		this.setVisible(true);
 		
 	}
@@ -79,5 +80,10 @@ public class AskForName extends JFrame {
 	public void createControls(Composite parent)
 	{
 		
+	}
+	
+	public void closeWindow()
+	{
+		this.dispose();
 	}
 }
