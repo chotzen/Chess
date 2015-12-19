@@ -10,9 +10,14 @@ import javax.swing.JCheckBox;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
+
 import javax.swing.UIManager;
 
 public class AskForName extends JFrame {
+
+	private static final long serialVersionUID = -4474187669273802545L;
+	
 	private JTextField player1Enter;
 	private JTextField player2Enter;
 	
@@ -21,6 +26,9 @@ public class AskForName extends JFrame {
 	
 	public AskForName()
 	{
+		
+		
+		
 		getContentPane().setLayout(null);
 		
 		JLabel lblPlayer_1 = new JLabel("Player 1");
@@ -58,7 +66,11 @@ public class AskForName extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				if (!player1Enter.getText().equals("Enter Name") && !player2Enter.getText().equals("Enter Name"))
 				{
-					new ChessGame(randomizeColors.isSelected(), player1Enter.getText(), player2Enter.getText());
+					try {
+						new ChessGame(randomizeColors.isSelected(), player1Enter.getText(), player2Enter.getText());
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
 					closeWindow();
 				} else
 				{
