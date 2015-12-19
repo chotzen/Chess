@@ -9,6 +9,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
+import com.devinhartzell.chess.board.Board;
+
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -44,9 +46,9 @@ public class ChessGameWindow extends JFrame {
 		JScrollBar scrollBar = new JScrollBar();
 		scrollBar.setBounds(579, 39, 15, 367);
 		getContentPane().add(scrollBar);
-		final BufferedImage image = ImageIO.read(getClass().getResource("/resources/a.jpg"));
+		//final BufferedImage image = ImageIO.read(getClass().getResource("/resources/a.jpg"));
 
-		
+		/*
 		JPanel board = new JPanel() {
 			
 			private static final long serialVersionUID = 6329003120785353635L;
@@ -59,13 +61,18 @@ public class ChessGameWindow extends JFrame {
 			}
 		};
 		
+		*/
+		//board.setBounds(6, 6, 401, 400);
+		//getContentPane().add(board);
 		
-		board.setBounds(6, 6, 400, 400);
-		getContentPane().add(board);
-		
-		this.setSize(606, 435);
+		this.setSize(621, 449);
 		this.setVisible(true);
 		
+		
+		Board board = new Board();
+		board.setLocation(6, 6);
+		
+		getContentPane().add(board);
 		
 	}
 	

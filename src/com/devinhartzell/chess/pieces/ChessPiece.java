@@ -1,7 +1,12 @@
 package com.devinhartzell.chess.pieces;
 
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import javax.imageio.ImageIO;
+
+import com.devinhartzell.chess.board.Board;
 
 public abstract class ChessPiece {
 	
@@ -14,18 +19,20 @@ public abstract class ChessPiece {
 	 * q - queen
 	 * k - king
 	 */
-	
 	public char type;
 	
 	/*
 	 * true = white
 	 * false = black
 	 */
-	
 	public boolean color;
-	
 	public int x, y;
+	public ChessPiece piece;
+	public BufferedImage image;	
+	public Board board;
 	
+
+
 	
 	// K = x, V = y
 	public abstract HashMap<Integer, Integer> getPossibleMoves();
@@ -44,4 +51,10 @@ public abstract class ChessPiece {
 		this.x = x;
 		this.y = y;
 	}
+	
+	public void setPiece(ChessPiece piece)
+	{
+		this.piece = piece;
+	}
+
 }

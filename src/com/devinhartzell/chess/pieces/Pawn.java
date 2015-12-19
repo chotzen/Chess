@@ -3,16 +3,32 @@ package com.devinhartzell.chess.pieces;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.imageio.ImageIO;
+
+import com.devinhartzell.chess.board.Board;
+
 public class Pawn extends ChessPiece {
 	
-	public Pawn(int x, int y, boolean color)
+	public Pawn(int x, int y, boolean color, Board board)
 	{
+		this.board = board;
 		this.x = x;
 		this.y = y;
 		this.color = color;
 		this.type = 'p';
+		try
+		{
+			if (color)
+				this.image = ImageIO.read(getClass().getResource("/resources/pieces/p_b.jpg"));
+			else
+				this.image = ImageIO.read(getClass().getResource("/resources/pieces/p_w.jpg"));
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
 	}
-
+	
 	@Override
 	public HashMap<Integer, Integer> getPossibleMoves() {
 		HashMap<Integer, Integer> moves = new HashMap<Integer, Integer>();
@@ -38,6 +54,11 @@ public class Pawn extends ChessPiece {
 		}
 		
 		return moves;
+	}
+	
+	public void move(int x, int y)
+	{
+		
 	}
 
 }
