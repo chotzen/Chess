@@ -1,18 +1,13 @@
 package com.devinhartzell.chess;
 
 import java.awt.Composite;
-import java.awt.Graphics;
 
 import javax.annotation.PostConstruct;
-import javax.imageio.ImageIO;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 import com.devinhartzell.chess.board.Board;
 
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 
 import javax.swing.JLabel;

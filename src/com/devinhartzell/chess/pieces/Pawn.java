@@ -1,17 +1,21 @@
 package com.devinhartzell.chess.pieces;
 
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.List;
 
 import javax.imageio.ImageIO;
 
 import com.devinhartzell.chess.board.Board;
+import com.devinhartzell.chess.board.Coordinate;
 
 public class Pawn extends ChessPiece {
 	
-	public Pawn(int x, int y, boolean color, Board board)
+	private final String WHITE_PATH = "/resources/pieces/p_w.png";
+	private final String BLACK_PATH = "/resources/pieces/p_b.png";
+	
+	public Pawn(int x, int y, boolean color)
 	{
-		this.board = board;
 		this.x = x;
 		this.y = y;
 		this.color = color;
@@ -19,46 +23,62 @@ public class Pawn extends ChessPiece {
 		try
 		{
 			if (color)
-				this.image = ImageIO.read(getClass().getResource("/resources/pieces/p_b.jpg"));
+				this.image = ImageIO.read(getClass().getResource(BLACK_PATH));
 			else
-				this.image = ImageIO.read(getClass().getResource("/resources/pieces/p_w.jpg"));
+				this.image = ImageIO.read(getClass().getResource(WHITE_PATH));
+			
+			Board.getBoardArray()[x][y].setPiece(this);
 		}
 		catch (Exception e)
 		{
-			e.printStackTrace();
+			System.out.println("Error: Could not load pawn resource");
 		}
 	}
 	
 	@Override
-	public HashMap<Integer, Integer> getPossibleMoves() {
-		HashMap<Integer, Integer> moves = new HashMap<Integer, Integer>();
+	public List<Coordinate> getPossibleMoves() {
+		List<Coordinate> movesList = new ArrayList<Coordinate>();
 		if (color)
 		{
-			if (y == 1)
-				// TODO: Promotions
-			if (y == 7)
-			{
-				moves.put(x, 5);
-			}
-			moves.put(x, y-1);
+		
+			if (y == 2)
+				if (Board.getBoardArray()[x][4].hasPiece())
+					movesList.add(new Coordinate(x, 4));
+			
+			if (Board.getBoardArray()[x][y+1].hasPiece())
+				movesList.add(new Coordinate(x, y+1));
+			
 		}
 		else 
 		{
-			if (y == 8)
-				// TODO: Promotions
-			if (y == 2)
-			{
-				moves.put(x, 4);
-			}
-			moves.put(x, y+1);
+			if (y == 7)
+				if (Board.getBoardArray()[x][5].hasPiece())
+					movesList.add(new Coordinate(x, 5));
+
+			if (Board.getBoardArray()[x][y-1].hasPiece())
+				movesList.add(new Coordinate(x, y-1));
 		}
-		
-		return moves;
+		return movesList;
 	}
 	
+	@Override
 	public void move(int x, int y)
 	{
-		
+		Board.getBoardArray()[this.x][this.y].setPiece(null);
+		this.x = x;
+		this.y = y;
+		Board.getBoardArray()[x][y].setPiece(this);
+	}
+	
+	
+	public BufferedImage getImage()
+	{
+		return this.image;
+	}
+
+	@Override
+	public boolean isNull() {
+		return false;
 	}
 
 }

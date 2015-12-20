@@ -1,12 +1,10 @@
 package com.devinhartzell.chess.pieces;
 
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.HashMap;
-
-import javax.imageio.ImageIO;
+import java.util.List;
 
 import com.devinhartzell.chess.board.Board;
+import com.devinhartzell.chess.board.Coordinate;
 
 public abstract class ChessPiece {
 	
@@ -29,13 +27,11 @@ public abstract class ChessPiece {
 	public int x, y;
 	public ChessPiece piece;
 	public BufferedImage image;	
-	public Board board;
-	
-
-
 	
 	// K = x, V = y
-	public abstract HashMap<Integer, Integer> getPossibleMoves();
+	public abstract List<Coordinate> getPossibleMoves();
+	
+	public abstract boolean isNull();
 	
 	public boolean getColor()
 	{
@@ -48,13 +44,24 @@ public abstract class ChessPiece {
 	}
 	
 	public void move(int x, int y){
+		Board.getBoardArray()[this.x][this.y].setPiece(new NullPiece());
 		this.x = x;
 		this.y = y;
+		
+		Board.getBoardArray()[x][y].setPiece(this);
+		
+		
 	}
 	
 	public void setPiece(ChessPiece piece)
 	{
 		this.piece = piece;
 	}
+	
+	public BufferedImage getImage()
+	{
+		return image;
+	}
+	
 
 }
