@@ -58,7 +58,7 @@ public class Square extends JPanel {
 		addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if (piece.type != '0')
+				if (piece.type != '0' && !getBackground().equals(Color.ORANGE))
 				{
 					//System.out.println("called");
 				
