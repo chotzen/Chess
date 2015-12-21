@@ -12,6 +12,7 @@ import java.io.IOException;
 
 import javax.swing.JLabel;
 import javax.swing.JScrollBar;
+import javax.swing.SwingConstants;
 
 public class ChessGameWindow extends JFrame {
 	
@@ -19,15 +20,15 @@ public class ChessGameWindow extends JFrame {
 	/**
 	 * 
 	 */
-	
+	private JLabel whiteLabel;
+	private JLabel blackLabel;
+	private static JLabel moveLabel;
 	private static final long serialVersionUID = 1109205743042597274L;
 
-	public ChessGameWindow(ChessGame game) throws IOException
+	public ChessGameWindow(ChessGame game, String white, String black) throws IOException
 	{
+		
 		getContentPane().setLayout(null);
-		
-		
-		
 		
 		JTextArea textArea = new JTextArea();
 		textArea.setEditable(false);
@@ -41,27 +42,23 @@ public class ChessGameWindow extends JFrame {
 		JScrollBar scrollBar = new JScrollBar();
 		scrollBar.setBounds(579, 39, 15, 367);
 		getContentPane().add(scrollBar);
-		//final BufferedImage image = ImageIO.read(getClass().getResource("/resources/a.jpg"));
-
-		/*
-		JPanel board = new JPanel() {
-			
-			private static final long serialVersionUID = 6329003120785353635L;
-
-			@Override
-			protected void paintComponent(Graphics g)
-			{
-				super.paintComponent(g);
-				g.drawImage(image, 0, 0, null);
-			}
-		};
 		
-		*/
-		//board.setBounds(6, 6, 401, 400);
-		//getContentPane().add(board);
-		
-		this.setSize(621, 449);
+		this.setSize(621, 475);
 		this.setVisible(true);
+		
+		whiteLabel = new JLabel(String.format("White: %s", white));
+		whiteLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		whiteLabel.setBounds(6, 418, 150, 16);
+		getContentPane().add(whiteLabel);
+		
+		blackLabel = new JLabel(String.format("Black: %s", black));
+		blackLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		blackLabel.setBounds(262, 418, 150, 16);
+		getContentPane().add(blackLabel);
+		
+		moveLabel = new JLabel("White to move");
+		moveLabel.setBounds(428, 418, 114, 16);
+		getContentPane().add(moveLabel);
 		
 		
 		Board board = new Board();
@@ -76,4 +73,13 @@ public class ChessGameWindow extends JFrame {
 	{
 		
 	}
+	
+	public static void nextMove()
+	{
+		if (Board.currentMove)
+			moveLabel.setText("Black to move");
+		else
+			moveLabel.setText("White to move");
+	}
+	
 }

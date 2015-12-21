@@ -1,34 +1,32 @@
 package com.devinhartzell.chess;
 
 import java.io.IOException;
-
-import com.devinhartzell.chess.pieces.ChessPiece;
-import com.devinhartzell.chess.pieces.Pawn;
+import java.util.Random;
 
 public class ChessGame {
 	
-	private int gameStatus;
-	
-	public String player1;
-	public String player2;
-	
-	private boolean invertedColors = false;
-	
-	public ChessPiece board[][] = new ChessPiece[8][8];
-	
-	
-	public ChessGame(boolean inverted, String player1, String player2) throws IOException
+	public ChessGame(boolean randomized, String p1, String p2) throws IOException
 	{
-		new ChessGameWindow(this);
-		System.out.println(player1);
-		System.out.println(player2);
-		System.out.println(inverted);
+		String white, black;
+		if (randomized)
+		{
+			Random r = new Random();
+			if (r.nextBoolean()) {
+				white = p1;
+				black = p2;
+			} else {
+				black = p1;
+				white = p2;
+		}} else {
+			white = p1;
+			black = p2;
+		}
+		new ChessGameWindow(this, white, black);
+		System.out.println(white);
 	}
 	
 	public static void main(String args[])
 	{
 		new AskForName();
 	}
-	
-
 }

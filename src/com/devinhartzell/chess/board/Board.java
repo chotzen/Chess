@@ -2,6 +2,7 @@ package com.devinhartzell.chess.board;
 
 import javax.swing.JPanel;
 
+import com.devinhartzell.chess.ChessGameWindow;
 import com.devinhartzell.chess.pieces.ChessPiece;
 import com.devinhartzell.chess.pieces.Pawn;
 
@@ -13,6 +14,12 @@ public class Board extends JPanel {
 	private static final long serialVersionUID = -396109385960336400L;
 	
 	private static Square[][] boardArray = new Square[9][9];
+	
+	/*
+	 * False = white
+	 * True = black
+	 */
+	public static boolean currentMove = false;
 	
 	public Board()
 	{
@@ -46,5 +53,16 @@ public class Board extends JPanel {
 
 	public static Square[][] getBoardArray() {
 		return boardArray;
+	}
+	
+	public static boolean getTurn()
+	{
+		return currentMove;
+	}
+	
+	public static void setTurn(boolean b)
+	{
+		currentMove = b;
+		ChessGameWindow.nextMove();
 	}
 }

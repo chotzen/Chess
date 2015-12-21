@@ -58,7 +58,7 @@ public class Square extends JPanel {
 		addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if (piece.type != '0' && !getBackground().equals(Color.ORANGE))
+				if (piece.type != '0' && !getBackground().equals(Color.ORANGE) && piece.getColor() == Board.getTurn())
 				{
 					//System.out.println("called");
 				
@@ -68,6 +68,7 @@ public class Square extends JPanel {
 						for (int j=1; j<=8; j++)
 						{
 							Board.getBoardArray()[i][j].setHighlighted(false);
+							Board.getBoardArray()[i][j].setSelected(false);
 						}
 					}
 					

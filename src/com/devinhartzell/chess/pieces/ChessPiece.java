@@ -60,6 +60,10 @@ public abstract class ChessPiece {
 		
 		this.x = new_x;
 		this.y = new_y;
+		
+		Board.setTurn(!Board.getTurn());
+		
+		
 	}
 	
 	public BufferedImage getImage()
