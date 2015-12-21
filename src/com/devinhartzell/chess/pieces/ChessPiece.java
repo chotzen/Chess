@@ -50,23 +50,16 @@ public abstract class ChessPiece {
 		int old_x = this.x;
 		int old_y = this.y;
 		
+		for (Coordinate s : Board.getBoardArray()[old_x][old_y].getPiece().getPossibleMoves())
+			Board.getBoardArray()[s.getX()][s.getY()].setHighlighted(false);
+		
 		Board.getBoardArray()[old_x][old_y].setPiece(new NullPiece(this.x, this.y));
 		Board.getBoardArray()[old_x][old_y].setSelected(false);
 		Board.getBoardArray()[new_x][new_y].setPiece(this);
 		System.out.println(Board.getBoardArray()[new_x][new_y].getPiece().toString());
 		
-		
 		this.x = new_x;
 		this.y = new_y;
-		//System.out.println(Board.getBoardArray()[x][y].toString());
-		/*
-		Board.getBoardArray()[this.x][this.y].setPiece(new NullPiece(this.x, this.y));
-		Board.getBoardArray()[this.x][this.y].repaint();
-		this.x = x;
-		this.y = y;
-		Board.getBoardArray()[x][y].setPiece(this);
-		Board.getBoardArray()[x][y].repaint();
-		*/
 	}
 	
 	public BufferedImage getImage()
@@ -76,6 +69,7 @@ public abstract class ChessPiece {
 	
 	public void kill()
 	{
+		
 		this.x = 0;
 		this.y = 0;
 	}
