@@ -13,6 +13,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import javax.swing.border.LineBorder;
 
 public class Square extends JPanel {
 	
@@ -34,8 +35,7 @@ public class Square extends JPanel {
 	//private Board board;
 	
 	public Square(final int x, final int y, boolean black) {
-
-		setForeground(UIManager.getColor("InternalFrame.borderShadow"));
+		
 		this.color = black;
 		if (black)
 			setBackground(Color.BLUE);
@@ -133,14 +133,18 @@ public class Square extends JPanel {
 	public void setHighlighted(boolean b)
 	{
 		if (b)
+		{
 			setBackground(Color.ORANGE);
+			setBorder(new LineBorder(new Color(0, 0, 128), 3));
+		}
+
 		else
 		{
 			if (color)
 				setBackground(Color.BLUE);
 			else
 				setBackground(Color.WHITE);
-			
+			setBorder(new LineBorder(new Color(0, 0, 128), 0));
 		}
 	}	
 	
