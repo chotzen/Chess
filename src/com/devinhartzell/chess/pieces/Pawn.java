@@ -50,11 +50,13 @@ public class Pawn extends ChessPiece {
 			
 			if (x+1 <= 8)
 				if (Board.getBoardArray()[x+1][y+1].hasPiece())
-					movesList.add(new Coordinate(x+1, y+1));
+					if (!Board.getBoardArray()[x+1][y+1].getPiece().getColor())
+							movesList.add(new Coordinate(x+1, y+1));
 			
 			if (x-1 >= 1)
 				if (Board.getBoardArray()[x-1][y+1].hasPiece())
-					movesList.add(new Coordinate(x-1, y+1));
+					if (!Board.getBoardArray()[x-1][y+1].getPiece().getColor())
+						movesList.add(new Coordinate(x-1, y+1));
 				
 		}
 		else 
@@ -68,11 +70,13 @@ public class Pawn extends ChessPiece {
 			
 			if (x+1 <= 8)
 				if (Board.getBoardArray()[x+1][y-1].hasPiece())
-					movesList.add(new Coordinate(x+1, y-1));
+					if (Board.getBoardArray()[x+1][y-1].getPiece().getColor())
+						movesList.add(new Coordinate(x+1, y-1));
 			
 			if (x-1 >= 1)
 				if (Board.getBoardArray()[x-1][y-1].hasPiece())
-					movesList.add(new Coordinate(x-1, y-1));
+					if (Board.getBoardArray()[x+1][y-1].getPiece().getColor())
+						movesList.add(new Coordinate(x-1, y-1));
 		}
 		return movesList;
 	}
