@@ -5,6 +5,7 @@ import javax.swing.JPanel;
 import com.devinhartzell.chess.ChessGameWindow;
 import com.devinhartzell.chess.pieces.ChessPiece;
 import com.devinhartzell.chess.pieces.Pawn;
+import com.devinhartzell.chess.pieces.Rook;
 
 public class Board extends JPanel {
 	
@@ -41,6 +42,8 @@ public class Board extends JPanel {
 			new Pawn(i, 2, true);
 			new Pawn(i, 7, false);
 		}
+		
+		new Rook(1, 1, false);
 	}
 	
 	public static ChessPiece getPieceAt(int x, int y)
