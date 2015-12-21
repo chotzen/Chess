@@ -20,6 +20,7 @@ public class ChessGameWindow extends JFrame {
 	/**
 	 * 
 	 */
+	
 	private JLabel whiteLabel;
 	private JLabel blackLabel;
 	private static JLabel moveLabel;
@@ -45,6 +46,7 @@ public class ChessGameWindow extends JFrame {
 		
 		this.setSize(621, 475);
 		this.setVisible(true);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
 		whiteLabel = new JLabel(String.format("White: %s", white));
 		whiteLabel.setHorizontalAlignment(SwingConstants.CENTER);
