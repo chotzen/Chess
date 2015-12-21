@@ -22,15 +22,18 @@ public class Square extends JPanel {
 	private static final long serialVersionUID = -7287090345533630180L;
 	
 	private JPanel piecePanel;
+	
+	// private int x, y;
 
-	public ChessPiece piece = new NullPiece();
-	public boolean color;
-	public BufferedImage pieceImage;
-	public BufferedImage blankImage;
-	public boolean selected;
+	private ChessPiece piece = new NullPiece(this.getX(), this.getY());
+	private boolean color;
+	private BufferedImage blankImage;
+	private boolean selected;
+	
+	private Graphics g;
 	//private Board board;
 	
-	public Square(int x, int y, boolean black) {
+	public Square(final int x, final int y, boolean black) {
 
 		setForeground(UIManager.getColor("InternalFrame.borderShadow"));
 		this.color = black;
@@ -55,9 +58,9 @@ public class Square extends JPanel {
 		addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if (!piece.getClass().equals(NullPiece.class))
+				if (piece.type != '0')
 				{
-					System.out.println("called");
+					//System.out.println("called");
 				
 						
 					for (int i=1; i<=8; i++)
@@ -70,10 +73,30 @@ public class Square extends JPanel {
 					
 					for (Coordinate s : piece.getPossibleMoves())
 					{
-						System.out.println(s.getX() + " " + s.getY());
+						//System.out.println(s.getX() + " " + s.getY());
 						Board.getBoardArray()[s.getX()][s.getY()].setHighlighted(true);
 					}
 					setSelected(true);
+				}
+				
+				if (getBackground().equals(Color.ORANGE))
+				{
+					if (piece.getClass().equals(NullPiece.class))
+					{
+						piece.kill();
+					}
+					for (int i = 1; i <= 8; i++)
+					{
+						for (int j = 1; j <= 8; j++)
+						{
+							if (Board.getBoardArray()[i][j].selected)
+							{
+								Board.getBoardArray()[i][j].getPiece().move(x, y);
+								Board.getBoardArray()[i][j].repaint();
+								
+							}
+						}
+					}
 				}
 			}
 		});
@@ -120,32 +143,32 @@ public class Square extends JPanel {
 		}
 	}	
 	
-	public void setPiece(ChessPiece piece)
-	{
-		this.piece = piece;
-		if (!piece.getClass().equals(NullPiece.class))
-		{
-			pieceImage = piece.getImage();
-		}
-		else
-		{
-			piece = new NullPiece();
-			pieceImage = blankImage;
-		}
-		
+	public void setPiece(ChessPiece newpiece)
+	{		
+		this.piece = newpiece;
+		g.drawImage(piece.getImage(), 5, 5, null);
 		repaint();
+		revalidate();
+		
+		//System.out.println(this.piece.toString());
 	}
 	
 	public boolean hasPiece()
 	{
-		return (piece.getClass().equals(NullPiece.class));
+		return !piece.isNull();
 	}
 	
 	@Override
 	protected void paintComponent(Graphics g)
 	{
-		super.paintComponent(g);
-		g.drawImage(pieceImage, 5, 5, null);
+		this.g = g;
+		try
+		{
+			super.paintComponent(g);
+			g.drawImage(piece.getImage(), 5, 5, null);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 }

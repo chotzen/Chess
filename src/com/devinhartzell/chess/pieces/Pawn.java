@@ -42,33 +42,42 @@ public class Pawn extends ChessPiece {
 		{
 		
 			if (y == 2)
-				if (Board.getBoardArray()[x][4].hasPiece())
+				if (!Board.getBoardArray()[x][4].hasPiece() && !Board.getBoardArray()[x][3].hasPiece())
 					movesList.add(new Coordinate(x, 4));
 			
-			if (Board.getBoardArray()[x][y+1].hasPiece())
+			if (!Board.getBoardArray()[x][y+1].hasPiece())
 				movesList.add(new Coordinate(x, y+1));
 			
+			if (x+1 <= 8)
+				if (Board.getBoardArray()[x+1][y+1].hasPiece())
+					movesList.add(new Coordinate(x+1, y+1));
+			
+			if (x-1 >= 1)
+				if (Board.getBoardArray()[x-1][y+1].hasPiece())
+					movesList.add(new Coordinate(x-1, y+1));
+				
 		}
 		else 
 		{
 			if (y == 7)
-				if (Board.getBoardArray()[x][5].hasPiece())
+				if (!Board.getBoardArray()[x][5].hasPiece() && !Board.getBoardArray()[x][6].hasPiece())
 					movesList.add(new Coordinate(x, 5));
 
-			if (Board.getBoardArray()[x][y-1].hasPiece())
+			if (!Board.getBoardArray()[x][y-1].hasPiece())
 				movesList.add(new Coordinate(x, y-1));
+			
+			if (x+1 <= 8)
+				if (Board.getBoardArray()[x+1][y-1].hasPiece())
+					movesList.add(new Coordinate(x+1, y-1));
+			
+			if (x-1 >= 1)
+				if (Board.getBoardArray()[x-1][y-1].hasPiece())
+					movesList.add(new Coordinate(x-1, y-1));
 		}
 		return movesList;
 	}
 	
-	@Override
-	public void move(int x, int y)
-	{
-		Board.getBoardArray()[this.x][this.y].setPiece(null);
-		this.x = x;
-		this.y = y;
-		Board.getBoardArray()[x][y].setPiece(this);
-	}
+
 	
 	
 	public BufferedImage getImage()
