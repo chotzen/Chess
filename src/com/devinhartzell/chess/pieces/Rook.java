@@ -19,7 +19,7 @@ public class Rook extends ChessPiece {
 		this.x = x;
 		this.y = y;
 		this.color = color;
-		this.type = 'p';
+		this.type = 'r';
 		try
 		{
 			if (color)

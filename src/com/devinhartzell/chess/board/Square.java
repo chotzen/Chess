@@ -1,6 +1,7 @@
 package com.devinhartzell.chess.board;
 
 import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import com.devinhartzell.chess.pieces.ChessPiece;
@@ -8,7 +9,6 @@ import com.devinhartzell.chess.pieces.NullPiece;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import javax.swing.UIManager;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
@@ -78,7 +78,8 @@ public class Square extends JPanel {
 						Board.getBoardArray()[s.getX()][s.getY()].setHighlighted(true);
 					}
 					setSelected(true);
-				}
+				} else if (!piece.getColor() == Board.getTurn())
+					JOptionPane.showMessageDialog(null, "It isn't your turn!");
 				
 				if (getBackground().equals(Color.ORANGE))
 				{
@@ -146,6 +147,9 @@ public class Square extends JPanel {
 				setBackground(Color.WHITE);
 			setBorder(new LineBorder(new Color(0, 0, 128), 0));
 		}
+		
+		repaint();
+		revalidate();
 	}	
 	
 	public void setPiece(ChessPiece newpiece)

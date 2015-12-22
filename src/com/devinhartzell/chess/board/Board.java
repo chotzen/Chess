@@ -4,6 +4,7 @@ import javax.swing.JPanel;
 
 import com.devinhartzell.chess.ChessGameWindow;
 import com.devinhartzell.chess.pieces.ChessPiece;
+import com.devinhartzell.chess.pieces.King;
 import com.devinhartzell.chess.pieces.Pawn;
 import com.devinhartzell.chess.pieces.Rook;
 
@@ -15,6 +16,8 @@ public class Board extends JPanel {
 	private static final long serialVersionUID = -396109385960336400L;
 	
 	private static Square[][] boardArray = new Square[9][9];
+	private static King whiteKing;
+	private static King blackKing;
 	
 	/*
 	 * False = white
@@ -43,7 +46,10 @@ public class Board extends JPanel {
 			new Pawn(i, 7, false);
 		}
 		
-		new Rook(1, 1, false);
+		new Rook(1, 1, true);
+		new Rook(8, 1, true);
+		new Rook(1, 8, false);
+		new Rook(8, 8, false);
 	}
 	
 	public static ChessPiece getPieceAt(int x, int y)
