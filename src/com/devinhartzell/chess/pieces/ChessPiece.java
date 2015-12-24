@@ -29,8 +29,10 @@ public abstract class ChessPiece {
 	public int x, y;
 	public BufferedImage image;	
 	
-	// K = x, V = y
+	// gets the moves from the piece's current position
 	public abstract ArrayList<Coordinate> getPossibleMoves();
+	// gets the theoretical moves for a piece if it were at (x, y)
+	public abstract ArrayList<Coordinate> getTheoreticalMoves(int x, int y);
 	
 	public abstract boolean isNull();
 	

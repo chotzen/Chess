@@ -27,6 +27,11 @@ public class NullPiece extends ChessPiece {
 	public ArrayList<Coordinate> getPossibleMoves() {
 		return null;
 	}
+	
+	@Override
+	public ArrayList<Coordinate> getTheoreticalMoves(int x, int y) {
+		return null;
+	}
 
 	@Override
 	public boolean isNull() {
