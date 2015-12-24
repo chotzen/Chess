@@ -2,7 +2,6 @@ package com.devinhartzell.chess.pieces;
 
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.imageio.ImageIO;
 
@@ -36,8 +35,8 @@ public class Pawn extends ChessPiece {
 	}
 	
 	@Override
-	public List<Coordinate> getPossibleMoves() {
-		List<Coordinate> movesList = new ArrayList<Coordinate>();
+	public ArrayList<Coordinate> getPossibleMoves() {
+		ArrayList<Coordinate> movesList = new ArrayList<Coordinate>();
 		if (color)
 		{
 		

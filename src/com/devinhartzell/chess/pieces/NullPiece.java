@@ -1,7 +1,7 @@
 package com.devinhartzell.chess.pieces;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
@@ -24,7 +24,7 @@ public class NullPiece extends ChessPiece {
 	}
 
 	@Override
-	public List<Coordinate> getPossibleMoves() {
+	public ArrayList<Coordinate> getPossibleMoves() {
 		return null;
 	}
 

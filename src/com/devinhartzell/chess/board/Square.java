@@ -1,7 +1,6 @@
 package com.devinhartzell.chess.board;
 
 import javax.imageio.ImageIO;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import com.devinhartzell.chess.pieces.ChessPiece;
@@ -74,12 +73,12 @@ public class Square extends JPanel {
 					
 					for (Coordinate s : piece.getPossibleMoves())
 					{
-						//System.out.println(s.getX() + " " + s.getY());
+						if (piece.getType() == 'k')
+							System.out.println(s.getX() + " " + s.getY());
 						Board.getBoardArray()[s.getX()][s.getY()].setHighlighted(true);
 					}
 					setSelected(true);
-				} else if (!piece.getColor() == Board.getTurn())
-					JOptionPane.showMessageDialog(null, "It isn't your turn!");
+				}
 				
 				if (getBackground().equals(Color.ORANGE))
 				{

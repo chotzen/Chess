@@ -20,5 +20,10 @@ public class Coordinate {
 	{
 		return y;
 	}
+	
+	public boolean equals(Coordinate c)
+	{
+		return (this.x == c.getX() && this.y == c.getY());
+	}
 
 }

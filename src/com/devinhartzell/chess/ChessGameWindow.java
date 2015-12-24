@@ -11,7 +11,6 @@ import com.devinhartzell.chess.board.Board;
 import java.io.IOException;
 
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JScrollBar;
 import javax.swing.SwingConstants;
 

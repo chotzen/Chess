@@ -2,7 +2,7 @@ package com.devinhartzell.chess.pieces;
 
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.List;
+
 
 import javax.imageio.ImageIO;
 
@@ -11,8 +11,8 @@ import com.devinhartzell.chess.board.Coordinate;
 
 public class Rook extends ChessPiece {
 	
-	private final String WHITE_PATH = "/resources/pieces/p_w.png";
-	private final String BLACK_PATH = "/resources/pieces/p_b.png";
+	private final String WHITE_PATH = "/resources/pieces/r_w.png";
+	private final String BLACK_PATH = "/resources/pieces/r_b.png";
 	
 	public Rook(int x, int y, boolean color)
 	{
@@ -31,13 +31,13 @@ public class Rook extends ChessPiece {
 		}
 		catch (Exception e)
 		{
-			System.out.println("Error: Could not load pawn resource");
+			System.out.println("Error: Could not load rook resource");
 		}
 	}
 	
 	@Override
-	public List<Coordinate> getPossibleMoves() {
-		List<Coordinate> movesList = new ArrayList<Coordinate>();
+	public ArrayList<Coordinate> getPossibleMoves() {
+		ArrayList<Coordinate> movesList = new ArrayList<Coordinate>();
 		// up
 		for (int i = y+1; i <= 8; i++)
 		{

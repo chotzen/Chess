@@ -1,7 +1,7 @@
 package com.devinhartzell.chess.pieces;
 
 import java.awt.image.BufferedImage;
-import java.util.List;
+import java.util.ArrayList;
 
 import com.devinhartzell.chess.board.Board;
 import com.devinhartzell.chess.board.Coordinate;
@@ -30,7 +30,7 @@ public abstract class ChessPiece {
 	public BufferedImage image;	
 	
 	// K = x, V = y
-	public abstract List<Coordinate> getPossibleMoves();
+	public abstract ArrayList<Coordinate> getPossibleMoves();
 	
 	public abstract boolean isNull();
 	

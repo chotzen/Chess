@@ -50,6 +50,9 @@ public class Board extends JPanel {
 		new Rook(8, 1, true);
 		new Rook(1, 8, false);
 		new Rook(8, 8, false);
+		
+		new King(5, 8, false);
+		new King(5, 1, true);
 	}
 	
 	public static ChessPiece getPieceAt(int x, int y)
