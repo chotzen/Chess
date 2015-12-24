@@ -68,6 +68,8 @@ public class Square extends JPanel {
 						{
 							Board.getBoardArray()[i][j].setHighlighted(false);
 							Board.getBoardArray()[i][j].setSelected(false);
+							Board.getBoardArray()[i][j].repaint();
+							Board.getBoardArray()[i][j].revalidate();
 						}
 					}
 					

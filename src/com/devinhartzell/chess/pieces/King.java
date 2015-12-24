@@ -20,8 +20,7 @@ public class King extends ChessPiece {
 		this.y = y;
 		this.color = color;
 		this.type = 'k';
-		try
-		{
+		try {
 			if (color)
 				this.image = ImageIO.read(getClass().getResource(BLACK_PATH));
 			else
@@ -29,9 +28,8 @@ public class King extends ChessPiece {
 			
 			Board.getBoardArray()[x][y].setPiece(this);
 		}
-		catch (Exception e)
-		{
-			System.out.println("Error: Could not load pawn resource");
+		catch (Exception e) {
+			System.out.println("Error: Could not load king resource");
 		}
 	}
 	
@@ -83,9 +81,21 @@ public class King extends ChessPiece {
 		return movesList;
 	}
 	
+	public boolean getCheck() {
+		for (int m = 1; m <= 8; m++) {
+			for (int n = 1; n <= 8; n++) {
+				Square sq = Board.getBoardArray()[m][n];
+				if (sq.hasPiece()) 
+					if (sq.getPiece().getColor() != this.color) 
+						for (Coordinate c : sq.getPiece().getPossibleMoves()) 
+							if (c.equals(new Coordinate(this.x, this.y))) 
+								return true;
+			}	
+		}		return false;
+	}
 	
-	public BufferedImage getImage()
-	{
+	
+	public BufferedImage getImage() {
 		return this.image;
 	}
 

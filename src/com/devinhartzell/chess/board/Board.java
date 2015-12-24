@@ -1,5 +1,6 @@
 package com.devinhartzell.chess.board;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import com.devinhartzell.chess.ChessGameWindow;
@@ -15,9 +16,13 @@ public class Board extends JPanel {
 	 */
 	private static final long serialVersionUID = -396109385960336400L;
 	
+	// Not using boardArray[0]
 	private static Square[][] boardArray = new Square[9][9];
 	private static King whiteKing;
 	private static King blackKing;
+	
+	private boolean check_w = false;
+	private boolean check_b = false;
 	
 	/*
 	 * False = white
@@ -51,8 +56,8 @@ public class Board extends JPanel {
 		new Rook(1, 8, false);
 		new Rook(8, 8, false);
 		
-		new King(5, 8, false);
-		new King(5, 1, true);
+		whiteKing = new King(5, 8, false);
+		blackKing = new King(5, 1, true);
 	}
 	
 	public static ChessPiece getPieceAt(int x, int y)
@@ -67,14 +72,30 @@ public class Board extends JPanel {
 		return boardArray;
 	}
 	
-	public static boolean getTurn()
-	{
+	public static boolean getTurn() {
 		return currentMove;
 	}
 	
-	public static void setTurn(boolean b)
-	{
+	public static void setTurn(boolean b) {
 		currentMove = b;
 		ChessGameWindow.nextMove();
+		
+		//white
+		if (b) 
+			if (whiteKing.getCheck())
+				JOptionPane.showMessageDialog(null, "White is now in Check!");
+		else 
+			if (blackKing.getCheck())
+				JOptionPane.showMessageDialog(null, "Black is now in Check!");
+		
 	}
+	
+	public static King getWKing() {
+		return Board.whiteKing;
+	}
+	
+	public static King getBKing() {
+		return Board.blackKing;
+	}
+
 }
