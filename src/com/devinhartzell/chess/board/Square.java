@@ -23,12 +23,14 @@ public class Square extends JPanel {
 	
 	private JPanel piecePanel;
 	
-	// private int x, y;
+	private int x, y;
 
 	private ChessPiece piece = new NullPiece(this.getX(), this.getY());
 	private boolean color;
 	private BufferedImage blankImage;
 	private boolean selected;
+	
+	private static boolean disableGraphicChanges = false;
 	
 	private Graphics g;
 	//private Board board;
@@ -102,8 +104,10 @@ public class Square extends JPanel {
 
 			@Override
 			protected void paintComponent(Graphics g) {
-				super.paintComponent(g);
-				g.drawImage(blankImage, 0, 0, null);
+				if (!disableGraphicChanges) {
+					super.paintComponent(g);
+					g.drawImage(blankImage, 0, 0, null);
+				}
 			}
 		};
 		
@@ -148,6 +152,10 @@ public class Square extends JPanel {
 		return !piece.isNull();
 	}
 	
+	public static void setDisabledGraphics(boolean b) {
+		Square.disableGraphicChanges = b;
+	}
+	
 	@Override
 	protected void paintComponent(Graphics g) {
 		this.g = g;
@@ -158,4 +166,18 @@ public class Square extends JPanel {
 			e.printStackTrace();
 		}
 	}
+	
+	@Override
+	public void repaint() {
+		this.repaint();
+		piecePanel.repaint();
+	}
+	
+	@Override
+	public void revalidate() {
+		this.revalidate();
+		piecePanel.revalidate();
+	}
+	
+	
 }

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import com.devinhartzell.chess.board.Board;
 import com.devinhartzell.chess.board.Coordinate;
+import com.devinhartzell.chess.board.Square;
 
 public abstract class ChessPiece {
 	
@@ -27,24 +28,29 @@ public abstract class ChessPiece {
 	public boolean color;
 	public boolean isNull = false;
 	public int x, y;
-	public BufferedImage image;	
+	public BufferedImage image;
 	
 	// gets the moves from the piece's current position
 	public abstract ArrayList<Coordinate> getPossibleMoves();
-	// gets the theoretical moves for a piece if it were at (x, y)
-	//public abstract ArrayList<Coordinate> getTheoreticalMoves(int x, int y);
-	public ArrayList<Coordinate> simulateMoves(ChessPiece movedPiece, int oldx, int oldy, int newx, int newy) {
-		
-		
-		return null;
-	}
+	// gets the theoretical moves for a piece if it were at (x, y);
 	
+	public ArrayList<Coordinate> getTheoreticalMoves(ChessPiece movedPiece, int new_x, int new_y) {
+		Square.setDisabledGraphics(true);
+		int old_x = this.x,
+			old_y = this.y;
+		movedPiece.move(new_x, new_y);
+		ArrayList<Coordinate> moves = getPossibleMoves();
+		movedPiece.move(old_x, old_y);
+		Square.setDisabledGraphics(false);
+		return moves;
+	}
 	
 	public abstract boolean isNull();
 	
 	public boolean getColor()
 	{
 		return color;
+		
 	}
 	
 	public char getType()

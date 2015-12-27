@@ -5,6 +5,8 @@ import java.util.Random;
 
 public class ChessGame {
 	
+	private static ChessGameWindow cgw;
+	
 	public ChessGame(boolean randomized, String p1, String p2) 
 			throws IOException {
 		String white, black;
@@ -20,11 +22,16 @@ public class ChessGame {
 			white = p1;
 			black = p2;
 		}
-		new ChessGameWindow(this, white, black);
+		cgw = new ChessGameWindow(this, white, black);
 		System.out.println(white);
 	}
 	
 	public static void main(String args[]) {
+		new AskForName();
+	}
+	
+	public static void endGame() {
+		cgw.dispose();
 		new AskForName();
 	}
 }

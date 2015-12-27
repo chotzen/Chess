@@ -3,6 +3,7 @@ package com.devinhartzell.chess.board;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import com.devinhartzell.chess.ChessGame;
 import com.devinhartzell.chess.ChessGameWindow;
 import com.devinhartzell.chess.pieces.ChessPiece;
 import com.devinhartzell.chess.pieces.King;
@@ -75,18 +76,29 @@ public class Board extends JPanel {
 		currentMove = b;
 		ChessGameWindow.nextMove();
 		
-		if (b) 
+		if (b) {
+			if (whiteKing.getCheckMate()) {
+				JOptionPane.showMessageDialog(null, "White is in CheckMate. Black wins!");
+				ChessGame.endGame();
+			}
+				
 			if (whiteKing.getCheck()) {
 				JOptionPane.showMessageDialog(null, "White is now in Check!");
 				check_w = true;
 			} else
 				check_w = false;
-		else 
+		} else {
+			if (blackKing.getCheckMate()) {
+				JOptionPane.showMessageDialog(null, "Black is in CheckMate. White wins!");
+				ChessGame.endGame();
+			}
+			
 			if (blackKing.getCheck()) {
 				JOptionPane.showMessageDialog(null, "Black is now in Check!");
 				check_b = true;
 			} else
 				check_b = false;
+		}
 	}
 	
 	public static King getWKing() {

@@ -93,9 +93,11 @@ public class King extends ChessPiece {
 			}	
 		}		return false;
 	}
+
 	
-	public boolean getCheckMate() {
+	public ArrayList<ChessPiece> getAttackers() {
 		ArrayList<ChessPiece> attackers = new ArrayList<ChessPiece>();
+		
 		for (int m = 1; m <= 8; m++) {
 			for (int n = 1; n <= 8; n++) {
 				ChessPiece pe = Board.getBoardArray()[m][n].getPiece();
@@ -108,28 +110,42 @@ public class King extends ChessPiece {
 					}
 				}
 			}
-		}
-		
+		} return attackers;
+	}
+	
+	public ArrayList<ChessPiece> getSameColorPieces() {
+		ArrayList<ChessPiece> pieces = new ArrayList<ChessPiece>();
 		for (int m = 1; m <= 8; m++) {
 			for (int n = 1; n <= 8; n++) {
 				ChessPiece pe = Board.getBoardArray()[m][n].getPiece();
 				if (pe.getColor() == this.color) {
-					for (Coordinate c : pe.getPossibleMoves()) {
-						
+					pieces.add(pe);
+				}
+			}
+		} return pieces;
+	}
+
+	public boolean getCheckMate() {
+		boolean pieceCanAttack = false;
+		for (ChessPiece pa : getAttackers()) {
+			boolean canAttack = false;
+			for (ChessPiece pe : getSameColorPieces()) {
+				for (Coordinate c : pe.getPossibleMoves()) {
+					for (Coordinate ca : pa.getTheoreticalMoves(this, c.getX(), c.getY())) {
+						if (ca.equals(new Coordinate(this.x, this.y))) {
+							canAttack = true;
+						}
 					}
 				}
 			}
-		}
+			if (canAttack)
+				pieceCanAttack = true;
+		} 
 		
-		
-		
-		
-		return true;
+		return pieceCanAttack;
 	}
-	
-	public ArrayList<ChessPiece> getAttackers() {
-		return null;
-	}
+
+
 	
 	public BufferedImage getImage() {
 		return this.image;
