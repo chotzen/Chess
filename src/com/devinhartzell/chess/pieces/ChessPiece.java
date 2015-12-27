@@ -32,7 +32,13 @@ public abstract class ChessPiece {
 	// gets the moves from the piece's current position
 	public abstract ArrayList<Coordinate> getPossibleMoves();
 	// gets the theoretical moves for a piece if it were at (x, y)
-	public abstract ArrayList<Coordinate> getTheoreticalMoves(int x, int y);
+	//public abstract ArrayList<Coordinate> getTheoreticalMoves(int x, int y);
+	public ArrayList<Coordinate> simulateMoves(ChessPiece movedPiece, int oldx, int oldy, int newx, int newy) {
+		
+		
+		return null;
+	}
+	
 	
 	public abstract boolean isNull();
 	

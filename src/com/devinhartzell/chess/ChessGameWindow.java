@@ -26,8 +26,8 @@ public class ChessGameWindow extends JFrame {
 	private static JLabel moveLabel;
 	private static final long serialVersionUID = 1109205743042597274L;
 
-	public ChessGameWindow(ChessGame game, String white, String black) throws IOException
-	{
+	public ChessGameWindow(ChessGame game, String white, String black) 
+			throws IOException {
 		
 		getContentPane().setLayout(null);
 		
@@ -71,17 +71,14 @@ public class ChessGameWindow extends JFrame {
 	}
 	
 	@PostConstruct
-	public void createControls(Composite parent)
-	{
+	public void createControls(Composite parent) {
 		
 	}
 	
-	public static void nextMove()
-	{
+	public static void nextMove() {
 		if (Board.currentMove)
 			moveLabel.setText("Black to move");
 		else
 			moveLabel.setText("White to move");
 	}
-	
 }

@@ -45,27 +45,22 @@ public class Square extends JPanel {
 		
 		setSize(50, 50);
 		
-		try
-		{
+		try {
 			this.blankImage = ImageIO.read(getClass().getResource("/resources/pieces/noPiece.png"));
 		}
-		catch (IOException e)
-		{
+		catch (IOException e) {
 			System.out.println("Could not load placeholder image");
 		}
 		
 		addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if (piece.type != '0' && !getBackground().equals(Color.ORANGE) && piece.getColor() == Board.getTurn())
-				{
+				if (piece.type != '0' && !getBackground().equals(Color.ORANGE) && piece.getColor() == Board.getTurn()) {
 					//System.out.println("called");
 				
 						
-					for (int i=1; i<=8; i++)
-					{
-						for (int j=1; j<=8; j++)
-						{
+					for (int i=1; i<=8; i++) {
+						for (int j=1; j<=8; j++) {
 							Board.getBoardArray()[i][j].setHighlighted(false);
 							Board.getBoardArray()[i][j].setSelected(false);
 							Board.getBoardArray()[i][j].repaint();
@@ -73,8 +68,7 @@ public class Square extends JPanel {
 						}
 					}
 					
-					for (Coordinate s : piece.getPossibleMoves())
-					{
+					for (Coordinate s : piece.getPossibleMoves()){
 						if (piece.getType() == 'k')
 							System.out.println(s.getX() + " " + s.getY());
 						Board.getBoardArray()[s.getX()][s.getY()].setHighlighted(true);
@@ -82,18 +76,14 @@ public class Square extends JPanel {
 					setSelected(true);
 				}
 				
-				if (getBackground().equals(Color.ORANGE))
-				{
-					if (piece.getClass().equals(NullPiece.class))
-					{
+				if (getBackground().equals(Color.ORANGE)) {
+					if (piece.getClass().equals(NullPiece.class)) {
 						piece.kill();
 					}
-					for (int i = 1; i <= 8; i++)
-					{
-						for (int j = 1; j <= 8; j++)
-						{
-							if (Board.getBoardArray()[i][j].selected)
-							{
+					
+					for (int i = 1; i <= 8; i++) {
+						for (int j = 1; j <= 8; j++) {
+							if (Board.getBoardArray()[i][j].selected) {
 								Board.getBoardArray()[i][j].getPiece().move(x, y);
 								Board.getBoardArray()[i][j].repaint();
 								
@@ -111,8 +101,7 @@ public class Square extends JPanel {
 			private static final long serialVersionUID = 8620947713227289840L;
 
 			@Override
-			protected void paintComponent(Graphics g)
-			{
+			protected void paintComponent(Graphics g) {
 				super.paintComponent(g);
 				g.drawImage(blankImage, 0, 0, null);
 			}
@@ -122,26 +111,19 @@ public class Square extends JPanel {
 		piecePanel.setLocation(5, 5);
 	}
 	
-	public void setSelected(boolean b)
-	{
+	public void setSelected(boolean b) {
 		this.selected = b;
 	}
 	
-	public ChessPiece getPiece()
-	{
+	public ChessPiece getPiece() {
 		return piece;
 	}
 	
-	public void setHighlighted(boolean b)
-	{
-		if (b)
-		{
+	public void setHighlighted(boolean b) {
+		if (b) {
 			setBackground(Color.ORANGE);
 			setBorder(new LineBorder(new Color(0, 0, 128), 3));
-		}
-
-		else
-		{
+		} else {
 			if (color)
 				setBackground(Color.BLUE);
 			else
@@ -153,8 +135,7 @@ public class Square extends JPanel {
 		revalidate();
 	}	
 	
-	public void setPiece(ChessPiece newpiece)
-	{		
+	public void setPiece(ChessPiece newpiece) {		
 		this.piece = newpiece;
 		g.drawImage(piece.getImage(), 5, 5, null);
 		repaint();
@@ -163,22 +144,18 @@ public class Square extends JPanel {
 		//System.out.println(this.piece.toString());
 	}
 	
-	public boolean hasPiece()
-	{
+	public boolean hasPiece() {
 		return !piece.isNull();
 	}
 	
 	@Override
-	protected void paintComponent(Graphics g)
-	{
+	protected void paintComponent(Graphics g) {
 		this.g = g;
-		try
-		{
+		try {
 			super.paintComponent(g);
 			g.drawImage(piece.getImage(), 5, 5, null);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
 }

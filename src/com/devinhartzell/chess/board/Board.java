@@ -21,8 +21,8 @@ public class Board extends JPanel {
 	private static King whiteKing;
 	private static King blackKing;
 	
-	private boolean check_w = false;
-	private boolean check_b = false;
+	private static boolean check_w = false;
+	private static boolean check_b = false;
 	
 	/*
 	 * False = white
@@ -30,23 +30,19 @@ public class Board extends JPanel {
 	 */
 	public static boolean currentMove = false;
 	
-	public Board()
-	{
+	public Board() {
 		setSize(400, 400);
 		setLayout(null);
 		
-		for (int i = 1; i <= 8; i++)
-		{
-			for (int j = 1; j <= 8; j++)
-			{
+		for (int i = 1; i <= 8; i++) {
+			for (int j = 1; j <= 8; j++) {
 				Square sq = new Square(i, j, !((i + j) % 2 == 0));
 				getBoardArray()[i][j] = sq;
 				this.add(sq);
 			}
 		}
 		
-		for (int i = 1; i<=8; i++)
-		{
+		for (int i = 1; i<=8; i++) {
 			new Pawn(i, 2, true);
 			new Pawn(i, 7, false);
 		}
@@ -60,8 +56,7 @@ public class Board extends JPanel {
 		blackKing = new King(5, 1, true);
 	}
 	
-	public static ChessPiece getPieceAt(int x, int y)
-	{
+	public static ChessPiece getPieceAt(int x, int y) {
 		if (getBoardArray()[x][y].hasPiece())
 			return getBoardArray()[x][y].getPiece();
 		else
@@ -80,14 +75,18 @@ public class Board extends JPanel {
 		currentMove = b;
 		ChessGameWindow.nextMove();
 		
-		//white
 		if (b) 
-			if (whiteKing.getCheck())
+			if (whiteKing.getCheck()) {
 				JOptionPane.showMessageDialog(null, "White is now in Check!");
+				check_w = true;
+			} else
+				check_w = false;
 		else 
-			if (blackKing.getCheck())
+			if (blackKing.getCheck()) {
 				JOptionPane.showMessageDialog(null, "Black is now in Check!");
-		
+				check_b = true;
+			} else
+				check_b = false;
 	}
 	
 	public static King getWKing() {

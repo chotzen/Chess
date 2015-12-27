@@ -26,8 +26,7 @@ public class AskForName extends JFrame {
 	private JCheckBox randomizeColors;
 	private JLabel errorMsg;
 	
-	public AskForName()
-	{
+	public AskForName() {
 		getContentPane().setLayout(null);
 		
 		JLabel lblPlayer_1 = new JLabel("Player 1");
@@ -76,19 +75,21 @@ public class AskForName extends JFrame {
 		
 		JButton btnStart = new JButton("Start");
 		btnStart.addMouseListener(new MouseAdapter() {
+			
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if (!player1Enter.getText().equals("Enter Name") && !player1Enter.getText().equals("") && 
-						!player2Enter.getText().equals("Enter Name") && !player2Enter.getText().equals(""))
-				{
+				if (!player1Enter.getText().equals("Enter Name") 
+						&& !player1Enter.getText().equals("") 
+						&& !player2Enter.getText().equals("Enter Name") 
+						&& !player2Enter.getText().equals("")) {
 					try {
-						new ChessGame(randomizeColors.isSelected(), player1Enter.getText(), player2Enter.getText());
+						new ChessGame(randomizeColors.isSelected(), 
+								player1Enter.getText(), player2Enter.getText());
 					} catch (IOException e1) {
 						e1.printStackTrace();
 					}
 					closeWindow();
-				} else
-				{
+				} else {
 					errorMsg.setText("You must input both names");
 				}
 			}
@@ -105,14 +106,12 @@ public class AskForName extends JFrame {
 	
 
 	
-	public void closeWindow()
-	{
+	public void closeWindow() {
 		this.dispose();
 	}
 	
 	@PostConstruct
-	public void createControls(Composite parent)
-	{
+	public void createControls(Composite parent) {
 		
 	}
 }

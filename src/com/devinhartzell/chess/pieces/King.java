@@ -94,61 +94,41 @@ public class King extends ChessPiece {
 		}		return false;
 	}
 	
-	@Override
-	public ArrayList<Coordinate> getTheoreticalMoves(int x, int y) {
-		ArrayList<Coordinate> movesList = new ArrayList<Coordinate>();
-		
-		// Go clockwise from the top
-		
-		int[] xc = {x, x+1, x+1, x+1, x, x-1, x-1, x-1};
-		int[] yc = {y+1, y+1, y, y-1, y-1, y-1, y, y+1};
-		
-		// left three spaces
-		for (int i = 0; i <= 7; i++)
-		{
-			if (xc[i] <= 8 && xc[i] >= 1 && yc[i] <=8 && yc[i] >= 1) {
-				if (Board.getBoardArray()[xc[i]][yc[i]].hasPiece()) {
-					if (Board.getBoardArray()[xc[i]][yc[i]].getPiece().getColor() != this.color) {
-						movesList.add(new Coordinate(xc[i], yc[i]));
+	public boolean getCheckMate() {
+		ArrayList<ChessPiece> attackers = new ArrayList<ChessPiece>();
+		for (int m = 1; m <= 8; m++) {
+			for (int n = 1; n <= 8; n++) {
+				ChessPiece pe = Board.getBoardArray()[m][n].getPiece();
+				if (pe.getColor() != this.color) {
+					for (Coordinate c : pe.getPossibleMoves()) {
+						if (c.equals(new Coordinate(x, y))) {
+							if (!attackers.contains(pe))
+								attackers.add(pe);
+						}
 					}
-				} else {
-					movesList.add(new Coordinate(xc[i], yc[i]));
 				}
 			}
 		}
 		
 		for (int m = 1; m <= 8; m++) {
 			for (int n = 1; n <= 8; n++) {
-				Square sq = Board.getBoardArray()[m][n];
-				if (sq.hasPiece()) {
-					if (sq.getPiece().getType() != 'k') {
-						if (sq.getPiece().getColor() != this.color) {
-							ArrayList<Coordinate> noMoves = sq.getPiece().getPossibleMoves();
-							ArrayList<Coordinate> intersection = new ArrayList<Coordinate>();
-							
-							for (Coordinate c : movesList)
-								for (Coordinate d : noMoves)
-									if (c.equals(d))
-										intersection.add(c);
-							
-							for (Coordinate c : intersection)							
-								movesList.remove(c);		
-						}
-					}	
+				ChessPiece pe = Board.getBoardArray()[m][n].getPiece();
+				if (pe.getColor() == this.color) {
+					for (Coordinate c : pe.getPossibleMoves()) {
+						
+					}
 				}
 			}
 		}
-				
-		return movesList;
+		
+		
+		
+		
+		return true;
 	}
 	
-	public boolean getCheckMate() {
-		for (int m = 1; m <= 8; m++) {
-			for (int n = 1; n <= 8; n++) {
-				
-			}
-		}
-		return true;
+	public ArrayList<ChessPiece> getAttackers() {
+		return null;
 	}
 	
 	public BufferedImage getImage() {

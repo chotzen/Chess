@@ -5,11 +5,10 @@ import java.util.Random;
 
 public class ChessGame {
 	
-	public ChessGame(boolean randomized, String p1, String p2) throws IOException
-	{
+	public ChessGame(boolean randomized, String p1, String p2) 
+			throws IOException {
 		String white, black;
-		if (randomized)
-		{
+		if (randomized) {
 			Random r = new Random();
 			if (r.nextBoolean()) {
 				white = p1;
@@ -25,8 +24,7 @@ public class ChessGame {
 		System.out.println(white);
 	}
 	
-	public static void main(String args[])
-	{
+	public static void main(String args[]) {
 		new AskForName();
 	}
 }
