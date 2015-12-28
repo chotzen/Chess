@@ -38,9 +38,13 @@ public abstract class ChessPiece {
 		Square.setDisabledGraphics(true);
 		int old_x = this.x,
 			old_y = this.y;
+		ChessPiece capturedPiece = null;
+		if (!Board.getBoardArray()[new_x][new_y].getPiece().isNull())
+			capturedPiece = Board.getBoardArray()[new_x][new_y].getPiece();
 		movedPiece.move(new_x, new_y);
 		ArrayList<Coordinate> moves = getPossibleMoves();
 		movedPiece.move(old_x, old_y);
+		Board.getBoardArray()[new_x][new_y].setPiece(capturedPiece);
 		Square.setDisabledGraphics(false);
 		return moves;
 	}

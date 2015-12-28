@@ -141,7 +141,9 @@ public class Square extends JPanel {
 	
 	public void setPiece(ChessPiece newpiece) {		
 		this.piece = newpiece;
+		try {
 		g.drawImage(piece.getImage(), 5, 5, null);
+		} catch (NullPointerException npe) {}
 		repaint();
 		revalidate();
 		
@@ -169,14 +171,18 @@ public class Square extends JPanel {
 	
 	@Override
 	public void repaint() {
-		this.repaint();
-		piecePanel.repaint();
+		super.repaint();
+		try {
+			piecePanel.repaint();
+		} catch (NullPointerException npe) {}
 	}
 	
 	@Override
 	public void revalidate() {
-		this.revalidate();
-		piecePanel.revalidate();
+		super.revalidate();
+		try {
+			piecePanel.revalidate();
+		} catch (NullPointerException npe) {}
 	}
 	
 	
