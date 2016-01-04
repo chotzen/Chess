@@ -22,8 +22,6 @@ public class Square extends JPanel {
 	private static final long serialVersionUID = -7287090345533630180L;
 	
 	private JPanel piecePanel;
-	
-	private int x, y;
 
 	private ChessPiece piece = new NullPiece(this.getX(), this.getY());
 	private boolean color;
@@ -49,8 +47,7 @@ public class Square extends JPanel {
 		
 		try {
 			this.blankImage = ImageIO.read(getClass().getResource("/resources/pieces/noPiece.png"));
-		}
-		catch (IOException e) {
+		} catch (IOException e) {
 			System.out.println("Could not load placeholder image");
 		}
 		
@@ -141,14 +138,17 @@ public class Square extends JPanel {
 	
 	public void setPiece(ChessPiece newpiece) {		
 		this.piece = newpiece;
-		try {
-		g.drawImage(piece.getImage(), 5, 5, null);
-		} catch (NullPointerException npe) {}
-		repaint();
-		revalidate();
+		if (!disableGraphicChanges) {
+			try {
+			g.drawImage(piece.getImage(), 5, 5, null);
+			} catch (NullPointerException npe) {}
+			repaint();
+			revalidate();
+		}
+	}
 		
 		//System.out.println(this.piece.toString());
-	}
+	
 	
 	public boolean hasPiece() {
 		return !piece.isNull();
@@ -160,12 +160,14 @@ public class Square extends JPanel {
 	
 	@Override
 	protected void paintComponent(Graphics g) {
-		this.g = g;
-		try {
-			super.paintComponent(g);
-			g.drawImage(piece.getImage(), 5, 5, null);
-		} catch (Exception e) {
-			e.printStackTrace();
+		if (!disableGraphicChanges) {
+			this.g = g;
+			try {
+				super.paintComponent(g);
+				g.drawImage(piece.getImage(), 5, 5, null);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 	}
 	

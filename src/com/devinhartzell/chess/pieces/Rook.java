@@ -38,6 +38,11 @@ public class Rook extends ChessPiece {
 	@Override
 	public ArrayList<Coordinate> getPossibleMoves() {
 		ArrayList<Coordinate> movesList = new ArrayList<Coordinate>();
+		
+		
+		
+		
+		
 		// up
 		for (int i = y+1; i <= 8; i++)
 		{

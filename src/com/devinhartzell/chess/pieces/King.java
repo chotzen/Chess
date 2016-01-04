@@ -140,7 +140,8 @@ public class King extends ChessPiece {
 					
 					// Test the move with all attackers
 					for (ChessPiece attacker : getAttackers()) {
-						for (Coordinate attackerMove : attacker.getTheoreticalMoves(friendPiece, move.getX(), move.getY())) {
+						for (Coordinate attackerMove : attacker.getTheoreticalMoves
+								(friendPiece, move.getX(), move.getY())) {
 							// If an attacker's move contains the king's space, say that it didn't work
 							if (attackerMove.equals(new Coordinate(this.x, this.y))) {
 								solvesCM = false;

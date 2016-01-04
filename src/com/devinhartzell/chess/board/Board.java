@@ -53,6 +53,7 @@ public class Board extends JPanel {
 		new Rook(1, 8, false);
 		new Rook(8, 8, false);
 		
+		
 		whiteKing = new King(5, 8, false);
 		blackKing = new King(5, 1, true);
 	}
