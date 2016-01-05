@@ -50,23 +50,24 @@ public abstract class ChessPiece {
 	}
 	
 	public ArrayList<ChessPiece> getProtectors() {
-		ArrayList<ChessPiece> attackers = new ArrayList<ChessPiece>();
-		
+		ArrayList<ChessPiece> protectors = new ArrayList<ChessPiece>();
 		for (int m = 1; m <= 8; m++) {
 			for (int n = 1; n <= 8; n++) {
 				ChessPiece pe = Board.getBoardArray()[m][n].getPiece();
-				if (pe.getType() == '0') {
+				if (pe.getType() != '0' && pe.getType() != 'k') {
 					if (pe.getColor() == this.color) {
-						for (Coordinate c : pe.getPossibleMoves()) {
-							if (c.equals(new Coordinate(x, y))) {
-								if (!attackers.contains(pe))
-									attackers.add(pe);
+						if (pe != this) {
+							for (Coordinate c : pe.getPossibleMoves()) {
+								if (c.equals(new Coordinate(x,y))) {
+									protectors.add(pe);
+									break;
+								}
 							}
-						}
+						}	
 					}
 				}
 			}
-		} return attackers;
+		} return protectors;
 	}
 	
 	public abstract boolean isNull();

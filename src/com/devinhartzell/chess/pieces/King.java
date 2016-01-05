@@ -160,8 +160,6 @@ public class King extends ChessPiece {
 		} else
 			return false;
 	}
-
-
 	
 	public BufferedImage getImage() {
 		return this.image;
