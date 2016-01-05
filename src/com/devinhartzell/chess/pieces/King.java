@@ -61,16 +61,18 @@ public class King extends ChessPiece {
 				if (sq.hasPiece()) {
 					if (sq.getPiece().getType() != 'k') {
 						if (sq.getPiece().getColor() != this.color) {
-							ArrayList<Coordinate> noMoves = sq.getPiece().getPossibleMoves();
-							ArrayList<Coordinate> intersection = new ArrayList<Coordinate>();
-							
-							for (Coordinate c : movesList)
-								for (Coordinate d : noMoves)
-									if (c.equals(d))
-										intersection.add(c);
-							
-							for (Coordinate c : intersection)							
-								movesList.remove(c);		
+							if (sq.getPiece().getProtectors().size() <= 0) {
+								ArrayList<Coordinate> noMoves = sq.getPiece().getPossibleMoves();
+								ArrayList<Coordinate> intersection = new ArrayList<Coordinate>();
+								
+								for (Coordinate c : movesList)
+									for (Coordinate d : noMoves)
+										if (c.equals(d))
+											intersection.add(c);
+								
+								for (Coordinate c : intersection)							
+									movesList.remove(c);	
+							}
 						}
 					}	
 				}

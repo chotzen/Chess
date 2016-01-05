@@ -49,6 +49,26 @@ public abstract class ChessPiece {
 		return moves;
 	}
 	
+	public ArrayList<ChessPiece> getProtectors() {
+		ArrayList<ChessPiece> attackers = new ArrayList<ChessPiece>();
+		
+		for (int m = 1; m <= 8; m++) {
+			for (int n = 1; n <= 8; n++) {
+				ChessPiece pe = Board.getBoardArray()[m][n].getPiece();
+				if (pe.getType() == '0') {
+					if (pe.getColor() == this.color) {
+						for (Coordinate c : pe.getPossibleMoves()) {
+							if (c.equals(new Coordinate(x, y))) {
+								if (!attackers.contains(pe))
+									attackers.add(pe);
+							}
+						}
+					}
+				}
+			}
+		} return attackers;
+	}
+	
 	public abstract boolean isNull();
 	
 	public boolean getColor() {
