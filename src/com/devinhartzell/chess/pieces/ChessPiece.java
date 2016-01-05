@@ -51,19 +51,15 @@ public abstract class ChessPiece {
 	
 	public abstract boolean isNull();
 	
-	public boolean getColor()
-	{
+	public boolean getColor() {
 		return color;
-		
 	}
 	
-	public char getType()
-	{
+	public char getType() {
 		return type;
 	}
 
-	public void move(int new_x, int new_y)
-	{
+	public void move(int new_x, int new_y) {
 		
 		int old_x = this.x;
 		int old_y = this.y;
@@ -84,13 +80,11 @@ public abstract class ChessPiece {
 		
 	}
 	
-	public BufferedImage getImage()
-	{
+	public BufferedImage getImage() {
 		return image;
 	}
 	
-	public void kill()
-	{
+	public void kill() {
 		
 		this.x = 0;
 		this.y = 0;

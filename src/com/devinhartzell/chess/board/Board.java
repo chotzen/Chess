@@ -77,7 +77,7 @@ public class Board extends JPanel {
 		currentMove = b;
 		ChessGameWindow.nextMove();
 		
-		if (b) {
+		if (!b) {
 			if (whiteKing.getCheckMate()) {
 				JOptionPane.showMessageDialog(null, "White is in CheckMate. Black wins!");
 				ChessGame.endGame();

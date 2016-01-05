@@ -39,10 +39,6 @@ public class Rook extends ChessPiece {
 	public ArrayList<Coordinate> getPossibleMoves() {
 		ArrayList<Coordinate> movesList = new ArrayList<Coordinate>();
 		
-		
-		
-		
-		
 		// up
 		for (int i = y+1; i <= 8; i++)
 		{
@@ -98,8 +94,7 @@ public class Rook extends ChessPiece {
 		return movesList;
 	}
 	
-	public BufferedImage getImage()
-	{
+	public BufferedImage getImage() {
 		return this.image;
 	}
 
