@@ -34,55 +34,31 @@ public class Queen extends ChessPiece {
 	@Override
 	public ArrayList<Coordinate> getPossibleMoves() {
 		ArrayList<Coordinate> movesList = new ArrayList<Coordinate>();
-		// up
-		for (int i = y+1; i <= 8; i++) {
-			if (Board.getBoardArray()[x][i].hasPiece()) {
-				if (this.color != Board.getBoardArray()[x][i].getPiece().getColor()) {
-					movesList.add(new Coordinate(x, i));
-				}
-				break;
-			} else {
-				movesList.add(new Coordinate(x, i));
-			}
-		}
 		
-		//down
-		for (int i = y-1; i >= 1; i--) {
-			if (Board.getBoardArray()[x][i].hasPiece()) {
-				if (this.color != Board.getBoardArray()[x][i].getPiece().getColor()) {
-					movesList.add(new Coordinate(x, i));
-				}
-				break;
-			} else {
-				movesList.add(new Coordinate(x, i));
-			}
-		}
+		int[] xc = {x, x+1, x+1, x+1, x, x-1, x-1, x-1};
+		int[] yc = {y+1, y+1, y, y-1, y-1, y-1, y, y+1};
 		
-		
-		//left
-		for (int i = x+1; i <= 8; i++) {
-			if (Board.getBoardArray()[i][y].hasPiece()) {
-				if (this.color != Board.getBoardArray()[i][y].getPiece().getColor()) {
-					movesList.add(new Coordinate(i, y));
+		for (int i = 0; i <= 7; i++) {
+			int testx = this.x;
+			int testy = this.y;
+			while (true) {
+				testx += xc[i];
+				testy += yc[i];
+				if (testx <= 8 && testx >= 1 && testy <=8 && testy >= 1) {
+					if (Board.getBoardArray()[testx][testy].hasPiece()) {
+						if (Board.getBoardArray()[testx][testy].getPiece().getColor() != this.color) {
+							movesList.add(new Coordinate(xc[i], yc[i]));
+						} else {
+							break;
+						}
+					} else {
+						movesList.add(new Coordinate(xc[i], yc[i]));
+					}
+				} else {
+					break;
 				}
-				break;
-			} else {
-				movesList.add(new Coordinate(i, y));
 			}
-		}
-		
-		//right
-		for (int i = x-1; i >= 1; i--) {
-			if (Board.getBoardArray()[i][y].hasPiece()) {
-				if (this.color != Board.getBoardArray()[i][y].getPiece().getColor()) {
-					movesList.add(new Coordinate(i, y));
-				}
-				break;
-			} else {
-				movesList.add(new Coordinate(i, y));
-			}
-		}
-		return movesList;
+		} return movesList;
 	}
 	
 	public BufferedImage getImage() {
