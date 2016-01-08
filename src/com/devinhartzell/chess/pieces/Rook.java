@@ -20,17 +20,14 @@ public class Rook extends ChessPiece {
 		this.y = y;
 		this.color = color;
 		this.type = 'r';
-		try
-		{
+		try {
 			if (color)
 				this.image = ImageIO.read(getClass().getResource(BLACK_PATH));
 			else
 				this.image = ImageIO.read(getClass().getResource(WHITE_PATH));
 			
 			Board.getBoardArray()[x][y].setPiece(this);
-		}
-		catch (Exception e)
-		{
+		} catch (Exception e) {
 			System.out.println("Error: Could not load rook resource");
 		}
 	}
@@ -40,8 +37,7 @@ public class Rook extends ChessPiece {
 		ArrayList<Coordinate> movesList = new ArrayList<Coordinate>();
 		
 		// up
-		for (int i = y+1; i <= 8; i++)
-		{
+		for (int i = y+1; i <= 8; i++) {
 			if (Board.getBoardArray()[x][i].hasPiece()) {
 				if (this.color != Board.getBoardArray()[x][i].getPiece().getColor()) {
 					movesList.add(new Coordinate(x, i));
@@ -53,8 +49,7 @@ public class Rook extends ChessPiece {
 		}
 		
 		//down
-		for (int i = y-1; i >= 1; i--)
-		{
+		for (int i = y-1; i >= 1; i--) {
 			if (Board.getBoardArray()[x][i].hasPiece()) {
 				if (this.color != Board.getBoardArray()[x][i].getPiece().getColor()) {
 					movesList.add(new Coordinate(x, i));
@@ -67,8 +62,7 @@ public class Rook extends ChessPiece {
 		
 		
 		//left
-		for (int i = x+1; i <= 8; i++)
-		{
+		for (int i = x+1; i <= 8; i++) {
 			if (Board.getBoardArray()[i][y].hasPiece()) {
 				if (this.color != Board.getBoardArray()[i][y].getPiece().getColor()) {
 					movesList.add(new Coordinate(i, y));
@@ -80,8 +74,7 @@ public class Rook extends ChessPiece {
 		}
 		
 		//right
-		for (int i = x-1; i >= 1; i--)
-		{
+		for (int i = x-1; i >= 1; i--) {
 			if (Board.getBoardArray()[i][y].hasPiece()) {
 				if (this.color != Board.getBoardArray()[i][y].getPiece().getColor()) {
 					movesList.add(new Coordinate(i, y));

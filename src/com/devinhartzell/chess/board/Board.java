@@ -8,6 +8,7 @@ import com.devinhartzell.chess.ChessGameWindow;
 import com.devinhartzell.chess.pieces.ChessPiece;
 import com.devinhartzell.chess.pieces.King;
 import com.devinhartzell.chess.pieces.Pawn;
+import com.devinhartzell.chess.pieces.Queen;
 import com.devinhartzell.chess.pieces.Rook;
 
 public class Board extends JPanel {
@@ -52,6 +53,10 @@ public class Board extends JPanel {
 		new Rook(8, 1, true);
 		new Rook(1, 8, false);
 		new Rook(8, 8, false);
+		
+		
+		new Queen(4, 8, false);
+		new Queen(4, 1, true);
 		
 		
 		whiteKing = new King(5, 8, false);
@@ -108,6 +113,13 @@ public class Board extends JPanel {
 	
 	public static King getBKing() {
 		return Board.blackKing;
+	}
+	
+	public boolean getCheck(boolean b) {
+		if (b) 
+			return check_b;
+		else
+			return check_w;
 	}
 
 }

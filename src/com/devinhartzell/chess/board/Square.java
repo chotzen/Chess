@@ -21,7 +21,7 @@ public class Square extends JPanel {
 	 */
 	private static final long serialVersionUID = -7287090345533630180L;
 	
-	private JPanel piecePanel;
+	//private JPanel piecePanel;
 
 	private ChessPiece piece = new NullPiece(this.getX(), this.getY());
 	private boolean color;
@@ -94,7 +94,7 @@ public class Square extends JPanel {
 		});
 		
 		
-		
+		/*
 		piecePanel = new JPanel() {
 
 			private static final long serialVersionUID = 8620947713227289840L;
@@ -103,13 +103,14 @@ public class Square extends JPanel {
 			protected void paintComponent(Graphics g) {
 				if (!disableGraphicChanges) {
 					super.paintComponent(g);
-					g.drawImage(blankImage, 0, 0, null);
+					g.drawImage(blankImage, 0, 0, 1, 1, null);
 				}
 			}
 		};
 		
 		piecePanel.setSize(40, 40);
 		piecePanel.setLocation(5, 5);
+		*/
 	}
 	
 	public void setSelected(boolean b) {
@@ -140,7 +141,10 @@ public class Square extends JPanel {
 		this.piece = newpiece;
 		if (!disableGraphicChanges) {
 			try {
-			g.drawImage(piece.getImage(), 5, 5, null);
+				if (piece.getType() == '0')
+					g.drawImage(piece.getImage(), 5, 5, 1, 1, null);
+				else
+					g.drawImage(piece.getImage(), 5, 5, 40, 40, null);
 			} catch (NullPointerException npe) {}
 			repaint();
 			revalidate();
@@ -164,7 +168,10 @@ public class Square extends JPanel {
 			this.g = g;
 			try {
 				super.paintComponent(g);
-				g.drawImage(piece.getImage(), 5, 5, null);
+				if (piece.getType() == '0')
+					g.drawImage(piece.getImage(), 5, 5, 1, 1, null);
+				else
+					g.drawImage(piece.getImage(), 5, 5, 40, 40, null);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -175,7 +182,7 @@ public class Square extends JPanel {
 	public void repaint() {
 		super.repaint();
 		try {
-			piecePanel.repaint();
+			//piecePanel.repaint();
 		} catch (NullPointerException npe) {}
 	}
 	
@@ -183,7 +190,7 @@ public class Square extends JPanel {
 	public void revalidate() {
 		super.revalidate();
 		try {
-			piecePanel.revalidate();
+			//piecePanel.revalidate();
 		} catch (NullPointerException npe) {}
 	}
 	

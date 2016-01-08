@@ -11,8 +11,8 @@ import com.devinhartzell.chess.board.Coordinate;
 
 public class Queen extends ChessPiece {
 	
-	private final String WHITE_PATH = "/resources/pieces/r_w.png";
-	private final String BLACK_PATH = "/resources/pieces/r_b.png";
+	private final String WHITE_PATH = "/resources/pieces/q_w.png";
+	private final String BLACK_PATH = "/resources/pieces/q_b.png";
 	
 	public Queen(int x, int y, boolean color) {
 		this.x = x;
@@ -35,24 +35,29 @@ public class Queen extends ChessPiece {
 	public ArrayList<Coordinate> getPossibleMoves() {
 		ArrayList<Coordinate> movesList = new ArrayList<Coordinate>();
 		
-		int[] xc = {x, x+1, x+1, x+1, x, x-1, x-1, x-1};
-		int[] yc = {y+1, y+1, y, y-1, y-1, y-1, y, y+1};
+		int[] xc = {0, 1, 1, 1, 0, -1, -1, -1};
+		int[] yc = {1, 1, 0, -1, -1, -1, 0, 1};
 		
 		for (int i = 0; i <= 7; i++) {
 			int testx = this.x;
 			int testy = this.y;
+			
+			int xmod = xc[i];
+			int ymod = yc[i];
+			
+			boolean b = true;
+			
 			while (true) {
-				testx += xc[i];
-				testy += yc[i];
+				testx += xmod;
+				testy += ymod;
+				
 				if (testx <= 8 && testx >= 1 && testy <=8 && testy >= 1) {
-					if (Board.getBoardArray()[testx][testy].hasPiece()) {
-						if (Board.getBoardArray()[testx][testy].getPiece().getColor() != this.color) {
-							movesList.add(new Coordinate(xc[i], yc[i]));
-						} else {
-							break;
-						}
+					if (!Board.getBoardArray()[testx][testy].hasPiece()) {
+						movesList.add(new Coordinate(testx, testy));
 					} else {
-						movesList.add(new Coordinate(xc[i], yc[i]));
+						if (Board.getBoardArray()[testx][testy].getPiece().getColor() != this.color)
+							movesList.add(new Coordinate(testx, testy));
+						break;
 					}
 				} else {
 					break;
