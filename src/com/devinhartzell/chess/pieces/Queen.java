@@ -11,14 +11,14 @@ import com.devinhartzell.chess.board.Coordinate;
 
 public class Queen extends ChessPiece {
 	
-	private final String WHITE_PATH = "/resources/pieces/r_w.png";
-	private final String BLACK_PATH = "/resources/pieces/r_b.png";
+	private final String WHITE_PATH = "/resources/pieces/q_w.png";
+	private final String BLACK_PATH = "/resources/pieces/q_b.png";
 	
 	public Queen(int x, int y, boolean color) {
 		this.x = x;
 		this.y = y;
 		this.color = color;
-		this.type = 'r';
+		this.type = 'q';
 		try {
 			if (color)
 				this.image = ImageIO.read(getClass().getResource(BLACK_PATH));
@@ -34,55 +34,34 @@ public class Queen extends ChessPiece {
 	@Override
 	public ArrayList<Coordinate> getPossibleMoves() {
 		ArrayList<Coordinate> movesList = new ArrayList<Coordinate>();
-		// up
-		for (int i = y+1; i <= 8; i++) {
-			if (Board.getBoardArray()[x][i].hasPiece()) {
-				if (this.color != Board.getBoardArray()[x][i].getPiece().getColor()) {
-					movesList.add(new Coordinate(x, i));
-				}
-				break;
-			} else {
-				movesList.add(new Coordinate(x, i));
-			}
-		}
 		
-		//down
-		for (int i = y-1; i >= 1; i--) {
-			if (Board.getBoardArray()[x][i].hasPiece()) {
-				if (this.color != Board.getBoardArray()[x][i].getPiece().getColor()) {
-					movesList.add(new Coordinate(x, i));
-				}
-				break;
-			} else {
-				movesList.add(new Coordinate(x, i));
-			}
-		}
+		int[] xc = {0, 1, 1, 1, 0, -1, -1, -1};
+		int[] yc = {1, 1, 0, -1, -1, -1, 0, 1};
 		
-		
-		//left
-		for (int i = x+1; i <= 8; i++) {
-			if (Board.getBoardArray()[i][y].hasPiece()) {
-				if (this.color != Board.getBoardArray()[i][y].getPiece().getColor()) {
-					movesList.add(new Coordinate(i, y));
+		for (int i = 0; i <= xc.length-1; i++) {
+			int testx = this.x;
+			int testy = this.y;
+			
+			int xmod = xc[i];
+			int ymod = yc[i];
+			
+			while (true) {
+				testx += xmod;
+				testy += ymod;
+				
+				if (testx <= 8 && testx >= 1 && testy <=8 && testy >= 1) {
+					if (!Board.getBoardArray()[testx][testy].hasPiece()) {
+						movesList.add(new Coordinate(testx, testy));
+					} else {
+						if (Board.getBoardArray()[testx][testy].getPiece().getColor() != this.color)
+							movesList.add(new Coordinate(testx, testy));
+						break;
+					}
+				} else {
+					break;
 				}
-				break;
-			} else {
-				movesList.add(new Coordinate(i, y));
 			}
-		}
-		
-		//right
-		for (int i = x-1; i >= 1; i--) {
-			if (Board.getBoardArray()[i][y].hasPiece()) {
-				if (this.color != Board.getBoardArray()[i][y].getPiece().getColor()) {
-					movesList.add(new Coordinate(i, y));
-				}
-				break;
-			} else {
-				movesList.add(new Coordinate(i, y));
-			}
-		}
-		return movesList;
+		} return movesList;
 	}
 	
 	public BufferedImage getImage() {

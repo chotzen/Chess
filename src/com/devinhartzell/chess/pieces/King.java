@@ -11,11 +11,10 @@ import com.devinhartzell.chess.board.Square;
 
 public class King extends ChessPiece {
 	
-	private final String WHITE_PATH = "/resources/pieces/p_w.png";
-	private final String BLACK_PATH = "/resources/pieces/p_b.png";
+	private final String WHITE_PATH = "/resources/pieces/k_w.png";
+	private final String BLACK_PATH = "/resources/pieces/k_b.png";
 	
-	public King(int x, int y, boolean color)
-	{
+	public King(int x, int y, boolean color) {
 		this.x = x;
 		this.y = y;
 		this.color = color;
@@ -169,5 +168,4 @@ public class King extends ChessPiece {
 	public boolean isNull() {
 		return false;
 	}
-
 }

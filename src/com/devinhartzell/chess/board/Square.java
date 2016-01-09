@@ -1,6 +1,5 @@
 package com.devinhartzell.chess.board;
 
-import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import com.devinhartzell.chess.pieces.ChessPiece;
@@ -10,8 +9,6 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
 import javax.swing.border.LineBorder;
 
 public class Square extends JPanel {
@@ -21,11 +18,11 @@ public class Square extends JPanel {
 	 */
 	private static final long serialVersionUID = -7287090345533630180L;
 	
-	private JPanel piecePanel;
+	//private JPanel piecePanel;
 
 	private ChessPiece piece = new NullPiece(this.getX(), this.getY());
 	private boolean color;
-	private BufferedImage blankImage;
+	//private BufferedImage blankImage;
 	private boolean selected;
 	
 	private static boolean disableGraphicChanges = false;
@@ -44,12 +41,6 @@ public class Square extends JPanel {
 		this.setLocation((50 * x) - 50 , (50 * y) - 50);
 		
 		setSize(50, 50);
-		
-		try {
-			this.blankImage = ImageIO.read(getClass().getResource("/resources/pieces/noPiece.png"));
-		} catch (IOException e) {
-			System.out.println("Could not load placeholder image");
-		}
 		
 		addMouseListener(new MouseAdapter() {
 			@Override
@@ -94,7 +85,7 @@ public class Square extends JPanel {
 		});
 		
 		
-		
+		/*
 		piecePanel = new JPanel() {
 
 			private static final long serialVersionUID = 8620947713227289840L;
@@ -103,13 +94,14 @@ public class Square extends JPanel {
 			protected void paintComponent(Graphics g) {
 				if (!disableGraphicChanges) {
 					super.paintComponent(g);
-					g.drawImage(blankImage, 0, 0, null);
+					g.drawImage(blankImage, 0, 0, 1, 1, null);
 				}
 			}
 		};
 		
 		piecePanel.setSize(40, 40);
 		piecePanel.setLocation(5, 5);
+		*/
 	}
 	
 	public void setSelected(boolean b) {
@@ -140,7 +132,10 @@ public class Square extends JPanel {
 		this.piece = newpiece;
 		if (!disableGraphicChanges) {
 			try {
-			g.drawImage(piece.getImage(), 5, 5, null);
+				if (piece.getType() == '0')
+					g.drawImage(piece.getImage(), 5, 5, 1, 1, null);
+				else
+					g.drawImage(piece.getImage(), 5, 5, 40, 40, null);
 			} catch (NullPointerException npe) {}
 			repaint();
 			revalidate();
@@ -164,7 +159,10 @@ public class Square extends JPanel {
 			this.g = g;
 			try {
 				super.paintComponent(g);
-				g.drawImage(piece.getImage(), 5, 5, null);
+				if (piece.getType() == '0')
+					g.drawImage(piece.getImage(), 5, 5, 1, 1, null);
+				else
+					g.drawImage(piece.getImage(), 5, 5, 40, 40, null);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -175,7 +173,7 @@ public class Square extends JPanel {
 	public void repaint() {
 		super.repaint();
 		try {
-			piecePanel.repaint();
+			//piecePanel.repaint();
 		} catch (NullPointerException npe) {}
 	}
 	
@@ -183,7 +181,7 @@ public class Square extends JPanel {
 	public void revalidate() {
 		super.revalidate();
 		try {
-			piecePanel.revalidate();
+			//piecePanel.revalidate();
 		} catch (NullPointerException npe) {}
 	}
 	
