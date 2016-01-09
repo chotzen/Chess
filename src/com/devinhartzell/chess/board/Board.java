@@ -5,6 +5,7 @@ import javax.swing.JPanel;
 
 import com.devinhartzell.chess.ChessGame;
 import com.devinhartzell.chess.ChessGameWindow;
+import com.devinhartzell.chess.pieces.Bishop;
 import com.devinhartzell.chess.pieces.ChessPiece;
 import com.devinhartzell.chess.pieces.King;
 import com.devinhartzell.chess.pieces.Knight;
@@ -63,6 +64,11 @@ public class Board extends JPanel {
 		new Knight(7, 1, true);
 		new Knight(2, 8, false);
 		new Knight(7, 8, false);
+		
+		new Bishop(3, 1, true);
+		new Bishop(6, 1, true);
+		new Bishop(3, 8, false);
+		new Bishop(6, 8, false);
 		
 		
 		whiteKing = new King(5, 8, false);

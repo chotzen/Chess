@@ -1,6 +1,5 @@
 package com.devinhartzell.chess.board;
 
-import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import com.devinhartzell.chess.pieces.ChessPiece;
@@ -10,8 +9,6 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
 import javax.swing.border.LineBorder;
 
 public class Square extends JPanel {
@@ -25,7 +22,7 @@ public class Square extends JPanel {
 
 	private ChessPiece piece = new NullPiece(this.getX(), this.getY());
 	private boolean color;
-	private BufferedImage blankImage;
+	//private BufferedImage blankImage;
 	private boolean selected;
 	
 	private static boolean disableGraphicChanges = false;
@@ -44,12 +41,6 @@ public class Square extends JPanel {
 		this.setLocation((50 * x) - 50 , (50 * y) - 50);
 		
 		setSize(50, 50);
-		
-		try {
-			this.blankImage = ImageIO.read(getClass().getResource("/resources/pieces/noPiece.png"));
-		} catch (IOException e) {
-			System.out.println("Could not load placeholder image");
-		}
 		
 		addMouseListener(new MouseAdapter() {
 			@Override

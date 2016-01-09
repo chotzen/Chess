@@ -38,7 +38,7 @@ public class Queen extends ChessPiece {
 		int[] xc = {0, 1, 1, 1, 0, -1, -1, -1};
 		int[] yc = {1, 1, 0, -1, -1, -1, 0, 1};
 		
-		for (int i = 0; i <= 7; i++) {
+		for (int i = 0; i <= xc.length-1; i++) {
 			int testx = this.x;
 			int testy = this.y;
 			
