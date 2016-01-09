@@ -18,7 +18,7 @@ public class Queen extends ChessPiece {
 		this.x = x;
 		this.y = y;
 		this.color = color;
-		this.type = 'r';
+		this.type = 'q';
 		try {
 			if (color)
 				this.image = ImageIO.read(getClass().getResource(BLACK_PATH));
@@ -44,8 +44,6 @@ public class Queen extends ChessPiece {
 			
 			int xmod = xc[i];
 			int ymod = yc[i];
-			
-			boolean b = true;
 			
 			while (true) {
 				testx += xmod;

@@ -7,6 +7,7 @@ import com.devinhartzell.chess.ChessGame;
 import com.devinhartzell.chess.ChessGameWindow;
 import com.devinhartzell.chess.pieces.ChessPiece;
 import com.devinhartzell.chess.pieces.King;
+import com.devinhartzell.chess.pieces.Knight;
 import com.devinhartzell.chess.pieces.Pawn;
 import com.devinhartzell.chess.pieces.Queen;
 import com.devinhartzell.chess.pieces.Rook;
@@ -57,6 +58,11 @@ public class Board extends JPanel {
 		
 		new Queen(4, 8, false);
 		new Queen(4, 1, true);
+		
+		new Knight(2, 1, true);
+		new Knight(7, 1, true);
+		new Knight(2, 8, false);
+		new Knight(7, 8, false);
 		
 		
 		whiteKing = new King(5, 8, false);
