@@ -83,25 +83,6 @@ public class Square extends JPanel {
 				}
 			}
 		});
-		
-		
-		/*
-		piecePanel = new JPanel() {
-
-			private static final long serialVersionUID = 8620947713227289840L;
-
-			@Override
-			protected void paintComponent(Graphics g) {
-				if (!disableGraphicChanges) {
-					super.paintComponent(g);
-					g.drawImage(blankImage, 0, 0, 1, 1, null);
-				}
-			}
-		};
-		
-		piecePanel.setSize(40, 40);
-		piecePanel.setLocation(5, 5);
-		*/
 	}
 	
 	public void setSelected(boolean b) {
@@ -123,9 +104,8 @@ public class Square extends JPanel {
 				setBackground(Color.WHITE);
 			setBorder(new LineBorder(new Color(0, 0, 128), 0));
 		}
-		
-		repaint();
 		revalidate();
+		repaint();
 	}	
 	
 	public void setPiece(ChessPiece newpiece) {		
@@ -168,22 +148,4 @@ public class Square extends JPanel {
 			}
 		}
 	}
-	
-	@Override
-	public void repaint() {
-		super.repaint();
-		try {
-			//piecePanel.repaint();
-		} catch (NullPointerException npe) {}
-	}
-	
-	@Override
-	public void revalidate() {
-		super.revalidate();
-		try {
-			//piecePanel.revalidate();
-		} catch (NullPointerException npe) {}
-	}
-	
-	
 }
