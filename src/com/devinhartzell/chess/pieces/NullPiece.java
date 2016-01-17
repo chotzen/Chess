@@ -33,5 +33,10 @@ public class NullPiece extends ChessPiece {
 		return true;
 	}
 	
+	@Override
+	public char getType() {
+		return '0';
+	}
+	
 
 }

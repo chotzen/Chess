@@ -100,13 +100,16 @@ public class King extends ChessPiece {
 		
 		for (int m = 1; m <= 8; m++) {
 			for (int n = 1; n <= 8; n++) {
-				ChessPiece pe = Board.getBoardArray()[m][n].getPiece();
-				if (pe.getType() == '0') {
-					if (pe.getColor() != this.color) {
-						for (Coordinate c : pe.getPossibleMoves()) {
-							if (c.equals(new Coordinate(x, y))) {
-								if (!attackers.contains(pe))
-									attackers.add(pe);
+				//System.out.println("Testing piece at " + m + ", " + n);
+				if (Board.getBoardArray()[m][n].getPiece().isNull() != this.isNull()) {
+					ChessPiece pe = Board.getBoardArray()[m][n].getPiece();
+					if (!(pe instanceof NullPiece)) {
+						if (pe.getColor() != this.color) {
+							for (Coordinate c : pe.getPossibleMoves()) {
+								if (c.equals(new Coordinate(x, y))) {
+									if (!attackers.contains(pe))
+										attackers.add(pe);
+								}
 							}
 						}
 					}
@@ -131,7 +134,6 @@ public class King extends ChessPiece {
 
 	public boolean getCheckMate() {
 		if (getCheck()) {
-			
 			// Loop all moves
 			for (ChessPiece friendPiece : getSameColorPieces()) {
 				for (Coordinate move : friendPiece.getPossibleMoves()) {

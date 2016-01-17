@@ -18,7 +18,7 @@ public class Bishop extends ChessPiece {
 		this.x = x;
 		this.y = y;
 		this.color = color;
-		this.type = 'q';
+		this.type = 'b';
 		try {
 			if (color)
 				this.image = ImageIO.read(getClass().getResource(BLACK_PATH));

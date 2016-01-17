@@ -17,18 +17,14 @@ public class Square extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = -7287090345533630180L;
-	
-	//private JPanel piecePanel;
 
 	private ChessPiece piece = new NullPiece(this.getX(), this.getY());
 	private boolean color;
-	//private BufferedImage blankImage;
 	private boolean selected;
 	
 	private static boolean disableGraphicChanges = false;
 	
 	private Graphics g;
-	//private Board board;
 	
 	public Square(final int x, final int y, boolean black) {
 		
@@ -46,8 +42,6 @@ public class Square extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if (piece.type != '0' && !getBackground().equals(Color.ORANGE) && piece.getColor() == Board.getTurn()) {
-					//System.out.println("called");
-				
 						
 					for (int i=1; i<=8; i++) {
 						for (int j=1; j<=8; j++) {
@@ -83,25 +77,6 @@ public class Square extends JPanel {
 				}
 			}
 		});
-		
-		
-		/*
-		piecePanel = new JPanel() {
-
-			private static final long serialVersionUID = 8620947713227289840L;
-
-			@Override
-			protected void paintComponent(Graphics g) {
-				if (!disableGraphicChanges) {
-					super.paintComponent(g);
-					g.drawImage(blankImage, 0, 0, 1, 1, null);
-				}
-			}
-		};
-		
-		piecePanel.setSize(40, 40);
-		piecePanel.setLocation(5, 5);
-		*/
 	}
 	
 	public void setSelected(boolean b) {
@@ -123,9 +98,8 @@ public class Square extends JPanel {
 				setBackground(Color.WHITE);
 			setBorder(new LineBorder(new Color(0, 0, 128), 0));
 		}
-		
-		repaint();
 		revalidate();
+		repaint();
 	}	
 	
 	public void setPiece(ChessPiece newpiece) {		
@@ -141,9 +115,6 @@ public class Square extends JPanel {
 			revalidate();
 		}
 	}
-		
-		//System.out.println(this.piece.toString());
-	
 	
 	public boolean hasPiece() {
 		return !piece.isNull();
@@ -168,22 +139,4 @@ public class Square extends JPanel {
 			}
 		}
 	}
-	
-	@Override
-	public void repaint() {
-		super.repaint();
-		try {
-			//piecePanel.repaint();
-		} catch (NullPointerException npe) {}
-	}
-	
-	@Override
-	public void revalidate() {
-		super.revalidate();
-		try {
-			//piecePanel.revalidate();
-		} catch (NullPointerException npe) {}
-	}
-	
-	
 }
