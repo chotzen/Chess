@@ -3,6 +3,7 @@ package com.devinhartzell.chess.pieces;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
+import com.devinhartzell.chess.ChessGameWindow;
 import com.devinhartzell.chess.board.Board;
 import com.devinhartzell.chess.board.Coordinate;
 import com.devinhartzell.chess.board.Square;
@@ -28,6 +29,7 @@ public abstract class ChessPiece {
 	public boolean color;
 	public boolean isNull = false;
 	public int x, y;
+	public int oldx, oldy;
 	public BufferedImage image;
 	
 	// gets the moves from the piece's current position
@@ -82,14 +84,20 @@ public abstract class ChessPiece {
 
 	public void move(int new_x, int new_y) {
 		
-		int old_x = this.x;
-		int old_y = this.y;
+		oldx = this.x;
+		oldy = this.y;
 		
-		for (Coordinate s : Board.getBoardArray()[old_x][old_y].getPiece().getPossibleMoves())
+		for (Coordinate s : Board.getBoardArray()[oldx][oldy].getPiece().getPossibleMoves())
 			Board.getBoardArray()[s.getX()][s.getY()].setHighlighted(false);
+		boolean cap;
+		if (Board.getBoardArray()[new_x][new_y].getPiece().getType() == '0')
+			cap = false;
+		else
+			cap = true;
+			
 		
-		Board.getBoardArray()[old_x][old_y].setPiece(new NullPiece(this.x, this.y));
-		Board.getBoardArray()[old_x][old_y].setSelected(false);
+		Board.getBoardArray()[oldx][oldy].setPiece(new NullPiece(this.x, this.y));
+		Board.getBoardArray()[oldx][oldy].setSelected(false);
 		Board.getBoardArray()[new_x][new_y].setPiece(this);
 		System.out.println(Board.getBoardArray()[new_x][new_y].getPiece().toString());
 		
@@ -97,6 +105,7 @@ public abstract class ChessPiece {
 		this.y = new_y;
 		
 		Board.setTurn(!Board.getTurn());
+		ChessGameWindow.addMove(this, cap);
 		
 		
 	}
@@ -116,5 +125,19 @@ public abstract class ChessPiece {
 		return isNull;
 	}
 	
-
+	public int getX() {
+		return x;
+	}
+	
+	public int getY() {
+		return y;
+	}
+	
+	public int getOldX() {
+		return oldx;
+	}
+	
+	public int getOldY() {
+		return oldy;
+	}
 }
