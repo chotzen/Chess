@@ -1,4 +1,4 @@
-package com.devinhartzell.chess;
+package com.devinhartzell.chess.gui;
 
 import java.awt.Composite;
 
@@ -6,6 +6,7 @@ import javax.annotation.PostConstruct;
 import javax.swing.JFrame;
 import javax.swing.JTextArea;
 
+import com.devinhartzell.chess.ChessGame;
 import com.devinhartzell.chess.board.Board;
 import com.devinhartzell.chess.pieces.ChessPiece;
 

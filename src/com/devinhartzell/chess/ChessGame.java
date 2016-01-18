@@ -3,6 +3,9 @@ package com.devinhartzell.chess;
 import java.io.IOException;
 import java.util.Random;
 
+import com.devinhartzell.chess.gui.AskForName;
+import com.devinhartzell.chess.gui.ChessGameWindow;
+
 public class ChessGame {
 	
 	private static ChessGameWindow cgw;

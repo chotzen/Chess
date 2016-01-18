@@ -1,4 +1,4 @@
-package com.devinhartzell.chess;
+package com.devinhartzell.chess.gui;
 
 public class PawnPromotionWindow {
 

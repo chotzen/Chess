@@ -4,7 +4,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import com.devinhartzell.chess.ChessGame;
-import com.devinhartzell.chess.ChessGameWindow;
+import com.devinhartzell.chess.gui.ChessGameWindow;
 import com.devinhartzell.chess.pieces.Bishop;
 import com.devinhartzell.chess.pieces.ChessPiece;
 import com.devinhartzell.chess.pieces.King;

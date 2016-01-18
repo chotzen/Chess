@@ -1,4 +1,4 @@
-package com.devinhartzell.chess;
+package com.devinhartzell.chess.gui;
 
 import java.awt.Composite;
 
@@ -13,6 +13,9 @@ import java.awt.event.MouseEvent;
 import java.io.IOException;
 
 import javax.swing.UIManager;
+
+import com.devinhartzell.chess.ChessGame;
+
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 

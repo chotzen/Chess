@@ -3,10 +3,10 @@ package com.devinhartzell.chess.pieces;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-import com.devinhartzell.chess.ChessGameWindow;
 import com.devinhartzell.chess.board.Board;
 import com.devinhartzell.chess.board.Coordinate;
 import com.devinhartzell.chess.board.Square;
+import com.devinhartzell.chess.gui.ChessGameWindow;
 
 public abstract class ChessPiece {
 	
@@ -36,6 +36,7 @@ public abstract class ChessPiece {
 	public abstract ArrayList<Coordinate> getPossibleMoves();
 	// gets the theoretical moves for a piece if it were at (x, y);
 	
+	/*
 	public ArrayList<Coordinate> getTheoreticalMoves(ChessPiece movedPiece, int new_x, int new_y) {
 		Square.setDisabledGraphics(true);
 		int old_x = this.x,
@@ -50,6 +51,7 @@ public abstract class ChessPiece {
 		Square.setDisabledGraphics(false);
 		return moves;
 	}
+	*/
 	
 	public ArrayList<ChessPiece> getProtectors() {
 		ArrayList<ChessPiece> protectors = new ArrayList<ChessPiece>();
