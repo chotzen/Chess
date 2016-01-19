@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
-import com.devinhartzell.chess.ChessGame;
 import com.devinhartzell.chess.board.Board;
 import com.devinhartzell.chess.board.Coordinate;
 
@@ -26,7 +25,7 @@ public class Pawn extends ChessPiece {
 			else
 				this.image = ImageIO.read(getClass().getResource(WHITE_PATH));
 			if (board.isMainBoard())
-				ChessGame.getMainBoard().getBoardArray()[x][y].setPiece(this);
+				board.getBoardArray()[x][y].setPiece(this);
 		}
 		catch (Exception e) {
 			System.out.println("Error: Could not load pawn resource");
@@ -39,35 +38,35 @@ public class Pawn extends ChessPiece {
 		if (color) {
 		
 			if (y == 2)
-				if (!ChessGame.getMainBoard().getBoardArray()[x][4].hasPiece() && !ChessGame.getMainBoard().getBoardArray()[x][3].hasPiece())
+				if (!board.getBoardArray()[x][4].hasPiece() && !board.getBoardArray()[x][3].hasPiece())
 					movesList.add(new Coordinate(x, 4));
-			if (!ChessGame.getMainBoard().getBoardArray()[x][y+1].hasPiece())
+			if (!board.getBoardArray()[x][y+1].hasPiece())
 				movesList.add(new Coordinate(x, y+1));
 			if (x+1 <= 8)
-				if (ChessGame.getMainBoard().getBoardArray()[x+1][y+1].hasPiece())
-					if (!ChessGame.getMainBoard().getBoardArray()[x+1][y+1].getPiece().getColor())
+				if (board.getBoardArray()[x+1][y+1].hasPiece())
+					if (!board.getBoardArray()[x+1][y+1].getPiece().getColor())
 							movesList.add(new Coordinate(x+1, y+1));
 			if (x-1 >= 1)
-				if (ChessGame.getMainBoard().getBoardArray()[x-1][y+1].hasPiece())
-					if (!ChessGame.getMainBoard().getBoardArray()[x-1][y+1].getPiece().getColor())
+				if (board.getBoardArray()[x-1][y+1].hasPiece())
+					if (!board.getBoardArray()[x-1][y+1].getPiece().getColor())
 						movesList.add(new Coordinate(x-1, y+1));
 		} else {
 			if (y == 7)
-				if (!ChessGame.getMainBoard().getBoardArray()[x][5].hasPiece() && !ChessGame.getMainBoard().getBoardArray()[x][6].hasPiece())
+				if (!board.getBoardArray()[x][5].hasPiece() && !board.getBoardArray()[x][6].hasPiece())
 					movesList.add(new Coordinate(x, 5));
 
-			if (!ChessGame.getMainBoard().getBoardArray()[x][y-1].hasPiece())
+			if (!board.getBoardArray()[x][y-1].hasPiece())
 				movesList.add(new Coordinate(x, y-1));
 			
 			if (x+1 <= 8)
-				if (ChessGame.getMainBoard().getBoardArray()[x+1][y-1].hasPiece())
-					if (ChessGame.getMainBoard().getBoardArray()[x+1][y-1].getPiece().getColor())
+				if (board.getBoardArray()[x+1][y-1].hasPiece())
+					if (board.getBoardArray()[x+1][y-1].getPiece().getColor())
 						movesList.add(new Coordinate(x+1, y-1));
 			
 			
 			if (x-1 >= 1)
-				if (ChessGame.getMainBoard().getBoardArray()[x-1][y-1].hasPiece())
-					if (ChessGame.getMainBoard().getBoardArray()[x-1][y-1].getPiece().getColor())
+				if (board.getBoardArray()[x-1][y-1].hasPiece())
+					if (board.getBoardArray()[x-1][y-1].getPiece().getColor())
 						movesList.add(new Coordinate(x-1, y-1));
 		} return movesList;
 	}

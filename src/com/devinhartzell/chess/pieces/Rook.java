@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
-import com.devinhartzell.chess.ChessGame;
 import com.devinhartzell.chess.board.Board;
 import com.devinhartzell.chess.board.Coordinate;
 
@@ -26,7 +25,7 @@ public class Rook extends ChessPiece {
 			else
 				this.image = ImageIO.read(getClass().getResource(WHITE_PATH));
 			if (board.isMainBoard())
-				ChessGame.getMainBoard().getBoardArray()[x][y].setPiece(this);
+				board.getBoardArray()[x][y].setPiece(this);
 		}
 		catch (Exception e) {
 			System.out.println("Error: Could not load rook resource");
@@ -39,8 +38,8 @@ public class Rook extends ChessPiece {
 		
 		// up
 		for (int i = y+1; i <= 8; i++) {
-			if (ChessGame.getMainBoard().getBoardArray()[x][i].hasPiece()) {
-				if (this.color != ChessGame.getMainBoard().getBoardArray()[x][i].getPiece().getColor()) {
+			if (board.getBoardArray()[x][i].hasPiece()) {
+				if (this.color != board.getBoardArray()[x][i].getPiece().getColor()) {
 					movesList.add(new Coordinate(x, i));
 				}
 				break;
@@ -51,8 +50,8 @@ public class Rook extends ChessPiece {
 		
 		//down
 		for (int i = y-1; i >= 1; i--) {
-			if (ChessGame.getMainBoard().getBoardArray()[x][i].hasPiece()) {
-				if (this.color != ChessGame.getMainBoard().getBoardArray()[x][i].getPiece().getColor()) {
+			if (board.getBoardArray()[x][i].hasPiece()) {
+				if (this.color != board.getBoardArray()[x][i].getPiece().getColor()) {
 					movesList.add(new Coordinate(x, i));
 				}
 				break;
@@ -64,8 +63,8 @@ public class Rook extends ChessPiece {
 		
 		//left
 		for (int i = x+1; i <= 8; i++) {
-			if (ChessGame.getMainBoard().getBoardArray()[i][y].hasPiece()) {
-				if (this.color != ChessGame.getMainBoard().getBoardArray()[i][y].getPiece().getColor()) {
+			if (board.getBoardArray()[i][y].hasPiece()) {
+				if (this.color != board.getBoardArray()[i][y].getPiece().getColor()) {
 					movesList.add(new Coordinate(i, y));
 				}
 				break;
@@ -76,8 +75,8 @@ public class Rook extends ChessPiece {
 		
 		//right
 		for (int i = x-1; i >= 1; i--) {
-			if (ChessGame.getMainBoard().getBoardArray()[i][y].hasPiece()) {
-				if (this.color != ChessGame.getMainBoard().getBoardArray()[i][y].getPiece().getColor()) {
+			if (board.getBoardArray()[i][y].hasPiece()) {
+				if (this.color != board.getBoardArray()[i][y].getPiece().getColor()) {
 					movesList.add(new Coordinate(i, y));
 				}
 				break;

@@ -3,9 +3,6 @@ package com.devinhartzell.chess.pieces;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-import javax.imageio.ImageIO;
-
-import com.devinhartzell.chess.ChessGame;
 import com.devinhartzell.chess.board.Board;
 import com.devinhartzell.chess.board.Coordinate;
 import com.devinhartzell.chess.gui.ChessGameWindow;
@@ -46,12 +43,12 @@ public abstract class ChessPiece {
 		int old_x = this.x,
 			old_y = this.y;
 		ChessPiece capturedPiece = null;
-		if (!ChessGame.getMainBoard().getBoardArray()[new_x][new_y].getPiece().isNull())
-			capturedPiece = ChessGame.getMainBoard().getBoardArray()[new_x][new_y].getPiece();
+		if (!board.getBoardArray()[new_x][new_y].getPiece().isNull())
+			capturedPiece = board.getBoardArray()[new_x][new_y].getPiece();
 		movedPiece.move(new_x, new_y);
 		ArrayList<Coordinate> moves = getPossibleMoves();
 		movedPiece.move(old_x, old_y);
-		ChessGame.getMainBoard().getBoardArray()[new_x][new_y].setPiece(capturedPiece);
+		board.getBoardArray()[new_x][new_y].setPiece(capturedPiece);
 		Square.setDisabledGraphics(false);
 		return moves;
 	}
@@ -61,8 +58,8 @@ public abstract class ChessPiece {
 		ArrayList<ChessPiece> protectors = new ArrayList<ChessPiece>();
 		for (int m = 1; m <= 8; m++) {
 			for (int n = 1; n <= 8; n++) {
-				ChessPiece pe = ChessGame.getMainBoard().getBoardArray()[m][n].getPiece();
-				if (pe.getType() != '0' && pe.getType() != 'k') {
+				ChessPiece pe = board.getBoardArray()[m][n].getPiece();
+				if (pe.getType() != '0' && !(pe instanceof King)) {
 					if (pe.getColor() == this.color) {
 						if (pe != this) {
 							for (Coordinate c : pe.getPossibleMoves()) {
@@ -93,24 +90,24 @@ public abstract class ChessPiece {
 		oldx = this.x;
 		oldy = this.y;
 		
-		for (Coordinate s : ChessGame.getMainBoard().getBoardArray()[oldx][oldy].getPiece().getPossibleMoves())
-			ChessGame.getMainBoard().getBoardArray()[s.getX()][s.getY()].setHighlighted(false);
+		for (Coordinate s : board.getBoardArray()[oldx][oldy].getPiece().getPossibleMoves())
+			board.getBoardArray()[s.getX()][s.getY()].setHighlighted(false);
 		boolean cap;
-		if (ChessGame.getMainBoard().getBoardArray()[new_x][new_y].getPiece().getType() == '0')
+		if (board.getBoardArray()[new_x][new_y].getPiece().getType() == '0')
 			cap = false;
 		else
 			cap = true;
 			
 		
-		ChessGame.getMainBoard().getBoardArray()[oldx][oldy].setPiece(new NullPiece(this.x, this.y));
-		ChessGame.getMainBoard().getBoardArray()[oldx][oldy].getPanel().setSelected(false);
-		ChessGame.getMainBoard().getBoardArray()[new_x][new_y].setPiece(this);
-		System.out.println(ChessGame.getMainBoard().getBoardArray()[new_x][new_y].getPiece().toString());
+		board.getBoardArray()[oldx][oldy].setPiece(new NullPiece(this.x, this.y));
+		board.getBoardArray()[oldx][oldy].getPanel().setSelected(false);
+		board.getBoardArray()[new_x][new_y].setPiece(this);
+		System.out.println(board.getBoardArray()[new_x][new_y].getPiece().toString());
 		
 		this.x = new_x;
 		this.y = new_y;
 		
-		ChessGame.getMainBoard().setTurn(!ChessGame.getMainBoard().getTurn());
+		board.setTurn(!board.getTurn());
 		ChessGameWindow.addMove(this, cap);
 		
 		

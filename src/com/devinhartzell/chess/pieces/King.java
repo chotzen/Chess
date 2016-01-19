@@ -62,7 +62,7 @@ public class King extends ChessPiece {
 			for (int n = 1; n <= 8; n++) {
 				Square sq = ChessGame.getMainBoard().getBoardArray()[m][n];
 				if (sq.hasPiece()) {
-					if (sq.getPiece().getType() != 'k') {
+					if (!(sq.getPiece() instanceof King)) {
 						if (sq.getPiece().getColor() != this.color) {
 							if (sq.getPiece().getProtectors().size() <= 0) {
 								ArrayList<Coordinate> noMoves = sq.getPiece().getPossibleMoves();
@@ -137,6 +137,8 @@ public class King extends ChessPiece {
 	}
 
 	public boolean getCheckMate() {
+		
+		/*
 		if (getCheck()) {
 			// Loop all moves
 			for (ChessPiece friendPiece : getSameColorPieces()) {
@@ -152,7 +154,7 @@ public class King extends ChessPiece {
 							if (attackerMove.equals(new Coordinate(this.x, this.y))) {
 								solvesCM = false;
 							}
-						}*/
+						}
 					}   
 					
 					if (solvesCM) {
@@ -164,6 +166,9 @@ public class King extends ChessPiece {
 			return true;
 		} else
 			return false;
+		
+		*/
+		return false;
 	}
 	
 	public BufferedImage getImage() {
