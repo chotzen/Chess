@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
@@ -26,6 +27,7 @@ public class SquarePanel extends JPanel {
 	//private int x, y;
 	private boolean color;
 	
+	private boolean highlighted;
 	private boolean selected;
 	
 	private Graphics g;
@@ -48,25 +50,26 @@ public class SquarePanel extends JPanel {
 		addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if (square.getPiece().type != '0' && !getBackground().equals(Color.ORANGE) && square.getPiece().getColor() == ChessGame.getMainBoard().getTurn()) {
+				if (!(square.getPiece() instanceof NullPiece) && 
+						!highlighted && 
+						square.getPiece().getColor() == ChessGame.getMainBoard().getTurn()) {
 						
 					for (int i=1; i<=8; i++) {
 						for (int j=1; j<=8; j++) {
-							ChessGame.getMainBoard().getBoardArray()[i][j].setHighlighted(false);
+							ChessGame.getMainBoard().getBoardArray()[i][j].getPanel().setHighlighted(false);
 							ChessGame.getMainBoard().getBoardArray()[i][j].getPanel().setSelected(false);
 							ChessGame.getMainBoard().getBoardArray()[i][j].getPanel().update();
 						}
 					}
 					
-					for (Coordinate s : square.getPiece().getPossibleMoves()){
-						if (square.getPiece().getType() == 'k')
-							System.out.println(s.getX() + " " + s.getY());
-						ChessGame.getMainBoard().getBoardArray()[s.getX()][s.getY()].setHighlighted(true);
+					for (Coordinate s : square.getPiece().getPossibleMoves()) {
+						System.out.println(s.getX() + " " + s.getY());
+						ChessGame.getMainBoard().getBoardArray()[s.getX()][s.getY()].getPanel().setHighlighted(true);
 					}
 					setSelected(true);
 				}
 				
-				if (getBackground().equals(Color.ORANGE)) {
+				if (highlighted) {
 					if (square.getPiece() instanceof NullPiece) {
 						square.getPiece().kill();
 					}
@@ -81,24 +84,37 @@ public class SquarePanel extends JPanel {
 						}
 					}
 				}
+				
+				for (int i = 1; i<=8; i++) {
+					for (int j = 1; j<= 8; j++) {
+						ChessGame.getMainBoard().getBoardArray()[i][j].getPanel().repaint();
+						ChessGame.getMainBoard().getBoardArray()[i][j].getPanel().revalidate();
+					}
+				}
 			}
+			
+			
 		});
 	}
 	
 	
 	public void setHighlighted(boolean b) {
+		System.out.println("Recieved @ " + square.x + " " + square.y + " " + b);
 		if (b) {
 			setBackground(Color.ORANGE);
 			setBorder(new LineBorder(new Color(0, 0, 128), 3));
+			System.out.println(String.format("Setting square at %s, %s as highlighted", square.x, square.y));
 		} else {
 			if (color)
-				setBackground(Color.BLUE);
+				setBackground(Color.DARK_GRAY);
 			else
-				setBackground(Color.WHITE);
+				setBackground(Color.BLUE);
 			setBorder(new LineBorder(new Color(0, 0, 128), 0));
 		}
 		update();
+		highlighted = b;
 	}	
+	
 	
 	public void updatePiece(ChessPiece p) {
 		try {
