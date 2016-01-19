@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
+import com.devinhartzell.chess.ChessGame;
 import com.devinhartzell.chess.board.Board;
 import com.devinhartzell.chess.board.Coordinate;
 
@@ -25,7 +26,7 @@ public class Bishop extends ChessPiece {
 			else
 				this.image = ImageIO.read(getClass().getResource(WHITE_PATH));
 			
-			Board.getBoardArray()[x][y].setPiece(this);
+			ChessGame.getMainBoard().getBoardArray()[x][y].setPiece(this);
 		} catch (Exception e) {
 			System.out.println("Error: Could not load rook resource");
 		}
@@ -50,10 +51,10 @@ public class Bishop extends ChessPiece {
 				testy += ymod;
 				
 				if (testx <= 8 && testx >= 1 && testy <=8 && testy >= 1) {
-					if (!Board.getBoardArray()[testx][testy].hasPiece()) {
+					if (!ChessGame.getMainBoard().getBoardArray()[testx][testy].hasPiece()) {
 						movesList.add(new Coordinate(testx, testy));
 					} else {
-						if (Board.getBoardArray()[testx][testy].getPiece().getColor() != this.color)
+						if (ChessGame.getMainBoard().getBoardArray()[testx][testy].getPiece().getColor() != this.color)
 							movesList.add(new Coordinate(testx, testy));
 						break;
 					}

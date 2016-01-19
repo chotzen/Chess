@@ -4,7 +4,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import com.devinhartzell.chess.ChessGame;
+import com.devinhartzell.chess.gui.BoardPanel;
 import com.devinhartzell.chess.gui.ChessGameWindow;
+import com.devinhartzell.chess.gui.SquarePanel;
 import com.devinhartzell.chess.pieces.Bishop;
 import com.devinhartzell.chess.pieces.ChessPiece;
 import com.devinhartzell.chess.pieces.King;
@@ -13,84 +15,106 @@ import com.devinhartzell.chess.pieces.Pawn;
 import com.devinhartzell.chess.pieces.Queen;
 import com.devinhartzell.chess.pieces.Rook;
 
-public class Board extends JPanel {
+public class Board /*extends JPanel*/ {
+	
+	
 	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -396109385960336400L;
 	
 	// Not using boardArray[0]
-	private static Square[][] boardArray = new Square[9][9];
-	private static King whiteKing;
-	private static King blackKing;
+	private  Square[][] boardArray = new Square[9][9];
+	private  King whiteKing;
+	private  King blackKing;
 	
-	private static boolean check_w = false;
-	private static boolean check_b = false;
+	private BoardPanel boardPanel;
+	
+	private boolean check_w = false;
+	private boolean check_b = false;
+	
+	private boolean mainBoard = false;
 	
 	/*
 	 * False = white
 	 * True = black
 	 */
-	public static boolean currentMove = false;
+	public  boolean currentMove = false;
 	
-	public Board() {
-		setSize(400, 400);
-		setLayout(null);
+	public Board(boolean mainBoard) {
+		
+		this.mainBoard = mainBoard;
+		
+		if (mainBoard) {
+			ChessGame.setMainBoard(this);
+			boardPanel = new BoardPanel();
+			boardPanel.setLocation(6, 6);
+		}
 		
 		for (int i = 1; i <= 8; i++) {
 			for (int j = 1; j <= 8; j++) {
-				Square sq = new Square(i, j, !((i + j) % 2 == 0));
+				Square sq = new Square(i, j, !((i + j) % 2 == 0), this);
 				getBoardArray()[i][j] = sq;
-				this.add(sq);
 			}
 		}
 		
-		for (int i = 1; i<=8; i++) {
-			new Pawn(i, 2, true);
-			new Pawn(i, 7, false);
+		
+		if (mainBoard) {
+		
+			for (int i = 1; i<=8; i++) {
+				new Pawn(i, 2, true);
+				new Pawn(i, 7, false);
+			}
+			
+			new Rook(1, 1, true);
+			new Rook(8, 1, true);
+			new Rook(1, 8, false);
+			new Rook(8, 8, false);
+			
+			
+			new Queen(4, 8, false);
+			new Queen(4, 1, true);
+			
+			new Knight(2, 1, true);
+			new Knight(7, 1, true);
+			new Knight(2, 8, false);
+			new Knight(7, 8, false);
+			
+			new Bishop(3, 1, true);
+			new Bishop(6, 1, true);
+			new Bishop(3, 8, false);
+			new Bishop(6, 8, false);
+			
+			
+			whiteKing = new King(5, 8, false);
+			blackKing = new King(5, 1, true);
 		}
-		
-		new Rook(1, 1, true);
-		new Rook(8, 1, true);
-		new Rook(1, 8, false);
-		new Rook(8, 8, false);
-		
-		
-		new Queen(4, 8, false);
-		new Queen(4, 1, true);
-		
-		new Knight(2, 1, true);
-		new Knight(7, 1, true);
-		new Knight(2, 8, false);
-		new Knight(7, 8, false);
-		
-		new Bishop(3, 1, true);
-		new Bishop(6, 1, true);
-		new Bishop(3, 8, false);
-		new Bishop(6, 8, false);
-		
-		
-		whiteKing = new King(5, 8, false);
-		blackKing = new King(5, 1, true);
 	}
 	
-	public static ChessPiece getPieceAt(int x, int y) {
+	public void duplicate(Board board) {
+		for (int i = 1; i<=8; i++) {
+			for (int j = 1; j<=8; j++) {
+				getBoardArray()[i][j].setPiece(board.getBoardArray()[i][j].getPiece());
+			}
+		}
+	}
+	
+	public  ChessPiece getPieceAt(int x, int y) {
 		if (getBoardArray()[x][y].hasPiece())
 			return getBoardArray()[x][y].getPiece();
 		else
 			return null;
 	}
 
-	public static Square[][] getBoardArray() {
+	public  Square[][] getBoardArray() {
 		return boardArray;
 	}
 	
-	public static boolean getTurn() {
+	public  boolean getTurn() {
 		return currentMove;
 	}
 	
-	public static void setTurn(boolean b) {
+	public void setTurn(boolean b) {
 		currentMove = b;
 		ChessGameWindow.nextMove();
 		
@@ -119,12 +143,12 @@ public class Board extends JPanel {
 		}
 	}
 	
-	public static King getWKing() {
-		return Board.whiteKing;
+	public King getWKing() {
+		return whiteKing;
 	}
 	
-	public static King getBKing() {
-		return Board.blackKing;
+	public King getBKing() {
+		return blackKing;
 	}
 	
 	public boolean getCheck(boolean b) {
@@ -132,6 +156,15 @@ public class Board extends JPanel {
 			return check_b;
 		else
 			return check_w;
+	}
+	
+	public void updatePanel() {
+		if (mainBoard)
+			BoardPanel.updateBoard();
+	}
+	
+	public BoardPanel getBoardPanel() {
+		return boardPanel;
 	}
 
 }

@@ -3,10 +3,9 @@ package com.devinhartzell.chess.pieces;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-
 import javax.imageio.ImageIO;
 
-import com.devinhartzell.chess.board.Board;
+import com.devinhartzell.chess.ChessGame;
 import com.devinhartzell.chess.board.Coordinate;
 
 public class Knight extends ChessPiece {
@@ -25,7 +24,7 @@ public class Knight extends ChessPiece {
 			else
 				this.image = ImageIO.read(getClass().getResource(WHITE_PATH));
 			
-			Board.getBoardArray()[x][y].setPiece(this);
+			ChessGame.getMainBoard().getBoardArray()[x][y].setPiece(this);
 		} catch (Exception e) {
 			System.out.println("Error: Could not load rook resource");
 		}
@@ -41,8 +40,8 @@ public class Knight extends ChessPiece {
 		for (int i = 0; i <= xc.length-1; i++)
 		{
 			if (xc[i] <= 8 && xc[i] >= 1 && yc[i] <=8 && yc[i] >= 1) {
-				if (Board.getBoardArray()[xc[i]][yc[i]].hasPiece()) {
-					if (Board.getBoardArray()[xc[i]][yc[i]].getPiece().getColor() != this.color) {
+				if (ChessGame.getMainBoard().getBoardArray()[xc[i]][yc[i]].hasPiece()) {
+					if (ChessGame.getMainBoard().getBoardArray()[xc[i]][yc[i]].getPiece().getColor() != this.color) {
 						movesList.add(new Coordinate(xc[i], yc[i]));
 					}
 				} else {

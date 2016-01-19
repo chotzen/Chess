@@ -33,12 +33,14 @@ public class ChessGameWindow extends JFrame {
 	
 	private static int turn = 1;
 	
-	private static char[] xrel = {'X', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'};
-	private static char[] yrel = {'X', '8', '7', '6', '5', '4', '3', '2', '1'};
+	private static char[] xrel = {'0', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'};
+	private static char[] yrel = {'0', '8', '7', '6', '5', '4', '3', '2', '1'};
 	
 	
 	public ChessGameWindow(ChessGame game, String white, String black) 
 			throws IOException {
+		
+		
 		
 		getContentPane().setLayout(null);
 		
@@ -73,10 +75,8 @@ public class ChessGameWindow extends JFrame {
 		getContentPane().add(moveLabel);
 		
 		
-		Board board = new Board();
-		board.setLocation(6, 6);
-		
-		getContentPane().add(board);
+		Board b = new Board(true);
+		getContentPane().add(b.getBoardPanel());
 		
 	}
 	
@@ -86,11 +86,12 @@ public class ChessGameWindow extends JFrame {
 	}
 	
 	public static void nextMove() {
-		if (Board.currentMove)
+		if (ChessGame.getMainBoard().currentMove)
 			moveLabel.setText("Black to move");
 		else
 			moveLabel.setText("White to move");
 	}
+	
 	
 	public static void addMove(ChessPiece p, boolean capture) {
 		String type = String.valueOf(Character.toUpperCase(p.getType()));
