@@ -23,10 +23,11 @@ public class Square {
 		this.x = x;
 		this.y = y;
 		
-		if (mainBoard) {
-			panel = board.getBoardPanel().getPanelArray()[x][y];
-		}
 		
+	}
+	
+	public void setPanel(SquarePanel p) {
+		this.panel = p;
 	}
 	
 	public boolean isPartOfMainBoard() {

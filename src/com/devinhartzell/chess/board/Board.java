@@ -45,16 +45,23 @@ public class Board /*extends JPanel*/ {
 		
 		this.mainBoard = mainBoard;
 		
-		if (mainBoard) {
-			ChessGame.setMainBoard(this);
-			boardPanel = new BoardPanel();
-			boardPanel.setLocation(6, 6);
-		}
+
 		
 		for (int i = 1; i <= 8; i++) {
 			for (int j = 1; j <= 8; j++) {
 				Square sq = new Square(i, j, !((i + j) % 2 == 0), this);
 				getBoardArray()[i][j] = sq;
+			}
+		}
+		
+		if (mainBoard) {
+			ChessGame.setMainBoard(this);
+			boardPanel = new BoardPanel();
+			boardPanel.setLocation(6, 6);
+			for (int i = 1; i <= 8; i++) {
+				for (int j = 1; j<= 8; j++) {
+					getBoardArray()[i][j].setPanel(boardPanel.getPanelArray()[i][j]);
+				}
 			}
 		}
 		

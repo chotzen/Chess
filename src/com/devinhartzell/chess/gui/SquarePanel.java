@@ -38,7 +38,7 @@ public class SquarePanel extends JPanel {
 		} else {
 			setBackground(Color.LIGHT_GRAY);
 		}
-		
+		System.out.println(x + " " + y);
 		this.square = ChessGame.getMainBoard().getBoardArray()[x][y];
 		
 		/*this.x = x;
@@ -132,6 +132,7 @@ public class SquarePanel extends JPanel {
 				g.drawImage(square.getPiece().getImage(), 5, 5, 40, 40, null);
 		} catch (Exception e) {
 			//e.printStackTrace();
+			System.out.println(square.toString());
 		}
 		
 	}
