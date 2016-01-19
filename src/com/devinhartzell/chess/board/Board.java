@@ -39,6 +39,10 @@ public class Board /*extends JPanel*/ {
 	 */
 	public  boolean currentMove = false;
 	
+	public Board() {
+		this(false);
+	}
+	
 	public Board(boolean mainBoard) {
 		
 		this.mainBoard = mainBoard;
@@ -47,7 +51,7 @@ public class Board /*extends JPanel*/ {
 		
 		for (int i = 1; i <= 8; i++) {
 			for (int j = 1; j <= 8; j++) {
-				Square sq = new Square(i, j, !((i + j) % 2 == 0), this);
+				Square sq = new Square(i, j, this);
 				getBoardArray()[i][j] = sq;
 			}
 		}
@@ -67,32 +71,32 @@ public class Board /*extends JPanel*/ {
 		if (mainBoard) {
 		
 			for (int i = 1; i<=8; i++) {
-				new Pawn(i, 2, true);
-				new Pawn(i, 7, false);
+				new Pawn(i, 2, true, this);
+				new Pawn(i, 7, false, this);
 			}
 			
-			new Rook(1, 1, true);
-			new Rook(8, 1, true);
-			new Rook(1, 8, false);
-			new Rook(8, 8, false);
+			new Rook(1, 1, true, this);
+			new Rook(8, 1, true, this);
+			new Rook(1, 8, false, this);
+			new Rook(8, 8, false, this);
 			
 			
-			new Queen(4, 8, false);
-			new Queen(4, 1, true);
+			new Queen(4, 8, false, this);
+			new Queen(4, 1, true, this);
 			
-			new Knight(2, 1, true);
-			new Knight(7, 1, true);
-			new Knight(2, 8, false);
-			new Knight(7, 8, false);
+			new Knight(2, 1, true, this);
+			new Knight(7, 1, true, this);
+			new Knight(2, 8, false, this);
+			new Knight(7, 8, false, this);
 			
-			new Bishop(3, 1, true);
-			new Bishop(6, 1, true);
-			new Bishop(3, 8, false);
-			new Bishop(6, 8, false);
+			new Bishop(3, 1, true, this);
+			new Bishop(6, 1, true, this);
+			new Bishop(3, 8, false, this);
+			new Bishop(6, 8, false, this);
 			
 			
-			whiteKing = new King(5, 8, false);
-			blackKing = new King(5, 1, true);
+			whiteKing = new King(5, 8, false, this);
+			blackKing = new King(5, 1, true, this);
 		}
 	}
 	
@@ -172,4 +176,7 @@ public class Board /*extends JPanel*/ {
 		return boardPanel;
 	}
 
+	public boolean isMainBoard() {
+		return mainBoard;
+	}
 }

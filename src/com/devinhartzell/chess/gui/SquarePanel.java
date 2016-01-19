@@ -42,6 +42,7 @@ public class SquarePanel extends JPanel {
 		}
 		System.out.println(x + " " + y);
 		this.square = ChessGame.getMainBoard().getBoardArray()[x][y];
+		this.color = black;
 		
 		/*this.x = x;
 		this.y = y;*/
@@ -78,9 +79,8 @@ public class SquarePanel extends JPanel {
 						for (int j = 1; j <= 8; j++) {
 							if (ChessGame.getMainBoard().getBoardArray()[i][j].getPanel().selected) {
 								ChessGame.getMainBoard().getBoardArray()[i][j].getPiece().move(square.x, square.y);
-								ChessGame.getMainBoard().getBoardArray()[i][j].getPanel().update();
-								
 							}
+							ChessGame.getMainBoard().getBoardArray()[i][j].getPanel().setHighlighted(false);
 						}
 					}
 				}
@@ -106,9 +106,9 @@ public class SquarePanel extends JPanel {
 			System.out.println(String.format("Setting square at %s, %s as highlighted", square.x, square.y));
 		} else {
 			if (color)
-				setBackground(Color.DARK_GRAY);
-			else
 				setBackground(Color.BLUE);
+			else
+				setBackground(Color.LIGHT_GRAY);
 			setBorder(new LineBorder(new Color(0, 0, 128), 0));
 		}
 		update();

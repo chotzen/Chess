@@ -16,9 +16,9 @@ public class Square {
 
 	private SquarePanel panel;
 	
-	public Square(final int x, final int y, boolean mainBoard, Board board) {
+	public Square(final int x, final int y, Board board) {
 		this.piece = new NullPiece(x, y);
-		this.mainBoard = mainBoard;
+		this.mainBoard = board.isMainBoard();
 		
 		this.x = x;
 		this.y = y;

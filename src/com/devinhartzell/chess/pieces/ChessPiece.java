@@ -3,7 +3,10 @@ package com.devinhartzell.chess.pieces;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
+import javax.imageio.ImageIO;
+
 import com.devinhartzell.chess.ChessGame;
+import com.devinhartzell.chess.board.Board;
 import com.devinhartzell.chess.board.Coordinate;
 import com.devinhartzell.chess.gui.ChessGameWindow;
 
@@ -25,11 +28,13 @@ public abstract class ChessPiece {
 	 * true = white
 	 * false = black
 	 */
-	public boolean color;
-	public boolean isNull = false;
-	public int x, y;
-	public int oldx, oldy;
-	public BufferedImage image;
+	protected boolean color;
+	protected boolean isNull = false;
+	protected int x, y;
+	protected int oldx, oldy;
+	protected BufferedImage image;
+	
+	protected Board board;
 	
 	// gets the moves from the piece's current position
 	public abstract ArrayList<Coordinate> getPossibleMoves();

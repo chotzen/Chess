@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 
 import com.devinhartzell.chess.ChessGame;
+import com.devinhartzell.chess.board.Board;
 import com.devinhartzell.chess.board.Coordinate;
 
 public class Knight extends ChessPiece {
@@ -13,20 +14,22 @@ public class Knight extends ChessPiece {
 	private final String WHITE_PATH = "/resources/pieces/n_w.png";
 	private final String BLACK_PATH = "/resources/pieces/n_b.png";
 	
-	public Knight(int x, int y, boolean color) {
+	public Knight(int x, int y, boolean color, Board board) {
 		this.x = x;
 		this.y = y;
 		this.color = color;
-		this.type = 'n';
+		this.type = 'p';
+		this.board = board;
 		try {
 			if (color)
 				this.image = ImageIO.read(getClass().getResource(BLACK_PATH));
 			else
 				this.image = ImageIO.read(getClass().getResource(WHITE_PATH));
-			
-			ChessGame.getMainBoard().getBoardArray()[x][y].setPiece(this);
-		} catch (Exception e) {
-			System.out.println("Error: Could not load rook resource");
+			if (board.isMainBoard())
+				ChessGame.getMainBoard().getBoardArray()[x][y].setPiece(this);
+		}
+		catch (Exception e) {
+			System.out.println("Error: Could not load knight resource");
 		}
 	}
 	

@@ -15,18 +15,20 @@ public class Bishop extends ChessPiece {
 	private final String WHITE_PATH = "/resources/pieces/b_w.png";
 	private final String BLACK_PATH = "/resources/pieces/b_b.png";
 	
-	public Bishop(int x, int y, boolean color) {
+	public Bishop(int x, int y, boolean color, Board board) {
 		this.x = x;
 		this.y = y;
 		this.color = color;
 		this.type = 'b';
+		this.board = board;
 		try {
 			if (color)
 				this.image = ImageIO.read(getClass().getResource(BLACK_PATH));
 			else
 				this.image = ImageIO.read(getClass().getResource(WHITE_PATH));
 			
-			ChessGame.getMainBoard().getBoardArray()[x][y].setPiece(this);
+			if (board.isMainBoard())
+				ChessGame.getMainBoard().getBoardArray()[x][y].setPiece(this);
 		} catch (Exception e) {
 			System.out.println("Error: Could not load rook resource");
 		}
