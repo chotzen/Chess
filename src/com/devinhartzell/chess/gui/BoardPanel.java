@@ -1,5 +1,8 @@
 package com.devinhartzell.chess.gui;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import javax.swing.JPanel;
 
 import com.devinhartzell.chess.ChessGame;
@@ -21,6 +24,20 @@ public class BoardPanel extends JPanel {
 				panelArray[i][j].setLocation((i-1)*50, (j-1)*50);
 			}
 		}	
+		
+		Timer timer = new Timer();
+		timer.scheduleAtFixedRate(new TimerTask() {
+			@Override
+			public void run() {
+				for (int i = 1; i<=8; i++) {
+					for (int j = 1; j<=8; j++) {
+						panelArray[i][j].repaint();
+						panelArray[i][j].revalidate();
+					}
+				}
+				
+			}
+		}, 1000, 200);
 	}
 	
 	public static void updateBoard() {
