@@ -16,6 +16,9 @@ import java.io.IOException;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
+import javax.swing.JButton;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class ChessGameWindow extends JFrame {
 	
@@ -78,6 +81,17 @@ public class ChessGameWindow extends JFrame {
 		
 		Board b = new Board(true);
 		getContentPane().add(b.getBoardPanel());
+		
+		JButton btnNewBoard = new JButton("new board");
+		btnNewBoard.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Board test = new Board(ChessGame.getMainBoard());
+				test.getBoardArray()[7][7].getPiece().move(7, 6);
+			}
+		});
+		btnNewBoard.setBounds(145, 413, 117, 29);
+		getContentPane().add(btnNewBoard);
 		
 	}
 	

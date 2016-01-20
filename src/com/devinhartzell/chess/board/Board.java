@@ -22,9 +22,9 @@ public class Board /*extends JPanel*/ {
 	 */
 	
 	// Not using boardArray[0]
-	private  Square[][] boardArray = new Square[9][9];
-	private  King whiteKing;
-	private  King blackKing;
+	private Square[][] boardArray = new Square[9][9];
+	private King whiteKing;
+	private King blackKing;
 	
 	private BoardPanel boardPanel;
 	
@@ -41,6 +41,28 @@ public class Board /*extends JPanel*/ {
 	
 	public Board() {
 		this(false);
+	}
+	
+	public Board(Board base) {
+		this(false);
+		for (int i = 1; i<=8; i++) {
+			for (int j = 1; j<=8; j++) {
+				if (base.getBoardArray()[i][j].getPiece() instanceof Pawn)
+					new Pawn(i,j, base.getBoardArray()[i][j].getPiece().getColor(), this);
+				else if (base.getBoardArray()[i][j].getPiece() instanceof Knight)
+					new Knight(i,j, base.getBoardArray()[i][j].getPiece().getColor(), this);
+				else if (base.getBoardArray()[i][j].getPiece() instanceof Bishop)
+					new Bishop(i,j, base.getBoardArray()[i][j].getPiece().getColor(), this);
+				else if (base.getBoardArray()[i][j].getPiece() instanceof Rook)
+					new Rook(i,j, base.getBoardArray()[i][j].getPiece().getColor(), this);
+				else if (base.getBoardArray()[i][j].getPiece() instanceof Queen)
+					new Queen(i,j, base.getBoardArray()[i][j].getPiece().getColor(), this);
+				else if (base.getBoardArray()[i][j].getPiece() instanceof King)
+					new King(i,j, base.getBoardArray()[i][j].getPiece().getColor(), this);
+			}
+		}
+		whiteKing = base.getWKing();
+		blackKing = base.getBKing();
 	}
 	
 	public Board(boolean mainBoard) {
@@ -65,10 +87,6 @@ public class Board /*extends JPanel*/ {
 					getBoardArray()[i][j].setPanel(boardPanel.getPanelArray()[i][j]);
 				}
 			}
-		}
-		
-		
-		if (mainBoard) {
 		
 			for (int i = 1; i<=8; i++) {
 				new Pawn(i, 2, true, this);
