@@ -17,7 +17,7 @@ public class Knight extends ChessPiece {
 		this.x = x;
 		this.y = y;
 		this.color = color;
-		this.type = 'p';
+		this.type = 'n';
 		this.board = board;
 		try {
 			if (color)

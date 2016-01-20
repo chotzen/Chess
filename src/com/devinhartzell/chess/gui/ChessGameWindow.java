@@ -9,6 +9,7 @@ import javax.swing.JTextArea;
 import com.devinhartzell.chess.ChessGame;
 import com.devinhartzell.chess.board.Board;
 import com.devinhartzell.chess.pieces.ChessPiece;
+import com.devinhartzell.chess.pieces.Pawn;
 
 import java.io.IOException;
 
@@ -95,14 +96,13 @@ public class ChessGameWindow extends JFrame {
 	
 	public static void addMove(ChessPiece p, boolean capture) {
 		String type = String.valueOf(Character.toUpperCase(p.getType()));
-		if (type.contains("P")) { 
+		if (p instanceof Pawn) { 
 			System.out.println("hi");
 			if (capture)
 				type = String.valueOf(xrel[p.getOldX()]) + String.valueOf(yrel[p.getOldY()]);
-			else
-				
+			else	
 				type = "";
-		} 
+		}
 		if (!p.getColor()) {
 			if (capture) 
 				recentMoves.append(String.format("%s. %sx%s%s", turn, type, xrel[p.getX()], yrel[p.getY()]));
