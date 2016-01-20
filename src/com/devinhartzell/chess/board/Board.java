@@ -47,7 +47,7 @@ public class Board /*extends JPanel*/ {
 		this(false);
 		for (int i = 1; i<=8; i++) {
 			for (int j = 1; j<=8; j++) {
-				if (base.getBoardArray()[i][j].getPiece() instanceof Pawn)
+				if (base.getBoardArray()[i][j].getPiece() instanceof Pawn) 
 					new Pawn(i,j, base.getBoardArray()[i][j].getPiece().getColor(), this);
 				else if (base.getBoardArray()[i][j].getPiece() instanceof Knight)
 					new Knight(i,j, base.getBoardArray()[i][j].getPiece().getColor(), this);

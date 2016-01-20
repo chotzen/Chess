@@ -24,12 +24,13 @@ public class Pawn extends ChessPiece {
 				this.image = ImageIO.read(getClass().getResource(BLACK_PATH));
 			else
 				this.image = ImageIO.read(getClass().getResource(WHITE_PATH));
-			if (board.isMainBoard())
-				board.getBoardArray()[x][y].setPiece(this);
+			
+			board.getBoardArray()[x][y].setPiece(this);
 		}
 		catch (Exception e) {
 			System.out.println("Error: Could not load pawn resource");
 		}
+		
 	}
 	
 	@Override
