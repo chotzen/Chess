@@ -3,12 +3,14 @@ package com.devinhartzell.chess;
 import java.io.IOException;
 import java.util.Random;
 
+import com.devinhartzell.chess.board.Board;
 import com.devinhartzell.chess.gui.AskForName;
 import com.devinhartzell.chess.gui.ChessGameWindow;
 
 public class ChessGame {
 	
 	private static ChessGameWindow cgw;
+	private static Board mainBoard;
 	
 	public ChessGame(boolean randomized, String p1, String p2) 
 			throws IOException {
@@ -36,5 +38,14 @@ public class ChessGame {
 	public static void endGame() {
 		cgw.dispose();
 		new AskForName();
+	}
+	
+	public static void setMainBoard(Board board) {
+		mainBoard = board;
+	}
+	
+	public static Board getMainBoard() {
+		return mainBoard;
+		
 	}
 }

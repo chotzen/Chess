@@ -9,12 +9,16 @@ import javax.swing.JTextArea;
 import com.devinhartzell.chess.ChessGame;
 import com.devinhartzell.chess.board.Board;
 import com.devinhartzell.chess.pieces.ChessPiece;
+import com.devinhartzell.chess.pieces.Pawn;
 
 import java.io.IOException;
 
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
+import javax.swing.JButton;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class ChessGameWindow extends JFrame {
 	
@@ -33,12 +37,14 @@ public class ChessGameWindow extends JFrame {
 	
 	private static int turn = 1;
 	
-	private static char[] xrel = {'X', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'};
-	private static char[] yrel = {'X', '8', '7', '6', '5', '4', '3', '2', '1'};
+	private static char[] xrel = {'0', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'};
+	private static char[] yrel = {'0', '8', '7', '6', '5', '4', '3', '2', '1'};
 	
 	
 	public ChessGameWindow(ChessGame game, String white, String black) 
 			throws IOException {
+		
+		
 		
 		getContentPane().setLayout(null);
 		
@@ -73,10 +79,19 @@ public class ChessGameWindow extends JFrame {
 		getContentPane().add(moveLabel);
 		
 		
-		Board board = new Board();
-		board.setLocation(6, 6);
+		Board b = new Board(true);
+		getContentPane().add(b.getBoardPanel());
 		
-		getContentPane().add(board);
+		JButton btnNewBoard = new JButton("new board");
+		btnNewBoard.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Board test = new Board(ChessGame.getMainBoard());
+				test.getBoardArray()[7][7].getPiece().move(7, 6);
+			}
+		});
+		btnNewBoard.setBounds(145, 413, 117, 29);
+		getContentPane().add(btnNewBoard);
 		
 	}
 	
@@ -86,22 +101,22 @@ public class ChessGameWindow extends JFrame {
 	}
 	
 	public static void nextMove() {
-		if (Board.currentMove)
+		if (ChessGame.getMainBoard().currentMove)
 			moveLabel.setText("Black to move");
 		else
 			moveLabel.setText("White to move");
 	}
 	
+	
 	public static void addMove(ChessPiece p, boolean capture) {
 		String type = String.valueOf(Character.toUpperCase(p.getType()));
-		if (type.contains("P")) { 
+		if (p instanceof Pawn) { 
 			System.out.println("hi");
 			if (capture)
 				type = String.valueOf(xrel[p.getOldX()]) + String.valueOf(yrel[p.getOldY()]);
-			else
-				
+			else	
 				type = "";
-		} 
+		}
 		if (!p.getColor()) {
 			if (capture) 
 				recentMoves.append(String.format("%s. %sx%s%s", turn, type, xrel[p.getX()], yrel[p.getY()]));
