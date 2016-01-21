@@ -17,13 +17,11 @@ public class Square {
 	private SquarePanel panel;
 	
 	public Square(final int x, final int y, Board board) {
-		this.piece = new NullPiece(x, y);
+		this.piece = new NullPiece(x, y, board);
 		this.mainBoard = board.isMainBoard();
 		
 		this.x = x;
 		this.y = y;
-		
-		
 	}
 	
 	public void setPanel(SquarePanel p) {

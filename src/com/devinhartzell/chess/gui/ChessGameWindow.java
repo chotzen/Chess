@@ -12,6 +12,8 @@ import com.devinhartzell.chess.pieces.ChessPiece;
 import com.devinhartzell.chess.pieces.Pawn;
 
 import java.io.IOException;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
@@ -82,12 +84,24 @@ public class ChessGameWindow extends JFrame {
 		Board b = new Board(true);
 		getContentPane().add(b.getBoardPanel());
 		
-		JButton btnNewBoard = new JButton("new board");
+		JButton btnNewBoard = new JButton("Duplicate");
 		btnNewBoard.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Board test = new Board(ChessGame.getMainBoard());
-				test.getBoardArray()[7][7].getPiece().move(7, 6);
+				final Board test = new Board(ChessGame.getMainBoard());
+				new Timer().schedule(
+						new TimerTask() {
+
+							@Override
+							public void run() {
+								for (int i =1; i<=8; i++) {
+									for (int j=1; j<=8; j++) {
+										System.out.println(i + " " + j + test.getBoardArray()[i][j].getPiece().getClass().toString().replaceAll("com.devinhartzell.chess.pieces.", ""));
+									}
+								}
+							}
+							
+						}, 100);
 			}
 		});
 		btnNewBoard.setBounds(145, 413, 117, 29);
@@ -130,6 +144,6 @@ public class ChessGameWindow extends JFrame {
 				recentMoves.append(String.format(" %s%s%s\n", type, xrel[p.getX()], yrel[p.getY()]));
 			
 			turn++;
-		}	
+		}
 	}
 }

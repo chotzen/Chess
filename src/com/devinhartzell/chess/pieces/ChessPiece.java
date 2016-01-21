@@ -99,7 +99,7 @@ public abstract class ChessPiece {
 			cap = true;
 			
 		
-		board.getBoardArray()[oldx][oldy].setPiece(new NullPiece(this.x, this.y));
+		board.getBoardArray()[oldx][oldy].setPiece(new NullPiece(this.x, this.y, board));
 		board.getBoardArray()[oldx][oldy].getPanel().setSelected(false);
 		board.getBoardArray()[new_x][new_y].setPiece(this);
 		System.out.println(board.getBoardArray()[new_x][new_y].getPiece().toString());

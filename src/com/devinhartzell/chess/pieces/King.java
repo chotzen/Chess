@@ -27,11 +27,10 @@ public class King extends ChessPiece {
 			else
 				this.image = ImageIO.read(getClass().getResource(WHITE_PATH));
 			
-			if (board.isMainBoard())
-				ChessGame.getMainBoard().getBoardArray()[x][y].setPiece(this);
+			board.getBoardArray()[x][y].setPiece(this);
 		}
 		catch (Exception e) {
-			System.out.println("Error: Could not load pawn resource");
+			System.out.println("Error: Could not load knight resource");
 		}
 	}
 	
