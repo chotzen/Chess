@@ -58,11 +58,12 @@ public class Board /*extends JPanel*/ {
 				else if (base.getBoardArray()[i][j].getPiece() instanceof Queen)
 					new Queen(i,j, base.getBoardArray()[i][j].getPiece().getColor(), this);
 				else if (base.getBoardArray()[i][j].getPiece() instanceof King)
-					new King(i,j, base.getBoardArray()[i][j].getPiece().getColor(), this);
+					if (!base.getBoardArray()[i][j].getPiece().getColor())
+						whiteKing = new King(i,j, base.getBoardArray()[i][j].getPiece().getColor(), this);
+					else
+						blackKing = new King(i,j, base.getBoardArray()[i][j].getPiece().getColor(), this);
 			}
 		}
-		whiteKing = base.getWKing();
-		blackKing = base.getBKing();
 	}
 	
 	public Board(boolean mainBoard) {
@@ -145,29 +146,29 @@ public class Board /*extends JPanel*/ {
 		currentMove = b;
 		ChessGameWindow.nextMove();
 		
-		if (!b) {
-			if (whiteKing.getCheckMate()) {
-				JOptionPane.showMessageDialog(null, "White is in CheckMate. Black wins!");
-				ChessGame.endGame();
-			}
-				
-			if (whiteKing.getCheck()) {
-				JOptionPane.showMessageDialog(null, "White is now in Check!");
-				check_w = true;
-			} else
-				check_w = false;
-		} else {
-			if (blackKing.getCheckMate()) {
-				JOptionPane.showMessageDialog(null, "Black is in CheckMate. White wins!");
-				ChessGame.endGame();
-			}
-			
-			if (blackKing.getCheck()) {
-				JOptionPane.showMessageDialog(null, "Black is now in Check!");
-				check_b = true;
-			} else
-				check_b = false;
+		
+		if (whiteKing.getCheckMate()) {
+			JOptionPane.showMessageDialog(null, "White is in CheckMate. Black wins!");
+			ChessGame.endGame();
 		}
+			
+		if (whiteKing.getCheck()) {
+			JOptionPane.showMessageDialog(null, "White is now in Check!");
+			check_w = true;
+		} else
+			check_w = false;
+	
+		if (blackKing.getCheckMate()) {
+			JOptionPane.showMessageDialog(null, "Black is in CheckMate. White wins!");
+			ChessGame.endGame();
+		}
+		
+		if (blackKing.getCheck()) {
+			JOptionPane.showMessageDialog(null, "Black is now in Check!");
+			check_b = true;
+		} else
+			check_b = false;
+		
 	}
 	
 	public King getWKing() {
