@@ -84,7 +84,7 @@ public class ChessGameWindow extends JFrame {
 		Board b = new Board(true);
 		getContentPane().add(b.getBoardPanel());
 		
-		JButton btnNewBoard = new JButton("new board");
+		JButton btnNewBoard = new JButton("Duplicate");
 		btnNewBoard.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -96,7 +96,7 @@ public class ChessGameWindow extends JFrame {
 							public void run() {
 								for (int i =1; i<=8; i++) {
 									for (int j=1; j<=8; j++) {
-										System.out.println(i + " " + j + test.getBoardArray()[i][j].getPiece().toString());
+										System.out.println(i + " " + j + test.getBoardArray()[i][j].getPiece().getClass().toString().replaceAll("com.devinhartzell.chess.pieces.", ""));
 									}
 								}
 							}
@@ -144,6 +144,6 @@ public class ChessGameWindow extends JFrame {
 				recentMoves.append(String.format(" %s%s%s\n", type, xrel[p.getX()], yrel[p.getY()]));
 			
 			turn++;
-		}	
+		}
 	}
 }
