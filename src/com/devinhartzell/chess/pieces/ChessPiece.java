@@ -100,14 +100,16 @@ public abstract class ChessPiece {
 			
 		
 		board.getBoardArray()[oldx][oldy].setPiece(new NullPiece(this.x, this.y, board));
-		board.getBoardArray()[oldx][oldy].getPanel().setSelected(false);
+		if (board.isMainBoard())
+			board.getBoardArray()[oldx][oldy].getPanel().setSelected(false);
 		board.getBoardArray()[new_x][new_y].setPiece(this);
 		System.out.println(board.getBoardArray()[new_x][new_y].getPiece().toString());
 		
 		this.x = new_x;
 		this.y = new_y;
 		
-		board.setTurn(!board.getTurn());
+		if (board.isMainBoard())
+			board.setTurn(!board.getTurn());
 		ChessGameWindow.addMove(this, cap);
 		
 		
@@ -142,5 +144,9 @@ public abstract class ChessPiece {
 	
 	public int getOldY() {
 		return oldy;
+	}
+	
+	public Board getBoard() {
+		return board;
 	}
 }

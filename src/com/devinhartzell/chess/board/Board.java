@@ -146,28 +146,19 @@ public class Board /*extends JPanel*/ {
 		currentMove = b;
 		ChessGameWindow.nextMove();
 		
-		
-		if (whiteKing.getCheckMate()) {
-			JOptionPane.showMessageDialog(null, "White is in CheckMate. Black wins!");
-			ChessGame.endGame();
-		}
-			
 		if (whiteKing.getCheck()) {
-			JOptionPane.showMessageDialog(null, "White is now in Check!");
-			check_w = true;
-		} else
-			check_w = false;
-	
-		if (blackKing.getCheckMate()) {
-			JOptionPane.showMessageDialog(null, "Black is in CheckMate. White wins!");
-			ChessGame.endGame();
+			if (whiteKing.getCheckMate()) {
+				JOptionPane.showMessageDialog(null, "White is in CheckMate. Black wins!");
+				ChessGame.endGame();
+			} else 
+				JOptionPane.showMessageDialog(null, "White is now in Check!");
+		} else {
+			if (blackKing.getCheckMate()) {
+				JOptionPane.showMessageDialog(null, "Black is now in CheckMate. White wins!");
+				ChessGame.endGame();
+			} else 
+				JOptionPane.showMessageDialog(null, "Black is now in Check!");
 		}
-		
-		if (blackKing.getCheck()) {
-			JOptionPane.showMessageDialog(null, "Black is now in Check!");
-			check_b = true;
-		} else
-			check_b = false;
 		
 	}
 	

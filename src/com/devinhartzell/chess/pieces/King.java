@@ -136,38 +136,36 @@ public class King extends ChessPiece {
 	}
 
 	public boolean getCheckMate() {
-		
 		/*
-		if (getCheck()) {
-			// Loop all moves
-			for (ChessPiece friendPiece : getSameColorPieces()) {
-				for (Coordinate move : friendPiece.getPossibleMoves()) {
-					// Assume that it solves checkmate
-					boolean solvesCM = true;
-					
-					// Test the move with all attackers
-					for (ChessPiece attacker : getAttackers()) {
-						/*for (Coordinate attackerMove : attacker.getTheoreticalMoves
-								(friendPiece, move.getX(), move.getY())) {
-							// If an attacker's move contains the king's space, say that it didn't work
-							if (attackerMove.equals(new Coordinate(this.x, this.y))) {
-								solvesCM = false;
+		for (int i = 1; i <=8; i++) {
+			for (int j = 1; j <= 8; j++) {
+				ChessPiece pe = board.getBoardArray()[i][j].getPiece();
+				if (!(pe instanceof NullPiece)) {
+					if (pe.getColor() == this.color) {
+						// loop all the moves that the player has
+						for (Coordinate c : pe.getPossibleMoves()) {
+							final Board testboard = new Board(this.board);
+							testboard.getBoardArray()[i][j].getPiece().move(c.getX(), c.getY());
+							
+							try {
+								wait(50);
+							} catch (InterruptedException e) {}
+							
+							
+							if (color) {
+								if (!testboard.getBKing().getCheck()) 
+									return false;
+							} else {
+								if (!testboard.getWKing().getCheck())
+									return false;
 							}
 						}
-					}   
-					
-					if (solvesCM) {
-						return false;
 					}
 				}
 			}
-			
-			return true;
-		} else
-			return false;
+		}*/
+		return true;
 		
-		*/
-		return false;
 	}
 	
 	public BufferedImage getImage() {
