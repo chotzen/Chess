@@ -136,6 +136,8 @@ public class King extends ChessPiece {
 	}
 
 	public boolean getCheckMate() {
+		Board testboard = new Board(this.board);
+		//testboard.getBoardArray()[2][2].getPiece().move(2, 3);
 		/*
 		for (int i = 1; i <=8; i++) {
 			for (int j = 1; j <= 8; j++) {
@@ -164,7 +166,7 @@ public class King extends ChessPiece {
 				}
 			}
 		}*/
-		return true;
+		return false;
 		
 	}
 	

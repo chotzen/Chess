@@ -152,7 +152,7 @@ public class Board /*extends JPanel*/ {
 				ChessGame.endGame();
 			} else 
 				JOptionPane.showMessageDialog(null, "White is now in Check!");
-		} else {
+		} if (blackKing.getCheck()) {
 			if (blackKing.getCheckMate()) {
 				JOptionPane.showMessageDialog(null, "Black is now in CheckMate. White wins!");
 				ChessGame.endGame();
@@ -188,5 +188,16 @@ public class Board /*extends JPanel*/ {
 
 	public boolean isMainBoard() {
 		return mainBoard;
+	}
+	
+	public void print() {
+		System.out.println("Printing Board:");
+		for (int i = 1; i<=8; i++) {
+			String line = "";
+			for (int j = 1; j<=8; j++) {
+				line = line + getBoardArray()[i][j].getPiece().getType();
+			}
+			System.out.println(i + " " + line);
+		}
 	}
 }
