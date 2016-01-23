@@ -108,9 +108,10 @@ public abstract class ChessPiece {
 		this.x = new_x;
 		this.y = new_y;
 		
-		if (board.isMainBoard())
+		if (board.isMainBoard()) {
 			board.setTurn(!board.getTurn());
-		ChessGameWindow.addMove(this, cap);
+			ChessGameWindow.addMove(this, cap);
+		}
 		
 		
 	}

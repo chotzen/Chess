@@ -89,7 +89,9 @@ public class ChessGameWindow extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				final Board test = new Board(ChessGame.getMainBoard());
-				test.getBoardArray()[2][2].getPiece().move(2, 3);
+				test.getBoardArray()[5][7].getPiece().move(5, 5);
+				test.getBoardArray()[4][2].getPiece().move(4, 4);
+				test.getBoardArray()[5][5].getPiece().move(4,4);
 				test.print();
 			}
 		});

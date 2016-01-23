@@ -9,6 +9,7 @@ import com.devinhartzell.chess.pieces.Bishop;
 import com.devinhartzell.chess.pieces.ChessPiece;
 import com.devinhartzell.chess.pieces.King;
 import com.devinhartzell.chess.pieces.Knight;
+import com.devinhartzell.chess.pieces.NullPiece;
 import com.devinhartzell.chess.pieces.Pawn;
 import com.devinhartzell.chess.pieces.Queen;
 import com.devinhartzell.chess.pieces.Rook;
@@ -195,7 +196,12 @@ public class Board /*extends JPanel*/ {
 		for (int i = 1; i<=8; i++) {
 			String line = "";
 			for (int j = 1; j<=8; j++) {
-				line = line + getBoardArray()[i][j].getPiece().getType();
+				char type = getBoardArray()[i][j].getPiece().getType();
+				if (getBoardArray()[i][j].getPiece().getColor())
+					type = Character.toUpperCase(type);
+				if (getBoardArray()[i][j].getPiece() instanceof NullPiece)
+					type = '.';
+				line = line + type;
 			}
 			System.out.println(i + " " + line);
 		}
