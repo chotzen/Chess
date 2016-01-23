@@ -8,7 +8,6 @@ import javax.swing.JTextArea;
 
 import com.devinhartzell.chess.ChessGame;
 import com.devinhartzell.chess.board.Board;
-import com.devinhartzell.chess.board.Coordinate;
 import com.devinhartzell.chess.pieces.ChessPiece;
 import com.devinhartzell.chess.pieces.Pawn;
 
@@ -17,9 +16,6 @@ import java.io.IOException;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
-import javax.swing.JButton;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 public class ChessGameWindow extends JFrame {
 	
@@ -83,6 +79,7 @@ public class ChessGameWindow extends JFrame {
 		Board b = new Board(true);
 		getContentPane().add(b.getBoardPanel());
 		
+		/*
 		JButton btnNewBoard = new JButton("Duplicate");
 		btnNewBoard.addMouseListener(new MouseAdapter() {
 			@Override
@@ -100,8 +97,9 @@ public class ChessGameWindow extends JFrame {
 				System.out.println(test.getWKing().getCheck());
 			}
 		});
+		
 		btnNewBoard.setBounds(145, 413, 117, 29);
-		getContentPane().add(btnNewBoard);
+		getContentPane().add(btnNewBoard);*/
 		
 	}
 	
@@ -121,7 +119,6 @@ public class ChessGameWindow extends JFrame {
 	public static void addMove(ChessPiece p, boolean capture) {
 		String type = String.valueOf(Character.toUpperCase(p.getType()));
 		if (p instanceof Pawn) { 
-			System.out.println("hi");
 			if (capture)
 				type = String.valueOf(xrel[p.getOldX()]) + String.valueOf(yrel[p.getOldY()]);
 			else	

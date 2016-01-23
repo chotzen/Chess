@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
-import com.devinhartzell.chess.ChessGame;
 import com.devinhartzell.chess.board.Board;
 import com.devinhartzell.chess.board.Coordinate;
 import com.devinhartzell.chess.board.Square;
@@ -136,9 +135,9 @@ public class King extends ChessPiece {
 	}
 
 	public boolean getCheckMate() {
-		Board testboard = new Board(this.board);
+		/*Board testboard = new Board(this.board);
 		//testboard.getBoardArray()[2][2].getPiece().move(2, 3);
-		/*
+		
 		for (int i = 1; i <=8; i++) {
 			for (int j = 1; j <= 8; j++) {
 				ChessPiece pe = board.getBoardArray()[i][j].getPiece();

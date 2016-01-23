@@ -28,7 +28,6 @@ public class ChessGame {
 			black = p2;
 		}
 		cgw = new ChessGameWindow(this, white, black);
-		System.out.println(white);
 	}
 	
 	public static void main(String args[]) {
