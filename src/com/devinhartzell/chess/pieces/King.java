@@ -47,8 +47,8 @@ public class King extends ChessPiece {
 		for (int i = 0; i <= 7; i++)
 		{
 			if (xc[i] <= 8 && xc[i] >= 1 && yc[i] <=8 && yc[i] >= 1) {
-				if (ChessGame.getMainBoard().getBoardArray()[xc[i]][yc[i]].hasPiece()) {
-					if (ChessGame.getMainBoard().getBoardArray()[xc[i]][yc[i]].getPiece().getColor() != this.color) {
+				if (board.getBoardArray()[xc[i]][yc[i]].hasPiece()) {
+					if (board.getBoardArray()[xc[i]][yc[i]].getPiece().getColor() != this.color) {
 						movesList.add(new Coordinate(xc[i], yc[i]));
 					}
 				} else {
@@ -59,7 +59,7 @@ public class King extends ChessPiece {
 		
 		for (int m = 1; m <= 8; m++) {
 			for (int n = 1; n <= 8; n++) {
-				Square sq = ChessGame.getMainBoard().getBoardArray()[m][n];
+				Square sq = board.getBoardArray()[m][n];
 				if (sq.hasPiece()) {
 					if (!(sq.getPiece() instanceof King)) {
 						if (sq.getPiece().getColor() != this.color) {
@@ -87,7 +87,7 @@ public class King extends ChessPiece {
 	public boolean getCheck() {
 		for (int m = 1; m <= 8; m++) {
 			for (int n = 1; n <= 8; n++) {
-				Square sq = ChessGame.getMainBoard().getBoardArray()[m][n];
+				Square sq = board.getBoardArray()[m][n];
 				if (sq.hasPiece()) 
 					if (sq.getPiece().getColor() != this.color) 
 						for (Coordinate c : sq.getPiece().getPossibleMoves()) 
@@ -104,8 +104,8 @@ public class King extends ChessPiece {
 		for (int m = 1; m <= 8; m++) {
 			for (int n = 1; n <= 8; n++) {
 				//System.out.println("Testing piece at " + m + ", " + n);
-				if (ChessGame.getMainBoard().getBoardArray()[m][n].getPiece().isNull() != this.isNull()) {
-					ChessPiece pe = ChessGame.getMainBoard().getBoardArray()[m][n].getPiece();
+				if (board.getBoardArray()[m][n].getPiece().isNull() != this.isNull()) {
+					ChessPiece pe = board.getBoardArray()[m][n].getPiece();
 					if (!(pe instanceof NullPiece)) {
 						if (pe.getColor() != this.color) {
 							for (Coordinate c : pe.getPossibleMoves()) {
@@ -125,7 +125,7 @@ public class King extends ChessPiece {
 		ArrayList<ChessPiece> pieces = new ArrayList<ChessPiece>();
 		for (int m = 1; m <= 8; m++) {
 			for (int n = 1; n <= 8; n++) {
-				ChessPiece pe = ChessGame.getMainBoard().getBoardArray()[m][n].getPiece();
+				ChessPiece pe = board.getBoardArray()[m][n].getPiece();
 				if (!pe.isNull()) {
 					if (pe.getColor() == this.color) {
 						pieces.add(pe);

@@ -8,12 +8,11 @@ import javax.swing.JTextArea;
 
 import com.devinhartzell.chess.ChessGame;
 import com.devinhartzell.chess.board.Board;
+import com.devinhartzell.chess.board.Coordinate;
 import com.devinhartzell.chess.pieces.ChessPiece;
 import com.devinhartzell.chess.pieces.Pawn;
 
 import java.io.IOException;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
@@ -89,10 +88,16 @@ public class ChessGameWindow extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				final Board test = new Board(ChessGame.getMainBoard());
-				test.getBoardArray()[5][7].getPiece().move(5, 5);
-				test.getBoardArray()[4][2].getPiece().move(4, 4);
-				test.getBoardArray()[5][5].getPiece().move(4,4);
+				test.getBoardArray()[6][7].getPiece().move(6, 6);
+				test.getBoardArray()[5][2].getPiece().move(5, 4);
+				test.getBoardArray()[7][7].getPiece().move(7, 5);
+				test.getBoardArray()[4][1].getPiece().move(8, 5);
 				test.print();
+				for (Coordinate c : test.getBoardArray()[8][5].getPiece().getPossibleMoves()) {
+					System.out.println(String.format("%s, %s %s", c.getX(), c.getY(), 
+							test.getBoardArray()[c.getX()][c.getY()].getPiece().getType()));
+				}
+				System.out.println(test.getWKing().getCheck());
 			}
 		});
 		btnNewBoard.setBounds(145, 413, 117, 29);
