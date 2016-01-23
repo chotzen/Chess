@@ -135,37 +135,39 @@ public class King extends ChessPiece {
 	}
 
 	public boolean getCheckMate() {
-		/*Board testboard = new Board(this.board);
-		//testboard.getBoardArray()[2][2].getPiece().move(2, 3);
+		/*
+		 * Look at all of the moves
+		 * See if any of them move the king out of check
+		 * ???
+		 * Profit
+		 */
 		
-		for (int i = 1; i <=8; i++) {
-			for (int j = 1; j <= 8; j++) {
+		// Loop all the squares (i,j) in the board
+		for (int i = 1; i<=8; i++) {
+			for (int j = 1; j<=8; j++) {
 				ChessPiece pe = board.getBoardArray()[i][j].getPiece();
+				
+				// Check if it's actually a piece and if it's on our team
 				if (!(pe instanceof NullPiece)) {
 					if (pe.getColor() == this.color) {
-						// loop all the moves that the player has
+						
+						// Loop out all the possible moves of the piece
 						for (Coordinate c : pe.getPossibleMoves()) {
-							final Board testboard = new Board(this.board);
+							Board testboard = new Board(this.board);
 							testboard.getBoardArray()[i][j].getPiece().move(c.getX(), c.getY());
-							
-							try {
-								wait(50);
-							} catch (InterruptedException e) {}
-							
-							
-							if (color) {
-								if (!testboard.getBKing().getCheck()) 
+							if (!this.color) {
+								if (!testboard.getWKing().getCheck())
 									return false;
 							} else {
-								if (!testboard.getWKing().getCheck())
+								if (!testboard.getBKing().getCheck())
 									return false;
 							}
 						}
 					}
 				}
 			}
-		}*/
-		return false;
+		}
+		return true;
 		
 	}
 	
