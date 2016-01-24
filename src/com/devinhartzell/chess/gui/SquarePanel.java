@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
 import com.devinhartzell.chess.ChessGame;
+import com.devinhartzell.chess.board.Board;
 import com.devinhartzell.chess.board.Coordinate;
 import com.devinhartzell.chess.board.Square;
 import com.devinhartzell.chess.pieces.ChessPiece;
@@ -23,7 +24,7 @@ public class SquarePanel extends JPanel {
 
 	private Square square;
 	
-	//private int x, y;
+	private int x, y;
 	private boolean color;
 	
 	private boolean highlighted;
@@ -31,7 +32,7 @@ public class SquarePanel extends JPanel {
 	
 	private Graphics g;
 	
-	public SquarePanel(int x, int y, boolean black) {
+	public SquarePanel(final int x, final int y, boolean black) {
 		setSize(50, 50);
 		setLayout(null);
 		if (black) {
@@ -43,8 +44,8 @@ public class SquarePanel extends JPanel {
 		this.square = ChessGame.getMainBoard().getBoardArray()[x][y];
 		this.color = black;
 		
-		/*this.x = x;
-		this.y = y;*/
+		this.x = x;
+		this.y = y;
 		
 		setLocation((50 * x) - 50 , (50 * y) - 50);
 		addMouseListener(new MouseAdapter() {
@@ -63,7 +64,30 @@ public class SquarePanel extends JPanel {
 					}
 					
 					for (Coordinate s : square.getPiece().getPossibleMoves()) {
-						ChessGame.getMainBoard().getBoardArray()[s.getX()][s.getY()].getPanel().setHighlighted(true);
+						if (!square.getPiece().getColor()) {
+							if (square.getPiece().getBoard().getWKing().getCheck()) {
+								Board testboard = new Board(square.getPiece().getBoard());
+								testboard.getBoardArray()[x][y].getPiece().move(s.getX(), s.getY());
+								if (!testboard.getWKing().getCheck()) {
+									ChessGame.getMainBoard().getBoardArray()[s.getX()][s.getY()].getPanel().setHighlighted(true);
+								} 
+							} else
+								ChessGame.getMainBoard().getBoardArray()[s.getX()][s.getY()].getPanel().setHighlighted(true);
+						} else {
+							if (square.getPiece().getBoard().getBKing().getCheck()) {
+								Board testboard = new Board(square.getPiece().getBoard());
+								testboard.getBoardArray()[x][y].getPiece().move(s.getX(), s.getY());
+								if (!testboard.getBKing().getCheck()) {
+									ChessGame.getMainBoard().getBoardArray()[s.getX()][s.getY()].getPanel().setHighlighted(true);
+								}
+							} else
+								ChessGame.getMainBoard().getBoardArray()[s.getX()][s.getY()].getPanel().setHighlighted(true);
+								
+						}
+								
+						
+								
+						//ChessGame.getMainBoard().getBoardArray()[s.getX()][s.getY()].getPanel().setHighlighted(true);
 					}
 					setSelected(true);
 				}

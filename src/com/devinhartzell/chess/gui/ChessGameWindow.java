@@ -26,6 +26,10 @@ public class ChessGameWindow extends JFrame {
 	
 	private JLabel whiteLabel;
 	private JLabel blackLabel;
+	
+	private String whiteName;
+	private String blackName;
+	
 	private static JLabel moveLabel;
 	private static final long serialVersionUID = 1109205743042597274L;
 	
@@ -126,17 +130,30 @@ public class ChessGameWindow extends JFrame {
 		}
 		if (!p.getColor()) {
 			if (capture) 
-				recentMoves.append(String.format("%s. %sx%s%s", turn, type, xrel[p.getX()], yrel[p.getY()]));
+				recentMoves.append(String.format("\n%s. %sx%s%s", turn, type, xrel[p.getX()], yrel[p.getY()]));
 			 else 
-				recentMoves.append(String.format("%s. %s%s%s", turn, type, xrel[p.getX()], yrel[p.getY()]));
+				recentMoves.append(String.format("\n%s. %s%s%s", turn, type, xrel[p.getX()], yrel[p.getY()]));
 		
 		} else {
 			if (capture) 
-				recentMoves.append(String.format(" %sx%s%s\n", type, xrel[p.getX()], yrel[p.getY()]));
+				recentMoves.append(String.format(" %sx%s%s", type, xrel[p.getX()], yrel[p.getY()]));
 			else 
-				recentMoves.append(String.format(" %s%s%s\n", type, xrel[p.getX()], yrel[p.getY()]));
+				recentMoves.append(String.format(" %s%s%s", type, xrel[p.getX()], yrel[p.getY()]));
 			
 			turn++;
 		}
+	}
+	public static void append(String s) {
+		recentMoves.append(s);
+	}
+	
+	
+	
+	public String getWhite() {
+		return whiteName;
+	}
+	
+	public String getBlack() {
+		return blackName;
 	}
 }

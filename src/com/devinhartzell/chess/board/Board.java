@@ -148,11 +148,15 @@ public class Board /*extends JPanel*/ {
 		ChessGameWindow.nextMove();
 		
 		if (whiteKing.getCheck()) {
+			
 			if (whiteKing.getCheckMate()) {
 				JOptionPane.showMessageDialog(null, "White is in CheckMate. Black wins!");
+				ChessGameWindow.append("##");
 				ChessGame.endGame();
-			} else 
+			} else {
 				JOptionPane.showMessageDialog(null, "White is now in Check!");
+				ChessGameWindow.append("#");
+			}
 		} if (blackKing.getCheck()) {
 			if (blackKing.getCheckMate()) {
 				JOptionPane.showMessageDialog(null, "Black is now in CheckMate. White wins!");

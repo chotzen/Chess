@@ -79,6 +79,8 @@ public class King extends ChessPiece {
 				}
 			}
 		}
+		
+		
 				
 		return movesList;
 	}
@@ -96,29 +98,6 @@ public class King extends ChessPiece {
 		}		return false;
 	}
 
-	
-	public ArrayList<ChessPiece> getAttackers() {
-		ArrayList<ChessPiece> attackers = new ArrayList<ChessPiece>();
-		
-		for (int m = 1; m <= 8; m++) {
-			for (int n = 1; n <= 8; n++) {
-				//System.out.println("Testing piece at " + m + ", " + n);
-				if (board.getBoardArray()[m][n].getPiece().isNull() != this.isNull()) {
-					ChessPiece pe = board.getBoardArray()[m][n].getPiece();
-					if (!(pe instanceof NullPiece)) {
-						if (pe.getColor() != this.color) {
-							for (Coordinate c : pe.getPossibleMoves()) {
-								if (c.equals(new Coordinate(x, y))) {
-									if (!attackers.contains(pe))
-										attackers.add(pe);
-								}
-							}
-						}
-					}
-				}
-			}
-		} return attackers;
-	}
 	
 	public ArrayList<ChessPiece> getSameColorPieces() {
 		ArrayList<ChessPiece> pieces = new ArrayList<ChessPiece>();
