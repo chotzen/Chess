@@ -43,8 +43,7 @@ public class King extends ChessPiece {
 		int[] yc = {y+1, y+1, y, y-1, y-1, y-1, y, y+1};
 		
 		// left three spaces
-		for (int i = 0; i <= 7; i++)
-		{
+		for (int i = 0; i <= 7; i++) {
 			if (xc[i] <= 8 && xc[i] >= 1 && yc[i] <=8 && yc[i] >= 1) {
 				if (board.getBoardArray()[xc[i]][yc[i]].hasPiece()) {
 					if (board.getBoardArray()[xc[i]][yc[i]].getPiece().getColor() != this.color) {
