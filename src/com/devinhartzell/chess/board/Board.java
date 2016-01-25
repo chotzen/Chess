@@ -9,6 +9,7 @@ import com.devinhartzell.chess.pieces.Bishop;
 import com.devinhartzell.chess.pieces.ChessPiece;
 import com.devinhartzell.chess.pieces.King;
 import com.devinhartzell.chess.pieces.Knight;
+import com.devinhartzell.chess.pieces.NullPiece;
 import com.devinhartzell.chess.pieces.Pawn;
 import com.devinhartzell.chess.pieces.Queen;
 import com.devinhartzell.chess.pieces.Rook;
@@ -146,28 +147,23 @@ public class Board /*extends JPanel*/ {
 		currentMove = b;
 		ChessGameWindow.nextMove();
 		
-		
-		if (whiteKing.getCheckMate()) {
-			JOptionPane.showMessageDialog(null, "White is in CheckMate. Black wins!");
-			ChessGame.endGame();
-		}
-			
 		if (whiteKing.getCheck()) {
-			JOptionPane.showMessageDialog(null, "White is now in Check!");
-			check_w = true;
-		} else
-			check_w = false;
-	
-		if (blackKing.getCheckMate()) {
-			JOptionPane.showMessageDialog(null, "Black is in CheckMate. White wins!");
-			ChessGame.endGame();
+			
+			if (whiteKing.getCheckMate()) {
+				JOptionPane.showMessageDialog(null, "White is in CheckMate. Black wins!");
+				ChessGameWindow.append("##");
+				ChessGame.endGame();
+			} else {
+				JOptionPane.showMessageDialog(null, "White is now in Check!");
+				ChessGameWindow.append("#");
+			}
+		} if (blackKing.getCheck()) {
+			if (blackKing.getCheckMate()) {
+				JOptionPane.showMessageDialog(null, "Black is now in CheckMate. White wins!");
+				ChessGame.endGame();
+			} else 
+				JOptionPane.showMessageDialog(null, "Black is now in Check!");
 		}
-		
-		if (blackKing.getCheck()) {
-			JOptionPane.showMessageDialog(null, "Black is now in Check!");
-			check_b = true;
-		} else
-			check_b = false;
 		
 	}
 	
@@ -197,5 +193,21 @@ public class Board /*extends JPanel*/ {
 
 	public boolean isMainBoard() {
 		return mainBoard;
+	}
+	
+	public void print() {
+		System.out.println("Printing Board:");
+		for (int i = 1; i<=8; i++) {
+			String line = "";
+			for (int j = 1; j<=8; j++) {
+				char type = getBoardArray()[i][j].getPiece().getType();
+				if (getBoardArray()[i][j].getPiece().getColor())
+					type = Character.toUpperCase(type);
+				if (getBoardArray()[i][j].getPiece() instanceof NullPiece)
+					type = '.';
+				line = line + type;
+			}
+			System.out.println(i + " " + line);
+		}
 	}
 }

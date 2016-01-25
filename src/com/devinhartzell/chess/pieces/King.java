@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
-import com.devinhartzell.chess.ChessGame;
 import com.devinhartzell.chess.board.Board;
 import com.devinhartzell.chess.board.Coordinate;
 import com.devinhartzell.chess.board.Square;
@@ -44,11 +43,10 @@ public class King extends ChessPiece {
 		int[] yc = {y+1, y+1, y, y-1, y-1, y-1, y, y+1};
 		
 		// left three spaces
-		for (int i = 0; i <= 7; i++)
-		{
+		for (int i = 0; i <= 7; i++) {
 			if (xc[i] <= 8 && xc[i] >= 1 && yc[i] <=8 && yc[i] >= 1) {
-				if (ChessGame.getMainBoard().getBoardArray()[xc[i]][yc[i]].hasPiece()) {
-					if (ChessGame.getMainBoard().getBoardArray()[xc[i]][yc[i]].getPiece().getColor() != this.color) {
+				if (board.getBoardArray()[xc[i]][yc[i]].hasPiece()) {
+					if (board.getBoardArray()[xc[i]][yc[i]].getPiece().getColor() != this.color) {
 						movesList.add(new Coordinate(xc[i], yc[i]));
 					}
 				} else {
@@ -59,7 +57,7 @@ public class King extends ChessPiece {
 		
 		for (int m = 1; m <= 8; m++) {
 			for (int n = 1; n <= 8; n++) {
-				Square sq = ChessGame.getMainBoard().getBoardArray()[m][n];
+				Square sq = board.getBoardArray()[m][n];
 				if (sq.hasPiece()) {
 					if (!(sq.getPiece() instanceof King)) {
 						if (sq.getPiece().getColor() != this.color) {
@@ -80,6 +78,8 @@ public class King extends ChessPiece {
 				}
 			}
 		}
+		
+		
 				
 		return movesList;
 	}
@@ -87,7 +87,7 @@ public class King extends ChessPiece {
 	public boolean getCheck() {
 		for (int m = 1; m <= 8; m++) {
 			for (int n = 1; n <= 8; n++) {
-				Square sq = ChessGame.getMainBoard().getBoardArray()[m][n];
+				Square sq = board.getBoardArray()[m][n];
 				if (sq.hasPiece()) 
 					if (sq.getPiece().getColor() != this.color) 
 						for (Coordinate c : sq.getPiece().getPossibleMoves()) 
@@ -98,34 +98,11 @@ public class King extends ChessPiece {
 	}
 
 	
-	public ArrayList<ChessPiece> getAttackers() {
-		ArrayList<ChessPiece> attackers = new ArrayList<ChessPiece>();
-		
-		for (int m = 1; m <= 8; m++) {
-			for (int n = 1; n <= 8; n++) {
-				//System.out.println("Testing piece at " + m + ", " + n);
-				if (ChessGame.getMainBoard().getBoardArray()[m][n].getPiece().isNull() != this.isNull()) {
-					ChessPiece pe = ChessGame.getMainBoard().getBoardArray()[m][n].getPiece();
-					if (!(pe instanceof NullPiece)) {
-						if (pe.getColor() != this.color) {
-							for (Coordinate c : pe.getPossibleMoves()) {
-								if (c.equals(new Coordinate(x, y))) {
-									if (!attackers.contains(pe))
-										attackers.add(pe);
-								}
-							}
-						}
-					}
-				}
-			}
-		} return attackers;
-	}
-	
 	public ArrayList<ChessPiece> getSameColorPieces() {
 		ArrayList<ChessPiece> pieces = new ArrayList<ChessPiece>();
 		for (int m = 1; m <= 8; m++) {
 			for (int n = 1; n <= 8; n++) {
-				ChessPiece pe = ChessGame.getMainBoard().getBoardArray()[m][n].getPiece();
+				ChessPiece pe = board.getBoardArray()[m][n].getPiece();
 				if (!pe.isNull()) {
 					if (pe.getColor() == this.color) {
 						pieces.add(pe);
@@ -136,38 +113,40 @@ public class King extends ChessPiece {
 	}
 
 	public boolean getCheckMate() {
-		
 		/*
-		if (getCheck()) {
-			// Loop all moves
-			for (ChessPiece friendPiece : getSameColorPieces()) {
-				for (Coordinate move : friendPiece.getPossibleMoves()) {
-					// Assume that it solves checkmate
-					boolean solvesCM = true;
-					
-					// Test the move with all attackers
-					for (ChessPiece attacker : getAttackers()) {
-						/*for (Coordinate attackerMove : attacker.getTheoreticalMoves
-								(friendPiece, move.getX(), move.getY())) {
-							// If an attacker's move contains the king's space, say that it didn't work
-							if (attackerMove.equals(new Coordinate(this.x, this.y))) {
-								solvesCM = false;
+		 * Look at all of the moves
+		 * See if any of them move the king out of check
+		 * ???
+		 * Profit
+		 */
+		
+		// Loop all the squares (i,j) in the board
+		for (int i = 1; i<=8; i++) {
+			for (int j = 1; j<=8; j++) {
+				ChessPiece pe = board.getBoardArray()[i][j].getPiece();
+				
+				// Check if it's actually a piece and if it's on our team
+				if (!(pe instanceof NullPiece)) {
+					if (pe.getColor() == this.color) {
+						
+						// Loop out all the possible moves of the piece
+						for (Coordinate c : pe.getPossibleMoves()) {
+							Board testboard = new Board(this.board);
+							testboard.getBoardArray()[i][j].getPiece().move(c.getX(), c.getY());
+							if (!this.color) {
+								if (!testboard.getWKing().getCheck())
+									return false;
+							} else {
+								if (!testboard.getBKing().getCheck())
+									return false;
 							}
 						}
-					}   
-					
-					if (solvesCM) {
-						return false;
 					}
 				}
 			}
-			
-			return true;
-		} else
-			return false;
+		}
+		return true;
 		
-		*/
-		return false;
 	}
 	
 	public BufferedImage getImage() {

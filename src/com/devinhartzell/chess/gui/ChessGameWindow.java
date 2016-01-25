@@ -12,15 +12,10 @@ import com.devinhartzell.chess.pieces.ChessPiece;
 import com.devinhartzell.chess.pieces.Pawn;
 
 import java.io.IOException;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
-import javax.swing.JButton;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 public class ChessGameWindow extends JFrame {
 	
@@ -31,6 +26,10 @@ public class ChessGameWindow extends JFrame {
 	
 	private JLabel whiteLabel;
 	private JLabel blackLabel;
+	
+	private String whiteName;
+	private String blackName;
+	
 	private static JLabel moveLabel;
 	private static final long serialVersionUID = 1109205743042597274L;
 	
@@ -84,28 +83,27 @@ public class ChessGameWindow extends JFrame {
 		Board b = new Board(true);
 		getContentPane().add(b.getBoardPanel());
 		
+		/*
 		JButton btnNewBoard = new JButton("Duplicate");
 		btnNewBoard.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				final Board test = new Board(ChessGame.getMainBoard());
-				new Timer().schedule(
-						new TimerTask() {
-
-							@Override
-							public void run() {
-								for (int i =1; i<=8; i++) {
-									for (int j=1; j<=8; j++) {
-										System.out.println(i + " " + j + test.getBoardArray()[i][j].getPiece().getClass().toString().replaceAll("com.devinhartzell.chess.pieces.", ""));
-									}
-								}
-							}
-							
-						}, 100);
+				test.getBoardArray()[6][7].getPiece().move(6, 6);
+				test.getBoardArray()[5][2].getPiece().move(5, 4);
+				test.getBoardArray()[7][7].getPiece().move(7, 5);
+				test.getBoardArray()[4][1].getPiece().move(8, 5);
+				test.print();
+				for (Coordinate c : test.getBoardArray()[8][5].getPiece().getPossibleMoves()) {
+					System.out.println(String.format("%s, %s %s", c.getX(), c.getY(), 
+							test.getBoardArray()[c.getX()][c.getY()].getPiece().getType()));
+				}
+				System.out.println(test.getWKing().getCheck());
 			}
 		});
+		
 		btnNewBoard.setBounds(145, 413, 117, 29);
-		getContentPane().add(btnNewBoard);
+		getContentPane().add(btnNewBoard);*/
 		
 	}
 	
@@ -125,7 +123,6 @@ public class ChessGameWindow extends JFrame {
 	public static void addMove(ChessPiece p, boolean capture) {
 		String type = String.valueOf(Character.toUpperCase(p.getType()));
 		if (p instanceof Pawn) { 
-			System.out.println("hi");
 			if (capture)
 				type = String.valueOf(xrel[p.getOldX()]) + String.valueOf(yrel[p.getOldY()]);
 			else	
@@ -133,17 +130,30 @@ public class ChessGameWindow extends JFrame {
 		}
 		if (!p.getColor()) {
 			if (capture) 
-				recentMoves.append(String.format("%s. %sx%s%s", turn, type, xrel[p.getX()], yrel[p.getY()]));
+				recentMoves.append(String.format("\n%s. %sx%s%s", turn, type, xrel[p.getX()], yrel[p.getY()]));
 			 else 
-				recentMoves.append(String.format("%s. %s%s%s", turn, type, xrel[p.getX()], yrel[p.getY()]));
+				recentMoves.append(String.format("\n%s. %s%s%s", turn, type, xrel[p.getX()], yrel[p.getY()]));
 		
 		} else {
 			if (capture) 
-				recentMoves.append(String.format(" %sx%s%s\n", type, xrel[p.getX()], yrel[p.getY()]));
+				recentMoves.append(String.format(" %sx%s%s", type, xrel[p.getX()], yrel[p.getY()]));
 			else 
-				recentMoves.append(String.format(" %s%s%s\n", type, xrel[p.getX()], yrel[p.getY()]));
+				recentMoves.append(String.format(" %s%s%s", type, xrel[p.getX()], yrel[p.getY()]));
 			
 			turn++;
 		}
+	}
+	public static void append(String s) {
+		recentMoves.append(s);
+	}
+	
+	
+	
+	public String getWhite() {
+		return whiteName;
+	}
+	
+	public String getBlack() {
+		return blackName;
 	}
 }

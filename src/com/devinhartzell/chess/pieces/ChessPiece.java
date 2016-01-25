@@ -31,6 +31,8 @@ public abstract class ChessPiece {
 	protected int oldx, oldy;
 	protected BufferedImage image;
 	
+	protected boolean hasMoved = false;
+	
 	protected Board board;
 	
 	// gets the moves from the piece's current position
@@ -87,29 +89,38 @@ public abstract class ChessPiece {
 
 	public void move(int new_x, int new_y) {
 		
-		oldx = this.x;
-		oldy = this.y;
+		hasMoved = true;
 		
-		for (Coordinate s : board.getBoardArray()[oldx][oldy].getPiece().getPossibleMoves())
-			board.getBoardArray()[s.getX()][s.getY()].setHighlighted(false);
 		boolean cap;
 		if (board.getBoardArray()[new_x][new_y].getPiece().getType() == '0')
 			cap = false;
 		else
 			cap = true;
+		
+		if (board.isMainBoard())
+			ChessGameWindow.addMove(this, cap);
+			
+		
+		oldx = this.x;
+		oldy = this.y;
+		
+		for (Coordinate s : board.getBoardArray()[oldx][oldy].getPiece().getPossibleMoves())
+			board.getBoardArray()[s.getX()][s.getY()].setHighlighted(false);
+		
 			
 		
 		board.getBoardArray()[oldx][oldy].setPiece(new NullPiece(this.x, this.y, board));
-		board.getBoardArray()[oldx][oldy].getPanel().setSelected(false);
+		if (board.isMainBoard())
+			board.getBoardArray()[oldx][oldy].getPanel().setSelected(false);
 		board.getBoardArray()[new_x][new_y].setPiece(this);
-		System.out.println(board.getBoardArray()[new_x][new_y].getPiece().toString());
+		//System.out.println(board.getBoardArray()[new_x][new_y].getPiece().toString());
 		
 		this.x = new_x;
 		this.y = new_y;
 		
-		board.setTurn(!board.getTurn());
-		ChessGameWindow.addMove(this, cap);
-		
+		if (board.isMainBoard()) {
+			board.setTurn(!board.getTurn());
+		}
 		
 	}
 	
@@ -118,7 +129,6 @@ public abstract class ChessPiece {
 	}
 	
 	public void kill() {
-		
 		this.x = 0;
 		this.y = 0;
 	}
@@ -142,5 +152,13 @@ public abstract class ChessPiece {
 	
 	public int getOldY() {
 		return oldy;
+	}
+	
+	public Board getBoard() {
+		return board;
+	}
+	
+	public boolean hasMoved() {
+		return hasMoved;
 	}
 }
