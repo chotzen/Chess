@@ -14,19 +14,16 @@ import com.devinhartzell.chess.pieces.Pawn;
 import com.devinhartzell.chess.pieces.Queen;
 import com.devinhartzell.chess.pieces.Rook;
 
-public class Board /*extends JPanel*/ {
+/*
+ * Wrapper for the boardArray squares
+ */
+public class Board {
 	
-	
-	
-	/**
-	 * 
-	 */
-	
-	// Not using boardArray[0]
 	private Square[][] boardArray = new Square[9][9];
+	
 	private King whiteKing;
 	private King blackKing;
-	
+
 	private BoardPanel boardPanel;
 	
 	private boolean check_w = false;
@@ -35,6 +32,7 @@ public class Board /*extends JPanel*/ {
 	private boolean mainBoard = false;
 	
 	/*
+	 * Tracks who has the next move
 	 * False = white
 	 * True = black
 	 */

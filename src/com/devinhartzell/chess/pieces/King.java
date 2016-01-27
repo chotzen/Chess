@@ -2,11 +2,13 @@ package com.devinhartzell.chess.pieces;
 
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.imageio.ImageIO;
 
 import com.devinhartzell.chess.board.Board;
 import com.devinhartzell.chess.board.Coordinate;
+import com.devinhartzell.chess.board.MoveChecker;
 import com.devinhartzell.chess.board.Square;
 
 public class King extends ChessPiece {
@@ -113,22 +115,27 @@ public class King extends ChessPiece {
 	}
 
 	public boolean getCheckMate() {
+		long start_time = System.currentTimeMillis();
 		/*
 		 * Look at all of the moves
 		 * See if any of them move the king out of check
-		 * ???
-		 * Profit
 		 */
-		
+		HashMap<MoveChecker, Thread> threadList = new HashMap<MoveChecker, Thread>();
 		// Loop all the squares (i,j) in the board
 		for (int i = 1; i<=8; i++) {
 			for (int j = 1; j<=8; j++) {
 				ChessPiece pe = board.getBoardArray()[i][j].getPiece();
 				
+				
 				// Check if it's actually a piece and if it's on our team
 				if (!(pe instanceof NullPiece)) {
 					if (pe.getColor() == this.color) {
+						MoveChecker m = new MoveChecker(pe);
+						Thread t = new Thread(m);
+						threadList.put(m, t);
+						t.start();						
 						
+						/*
 						// Loop out all the possible moves of the piece
 						for (Coordinate c : pe.getPossibleMoves()) {
 							Board testboard = new Board(this.board);
@@ -141,10 +148,24 @@ public class King extends ChessPiece {
 									return false;
 							}
 						}
+						*/
 					}
 				}
 			}
 		}
+		
+		for (MoveChecker m: threadList.keySet()) {
+			if (m.isRunning()) {
+				try {
+					threadList.get(m).join();
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+			if (m.endsCheckmate())
+				return false;
+		}
+		System.out.println("Finished in " + (double)(System.currentTimeMillis() - start_time)/1000 + " seconds");
 		return true;
 		
 	}
