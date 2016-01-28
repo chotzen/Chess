@@ -37,24 +37,7 @@ public abstract class ChessPiece {
 	
 	// gets the moves from the piece's current position
 	public abstract ArrayList<Coordinate> getPossibleMoves();
-	// gets the theoretical moves for a piece if it were at (x, y);
 	
-	/*
-	public ArrayList<Coordinate> getTheoreticalMoves(ChessPiece movedPiece, int new_x, int new_y) {
-		Square.setDisabledGraphics(true);
-		int old_x = this.x,
-			old_y = this.y;
-		ChessPiece capturedPiece = null;
-		if (!board.getBoardArray()[new_x][new_y].getPiece().isNull())
-			capturedPiece = board.getBoardArray()[new_x][new_y].getPiece();
-		movedPiece.move(new_x, new_y);
-		ArrayList<Coordinate> moves = getPossibleMoves();
-		movedPiece.move(old_x, old_y);
-		board.getBoardArray()[new_x][new_y].setPiece(capturedPiece);
-		Square.setDisabledGraphics(false);
-		return moves;
-	}
-	*/
 	
 	public ArrayList<ChessPiece> getProtectors() {
 		ArrayList<ChessPiece> protectors = new ArrayList<ChessPiece>();

@@ -22,17 +22,16 @@ public class King extends ChessPiece {
 		this.color = color;
 		this.type = 'k';
 		this.board = board;
-		try {
-			if (color)
-				this.image = ImageIO.read(getClass().getResource(BLACK_PATH));
-			else
-				this.image = ImageIO.read(getClass().getResource(WHITE_PATH));
-			
-			board.getBoardArray()[x][y].setPiece(this);
-		}
-		catch (Exception e) {
-			System.out.println("Error: Could not load knight resource");
-		}
+		if (board.isMainBoard())
+			try {
+				if (color)
+					this.image = ImageIO.read(getClass().getResource(BLACK_PATH));
+				else
+					this.image = ImageIO.read(getClass().getResource(WHITE_PATH));
+			} catch (Exception e){
+				System.out.println("Error: Could not load piece resource! " + this.type);
+			}
+		board.getBoardArray()[x][y].setPiece(this);
 	}
 	
 	@Override
