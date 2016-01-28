@@ -7,8 +7,6 @@ import javax.swing.JPanel;
 
 import com.devinhartzell.chess.ChessGame;
 import com.devinhartzell.chess.board.Board;
-import javax.swing.border.LineBorder;
-import java.awt.Color;
 
 public class BoardPanel extends JPanel {
 	
@@ -19,11 +17,6 @@ public class BoardPanel extends JPanel {
 	public BoardPanel() {
 		setSize(400, 400);
 		setLayout(null);
-		
-		JPanel panel = new JPanel();
-		panel.setBorder(new LineBorder(new Color(0, 0, 0), 5));
-		panel.setBounds(98, 133, 193, 100);
-		add(panel);
 		for (int i = 1; i<=8; i++) {
 			for (int j = 1; j<=8; j++) {
 				panelArray[i][j] = new SquarePanel(i, j, !((i + j) % 2 == 0));

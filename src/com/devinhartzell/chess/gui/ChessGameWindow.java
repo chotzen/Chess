@@ -16,7 +16,6 @@ import java.io.IOException;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
-import javax.swing.JPanel;
 
 public class ChessGameWindow extends JFrame {
 	
@@ -83,29 +82,6 @@ public class ChessGameWindow extends JFrame {
 		
 		Board b = new Board(true);
 		getContentPane().add(b.getBoardPanel());
-		
-		/*
-		JButton btnNewBoard = new JButton("Duplicate");
-		btnNewBoard.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				final Board test = new Board(ChessGame.getMainBoard());
-				test.getBoardArray()[6][7].getPiece().move(6, 6);
-				test.getBoardArray()[5][2].getPiece().move(5, 4);
-				test.getBoardArray()[7][7].getPiece().move(7, 5);
-				test.getBoardArray()[4][1].getPiece().move(8, 5);
-				test.print();
-				for (Coordinate c : test.getBoardArray()[8][5].getPiece().getPossibleMoves()) {
-					System.out.println(String.format("%s, %s %s", c.getX(), c.getY(), 
-							test.getBoardArray()[c.getX()][c.getY()].getPiece().getType()));
-				}
-				System.out.println(test.getWKing().getCheck());
-			}
-		});
-		
-		btnNewBoard.setBounds(145, 413, 117, 29);
-		getContentPane().add(btnNewBoard);*/
-		
 	}
 	
 	@PostConstruct
