@@ -16,6 +16,7 @@ import java.io.IOException;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
+import javax.swing.JPanel;
 
 public class ChessGameWindow extends JFrame {
 	
