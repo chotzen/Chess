@@ -48,6 +48,7 @@ public class ChessGameWindow extends JFrame {
 		super("Chess Game");
 		
 		getContentPane().setLayout(null);
+		setResizable(false);
 		
 		recentMoves = new JTextArea();
 		recentMoves.setText("");
