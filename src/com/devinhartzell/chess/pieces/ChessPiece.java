@@ -72,6 +72,10 @@ public abstract class ChessPiece {
 
 	public void move(int new_x, int new_y) {
 		
+		oldx = this.x;
+		oldy = this.y;
+		this.x = new_x;
+		this.y = new_y;
 		hasMoved = true;
 		
 		boolean cap;
@@ -84,8 +88,7 @@ public abstract class ChessPiece {
 			ChessGameWindow.addMove(this, cap);
 			
 		
-		oldx = this.x;
-		oldy = this.y;
+		
 		
 		for (Coordinate s : board.getBoardArray()[oldx][oldy].getPiece().getPossibleMoves())
 			board.getBoardArray()[s.getX()][s.getY()].setHighlighted(false);
@@ -98,8 +101,7 @@ public abstract class ChessPiece {
 		board.getBoardArray()[new_x][new_y].setPiece(this);
 		//System.out.println(board.getBoardArray()[new_x][new_y].getPiece().toString());
 		
-		this.x = new_x;
-		this.y = new_y;
+		
 		
 		if (board.isMainBoard()) {
 			board.setTurn(!board.getTurn());

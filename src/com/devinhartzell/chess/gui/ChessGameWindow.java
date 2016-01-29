@@ -38,14 +38,14 @@ public class ChessGameWindow extends JFrame {
 	
 	private static int turn = 1;
 	
-	private static char[] xrel = {'0', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'};
-	private static char[] yrel = {'0', '8', '7', '6', '5', '4', '3', '2', '1'};
+	private static char[] xrel = {'X', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'};
+	private static char[] yrel = {'X', '8', '7', '6', '5', '4', '3', '2', '1'};
 	
 	
 	public ChessGameWindow(ChessGame game, String white, String black) 
 			throws IOException {
 		
-		
+		super("Chess Game");
 		
 		getContentPane().setLayout(null);
 		
@@ -106,10 +106,12 @@ public class ChessGameWindow extends JFrame {
 				type = "";
 		}
 		if (!p.getColor()) {
+			if (!(turn == 1))
+				recentMoves.append("\n");
 			if (capture) 
-				recentMoves.append(String.format("\n%s. %sx%s%s", turn, type, xrel[p.getX()], yrel[p.getY()]));
+				recentMoves.append(String.format("%s. %sx%s%s", turn, type, xrel[p.getX()], yrel[p.getY()]));
 			 else 
-				recentMoves.append(String.format("\n%s. %s%s%s", turn, type, xrel[p.getX()], yrel[p.getY()]));
+				recentMoves.append(String.format("%s. %s%s%s", turn, type, xrel[p.getX()], yrel[p.getY()]));
 		
 		} else {
 			if (capture) 
@@ -120,6 +122,7 @@ public class ChessGameWindow extends JFrame {
 			turn++;
 		}
 	}
+	
 	public static void append(String s) {
 		recentMoves.append(s);
 	}
