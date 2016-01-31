@@ -92,7 +92,7 @@ public class Board {
 				new Pawn(i, 2, true, this);
 				new Pawn(i, 7, false, this);
 			}
-			/*
+			
 			new Rook(1, 1, true, this);
 			new Rook(8, 1, true, this);
 			new Rook(1, 8, false, this);
@@ -111,7 +111,7 @@ public class Board {
 			new Bishop(6, 1, true, this);
 			new Bishop(3, 8, false, this);
 			new Bishop(6, 8, false, this);
-			*/
+			
 			
 			whiteKing = new King(5, 8, false, this);
 			blackKing = new King(5, 1, true, this);
