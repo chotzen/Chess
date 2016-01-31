@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import com.devinhartzell.chess.board.Board;
 import com.devinhartzell.chess.board.Coordinate;
 import com.devinhartzell.chess.gui.ChessGameWindow;
+import com.devinhartzell.chess.gui.PawnPromotionWindow;
 
 public abstract class ChessPiece {
 	
@@ -71,7 +72,8 @@ public abstract class ChessPiece {
 	}
 
 	public void move(int new_x, int new_y) {
-		
+		for (Coordinate s : board.getBoardArray()[x][y].getPiece().getPossibleMoves())
+			board.getBoardArray()[s.getX()][s.getY()].setHighlighted(false);
 		oldx = this.x;
 		oldy = this.y;
 		this.x = new_x;
@@ -86,14 +88,6 @@ public abstract class ChessPiece {
 		
 		if (board.isMainBoard())
 			ChessGameWindow.addMove(this, cap);
-			
-		
-		
-		
-		for (Coordinate s : board.getBoardArray()[oldx][oldy].getPiece().getPossibleMoves())
-			board.getBoardArray()[s.getX()][s.getY()].setHighlighted(false);
-		
-			
 		
 		board.getBoardArray()[oldx][oldy].setPiece(new NullPiece(this.x, this.y, board));
 		if (board.isMainBoard())
@@ -101,7 +95,15 @@ public abstract class ChessPiece {
 		board.getBoardArray()[new_x][new_y].setPiece(this);
 		//System.out.println(board.getBoardArray()[new_x][new_y].getPiece().toString());
 		
-		
+		if (this instanceof Pawn) {
+			if (color) {
+				if (y == 8) 
+					new PawnPromotionWindow((Pawn)this);
+			} else {
+				if (y == 1)
+					new PawnPromotionWindow((Pawn)this);
+			}
+		}
 		
 		if (board.isMainBoard()) {
 			board.setTurn(!board.getTurn());

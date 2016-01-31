@@ -35,13 +35,15 @@ public class Pawn extends ChessPiece {
 	@Override
 	public ArrayList<Coordinate> getPossibleMoves() {
 		ArrayList<Coordinate> movesList = new ArrayList<Coordinate>();
+		try{
 		if (color) {
 		
 			if (y == 2)
 				if (!board.getBoardArray()[x][4].hasPiece() && !board.getBoardArray()[x][3].hasPiece())
 					movesList.add(new Coordinate(x, 4));
-			if (!board.getBoardArray()[x][y+1].hasPiece())
-				movesList.add(new Coordinate(x, y+1));
+			if (y-1 >= 1)
+				if (!board.getBoardArray()[x][y+1].hasPiece())
+					movesList.add(new Coordinate(x, y+1));
 			if (x+1 <= 8)
 				if (board.getBoardArray()[x+1][y+1].hasPiece())
 					if (!board.getBoardArray()[x+1][y+1].getPiece().getColor())
@@ -54,9 +56,10 @@ public class Pawn extends ChessPiece {
 			if (y == 7)
 				if (!board.getBoardArray()[x][5].hasPiece() && !board.getBoardArray()[x][6].hasPiece())
 					movesList.add(new Coordinate(x, 5));
-
-			if (!board.getBoardArray()[x][y-1].hasPiece())
-				movesList.add(new Coordinate(x, y-1));
+			
+			if (y-1 <= 8)
+				if (!board.getBoardArray()[x][y-1].hasPiece())
+					movesList.add(new Coordinate(x, y-1));
 			
 			if (x+1 <= 8)
 				if (board.getBoardArray()[x+1][y-1].hasPiece())
@@ -68,7 +71,8 @@ public class Pawn extends ChessPiece {
 				if (board.getBoardArray()[x-1][y-1].hasPiece())
 					if (board.getBoardArray()[x-1][y-1].getPiece().getColor())
 						movesList.add(new Coordinate(x-1, y-1));
-		} return movesList;
+		}} catch (Exception e){}
+		return movesList;
 	}
 	
 	
