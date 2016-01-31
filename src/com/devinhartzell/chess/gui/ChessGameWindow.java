@@ -137,4 +137,10 @@ public class ChessGameWindow extends JFrame {
 	public String getBlack() {
 		return blackName;
 	}
+	
+	@Override
+	public void dispose() {
+		super.dispose();
+		turn = 1;
+	}
 }
