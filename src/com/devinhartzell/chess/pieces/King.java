@@ -56,6 +56,7 @@ public class King extends ChessPiece {
 			}
 		}
 		
+		
 		for (int m = 1; m <= 8; m++) {
 			for (int n = 1; n <= 8; n++) {
 				Square sq = board.getBoardArray()[m][n];
@@ -84,6 +85,7 @@ public class King extends ChessPiece {
 				
 		return movesList;
 	}
+	
 	
 	public boolean getCheck() {
 		for (int m = 1; m <= 8; m++) {
