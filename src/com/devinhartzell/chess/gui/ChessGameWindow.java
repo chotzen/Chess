@@ -38,16 +38,17 @@ public class ChessGameWindow extends JFrame {
 	
 	private static int turn = 1;
 	
-	private static char[] xrel = {'0', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'};
-	private static char[] yrel = {'0', '8', '7', '6', '5', '4', '3', '2', '1'};
+	private static char[] xrel = {'X', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'};
+	private static char[] yrel = {'X', '8', '7', '6', '5', '4', '3', '2', '1'};
 	
 	
 	public ChessGameWindow(ChessGame game, String white, String black) 
 			throws IOException {
 		
-		
+		super("Chess Game");
 		
 		getContentPane().setLayout(null);
+		setResizable(false);
 		
 		recentMoves = new JTextArea();
 		recentMoves.setText("");
@@ -82,29 +83,6 @@ public class ChessGameWindow extends JFrame {
 		
 		Board b = new Board(true);
 		getContentPane().add(b.getBoardPanel());
-		
-		/*
-		JButton btnNewBoard = new JButton("Duplicate");
-		btnNewBoard.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				final Board test = new Board(ChessGame.getMainBoard());
-				test.getBoardArray()[6][7].getPiece().move(6, 6);
-				test.getBoardArray()[5][2].getPiece().move(5, 4);
-				test.getBoardArray()[7][7].getPiece().move(7, 5);
-				test.getBoardArray()[4][1].getPiece().move(8, 5);
-				test.print();
-				for (Coordinate c : test.getBoardArray()[8][5].getPiece().getPossibleMoves()) {
-					System.out.println(String.format("%s, %s %s", c.getX(), c.getY(), 
-							test.getBoardArray()[c.getX()][c.getY()].getPiece().getType()));
-				}
-				System.out.println(test.getWKing().getCheck());
-			}
-		});
-		
-		btnNewBoard.setBounds(145, 413, 117, 29);
-		getContentPane().add(btnNewBoard);*/
-		
 	}
 	
 	@PostConstruct
@@ -129,10 +107,12 @@ public class ChessGameWindow extends JFrame {
 				type = "";
 		}
 		if (!p.getColor()) {
+			if (!(turn == 1))
+				recentMoves.append("\n");
 			if (capture) 
-				recentMoves.append(String.format("\n%s. %sx%s%s", turn, type, xrel[p.getX()], yrel[p.getY()]));
+				recentMoves.append(String.format("%s. %sx%s%s", turn, type, xrel[p.getX()], yrel[p.getY()]));
 			 else 
-				recentMoves.append(String.format("\n%s. %s%s%s", turn, type, xrel[p.getX()], yrel[p.getY()]));
+				recentMoves.append(String.format("%s. %s%s%s", turn, type, xrel[p.getX()], yrel[p.getY()]));
 		
 		} else {
 			if (capture) 
@@ -143,6 +123,7 @@ public class ChessGameWindow extends JFrame {
 			turn++;
 		}
 	}
+	
 	public static void append(String s) {
 		recentMoves.append(s);
 	}
@@ -155,5 +136,11 @@ public class ChessGameWindow extends JFrame {
 	
 	public String getBlack() {
 		return blackName;
+	}
+	
+	@Override
+	public void dispose() {
+		super.dispose();
+		turn = 1;
 	}
 }

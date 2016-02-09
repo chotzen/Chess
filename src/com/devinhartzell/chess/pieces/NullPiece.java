@@ -9,18 +9,14 @@ import com.devinhartzell.chess.board.Board;
 import com.devinhartzell.chess.board.Coordinate;
 
 public class NullPiece extends ChessPiece {
-	
-	public NullPiece(int x, int y, Board board)
-	{
+	public NullPiece(int x, int y, Board board) {
 		this.x = x;
 		this.y = y;
 		this.type = '0';
 		this.board = board;
 		try {
 			this.image = ImageIO.read(getClass().getResource("/resources/pieces/noPiece.png"));
-		} 
-		catch (IOException e) 
-		{
+		} catch (IOException e) {
 			System.out.println("Could not load placeholder image");
 		}
 	}

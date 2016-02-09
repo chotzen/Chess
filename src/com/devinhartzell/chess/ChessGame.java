@@ -7,6 +7,10 @@ import com.devinhartzell.chess.board.Board;
 import com.devinhartzell.chess.gui.AskForName;
 import com.devinhartzell.chess.gui.ChessGameWindow;
 
+/*
+ * Main game handler class
+ * Starts and stops games
+ */
 public class ChessGame {
 	
 	private static ChessGameWindow cgw;

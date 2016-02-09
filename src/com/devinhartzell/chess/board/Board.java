@@ -14,19 +14,16 @@ import com.devinhartzell.chess.pieces.Pawn;
 import com.devinhartzell.chess.pieces.Queen;
 import com.devinhartzell.chess.pieces.Rook;
 
-public class Board /*extends JPanel*/ {
+/*
+ * Wrapper for the boardArray squares
+ */
+public class Board {
 	
-	
-	
-	/**
-	 * 
-	 */
-	
-	// Not using boardArray[0]
 	private Square[][] boardArray = new Square[9][9];
+	
 	private King whiteKing;
 	private King blackKing;
-	
+
 	private BoardPanel boardPanel;
 	
 	private boolean check_w = false;
@@ -35,6 +32,7 @@ public class Board /*extends JPanel*/ {
 	private boolean mainBoard = false;
 	
 	/*
+	 * Tracks who has the next move
 	 * False = white
 	 * True = black
 	 */
@@ -117,6 +115,7 @@ public class Board /*extends JPanel*/ {
 			
 			whiteKing = new King(5, 8, false, this);
 			blackKing = new King(5, 1, true, this);
+			
 		}
 	}
 	
@@ -147,6 +146,10 @@ public class Board /*extends JPanel*/ {
 		currentMove = b;
 		ChessGameWindow.nextMove();
 		
+		checkEndGame();	
+	}
+	
+	public void checkEndGame() {
 		if (whiteKing.getCheck()) {
 			
 			if (whiteKing.getCheckMate()) {
@@ -164,7 +167,6 @@ public class Board /*extends JPanel*/ {
 			} else 
 				JOptionPane.showMessageDialog(null, "Black is now in Check!");
 		}
-		
 	}
 	
 	public King getWKing() {
