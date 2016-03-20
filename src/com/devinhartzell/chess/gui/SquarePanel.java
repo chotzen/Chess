@@ -24,7 +24,6 @@ public class SquarePanel extends JPanel {
 
 	private Square square;
 	
-	private int x, y;
 	private boolean color;
 	
 	private boolean highlighted;
