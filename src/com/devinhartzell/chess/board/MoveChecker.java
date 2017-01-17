@@ -12,7 +12,7 @@ public class MoveChecker implements Runnable {
 	public MoveChecker(ChessPiece piece) {
 		this.piece = piece;
 	}
-
+	
 	@Override
 	public void run() {
 		running = true;
